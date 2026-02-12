@@ -629,7 +629,7 @@
                 overlay.textContent = "OTP पठाउँदै... / Sending OTP...";
 
                 try {
-                    const res = await fetch(`http://localhost:8080/send-otp?phone=${phone}`, { method: 'POST' });
+                    const res = await fetch(`//send-otp?phone=${phone`, { method: 'POST' });
                     const text = await res.text();
                     overlay.style.display = 'none';
 
@@ -665,7 +665,7 @@
                 if (status === "verified") {
                     overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
 
-                    const response = await fetch('http://localhost:8080/Order', {
+                    const response = await fetch('/Order', {
                         method: 'POST',
                         body: fdPreview
                     });
