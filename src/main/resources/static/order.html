@@ -657,7 +657,9 @@
             overlay.textContent = "भेरिफाइ गर्दै... / Verifying...";
 
             try {
-                const vRes = await fetch(`http://localhost:8080/verify-otp?phone=${phone}&otp=${otpValue}`, { method: 'POST' });
+                const vRes = await fetch(`/verify-otp?phone=${phone}&otp=${otpValue}`, {
+                    method: 'POST'
+                });
                 const status = await vRes.text();
 
                 if (status === "verified") {
