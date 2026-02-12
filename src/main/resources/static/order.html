@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Easy Spray – अर्डर फारम</title>
+
+    <style>
+        :root {
+            --container-max:760px;
+            --green-main: #16a34a;
+            --green-dark: #0f7a36;
+            --orange-main: #f97316;
+            --orange-main-2: #ea580c;
+            --bg-soft: #eef3f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+        }
+
+        /* --- Global stabilizers --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+            background: var(--bg-soft);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scrollbar-gutter: stable both-edges;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        /* ✅ FULL-WIDTH, NO CUTTING */
+        #custom-form-container {
+            position: relative;
+            margin: 0;
+            width: 100%;
+            max-width: 100%;
+            padding: 48px 16px 52px;
+            border-radius: 0;
+            box-shadow: none;
+            box-sizing: border-box;
+
+            background:
+                    linear-gradient(180deg, rgba(240,253,244,0.9), rgba(239,246,255,0.95)),
+                    url("http://localhost/EasyPS/wp-content/uploads/2025/11/Untitled-design-7.png")
+                    center/cover no-repeat;
+        }
+
+        #custom-form-container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            z-index: -1;
+        }
+
+        /* The actual white card that holds the form */
+        .form-card {
+            background: #ffffffec;
+            padding: 40px 32px 34px;
+            border-radius: 16px;
+            max-width: var(--container-max);
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(15,23,42,0.12);
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 26px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .form-subtitle {
+            margin: 0 0 18px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            margin: 16px 0;
+            position: relative;
+            width: 100%;
+            text-align: left;
+        }
+
+        .input-group input,
+        .input-group input[list] {
+            width: 100%;
+            padding: 14px 14px;
+            font-size: 16px;
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            transition: box-shadow .25s, border-color .25s, background .25s;
+            color: #000;
+            caret-color: #000;
+        }
+
+        .input-group input:focus {
+            border-color: var(--green-main);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(22,163,74,.18);
+            background: #f9fffb;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            position: absolute;
+            top: -10px;
+            left: 14px;
+            padding: 0 6px;
+            background: #fff;
+            color: var(--green-main);
+            font-weight: 700;
+            border-radius: 999px;
+        }
+
+        /* Package options */
+        .package-options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 24px;
+            align-items: stretch;
+        }
+
+        .package-option {
+            width: 100%;
+            padding: 18px 20px 16px;
+            border-radius: 14px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            text-align: left;
+            transition: transform .15s ease, box-shadow .25s, border-color .25s, background .25s;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+            will-change: transform;
+        }
+
+        @media (hover: hover) {
+            .package-option:hover {
+                border-color: var(--green-main);
+                background: #f0fdf4;
+                transform: translateY(-2px);
+            }
+        }
+
+        .package-option.selected {
+            border-color: var(--green-main);
+            background: #ecfdf3;
+            box-shadow: 0 14px 30px rgba(22,163,74,0.22);
+        }
+
+        .package-option h2 {
+            font-size: 18px;
+            margin: 0;
+            font-weight: 700;
+            color: #1f2933;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Price block with before/now */
+        .price-row {
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-top:8px;
+            flex-wrap:wrap;
+            font-weight:600;
+        }
+
+        .price-old {
+            color:black;
+            text-decoration: line-through;
+            font-size:14px;
+        }
+
+        .price-new {
+            color: var(--green-dark);
+            font-weight:800;
+            font-size:20px;
+        }
+
+        .save-pill {
+            background:#fee2e2;
+            border:1px solid #fecaca;
+            color:#b91c1c;
+            font-size:12px;
+            font-weight:700;
+            padding:3px 8px;
+            border-radius:999px;
+            white-space:nowrap;
+        }
+
+        .package-option .badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg,#f97316,#facc15);
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #111827;
+            border-radius: 999px;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(248,113,113,0.25);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        /* Primary button (match hero CTA) */
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--orange-main), var(--orange-main-2));
+            color: #fff;
+            cursor: pointer;
+            margin-top: 22px;
+            font-weight: 800;
+            letter-spacing: .04em;
+            box-shadow: 0 18px 45px rgba(234,88,12,0.32);
+            transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                    110deg,
+                    rgba(255,255,255,0) 0%,
+                    rgba(255,255,255,0.45) 45%,
+                    rgba(255,255,255,0) 60%
+            );
+            transform: translateX(-120%);
+            pointer-events: none;
+            animation: epsFormCtaShine 4s ease-in-out infinite;
+        }
+
+        @keyframes epsFormCtaShine {
+            to { transform: translateX(120%); }
+        }
+
+        @media (hover: hover) {
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 24px 50px rgba(234,88,12,0.5);
+                opacity: .97;
+            }
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 16px 34px rgba(234,88,12,0.42);
+        }
+
+        /* Secondary button (outline) */
+        .btn-secondary {
+            width: 100%;
+            padding: 12px 18px;
+            font-size: 15px;
+            border: 2px solid #d1d5db;
+            border-radius: 999px;
+            background: #fff;
+            color: #111827;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform .15s ease, box-shadow .15s, border-color .15s, background .15s;
+            box-shadow: 0 4px 12px rgba(15,23,42,0.08);
+            font-weight: 600;
+        }
+
+        @media (hover: hover) {
+            .btn-secondary:hover {
+                transform: translateY(-1px);
+                border-color: var(--green-main);
+                background:#f9fafb;
+            }
+        }
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        /* Confirmation modal */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,.55);
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 100%;
+            max-width: 480px;
+            padding: 24px 20px 20px;
+            border-radius: 16px;
+            text-align: left;
+            box-shadow: 0 18px 40px rgba(15,23,42,.28);
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 20px;
+            color: var(--green-dark);
+        }
+
+        .modal-content p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: var(--text-main);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-direction: column;
+        }
+        @media (min-width: 520px) {
+            .modal-actions { flex-direction: row; }
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,.7);
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            z-index: 99999;
+            touch-action: none;
+        }
+
+        /* ========= Mobile adjustments (<= 600px) ========= */
+        @media (max-width: 600px) {
+            #custom-form-container {
+                padding: 28px 10px 36px;
+            }
+
+            .form-card {
+                width: 94%;
+                max-width: 430px;
+                padding: 24px 18px 24px;
+                margin: 0 auto;
+                border-radius: 14px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .form-subtitle {
+                font-size: 13px;
+            }
+
+            /* ✅ keep inputs & labels nicely aligned on the left */
+            .input-group {
+                text-align: left;
+            }
+
+            .input-group label {
+                left: 14px;
+                transform: none;
+            }
+
+            .input-group input {
+                text-align: left;
+            }
+
+            .package-options {
+                align-items: stretch;
+            }
+
+            .package-option {
+                max-width: 100%;
+                text-align: left;
+            }
+
+            .package-option .badge {
+                right: 10px;
+            }
+
+            .modal-content {
+                text-align: center;
+            }
+
+            .modal-content p {
+                text-align: left;
+                margin: 6px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="custom-form-container">
+    <div class="form-card">
+        <h2>प्याकेज छान्नुहोस् / Choose Package</h2>
+        <p class="form-subtitle">Free Delivery + Cash on Delivery (COD) </p>
+
+        <form id="sprayForm">
+            <div class="input-group">
+                <input type="text" id="name" name="name" placeholder=" " required />
+                <label for="name">नाम / Name</label>
+            </div>
+
+            <div class="input-group">
+                <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder=" "
+                        required
+                        inputmode="numeric"
+                        pattern="^(?:\+?977)?9[6-8]\d{8}$"
+                        title="कृपया ठिक नेपाली मोबाइल नम्बर हाल्नुहोस् (98XXXXXXXX, 97798XXXXXXXX, +97798XXXXXXXX)"
+                />
+                <label for="phone">मोबाइल नम्बर / Mobile Number</label>
+            </div>
+
+
+            <div class="input-group">
+                <input type="text" id="address" name="address" placeholder=" " required />
+                <label for="address">ठेगाना / Address</label>
+            </div>
+
+            <div class="input-group">
+                <input
+                        list="provinces"
+                        id="province"
+                        name="province"
+                        placeholder=" "
+                        required
+                        autocomplete="address-level1"
+                        inputmode="text"
+                />
+                <label for="province">प्रदेश / Province</label>
+                <datalist id="provinces">
+                    <option value="कोशी प्रदेश / Koshi Province">
+                    <option value="मधेश प्रदेश / Madhesh Province">
+                    <option value="बाग्मती प्रदेश / Bagmati Province">
+                    <option value="गण्डकी प्रदेश / Gandaki Province">
+                    <option value="लुम्बिनी प्रदेश / Lumbini Province">
+                    <option value="कर्णाली प्रदेश / Karnali Province">
+                    <option value="सुदूरपश्चिम प्रदेश / Sudurpashchim Province">
+                </datalist>
+            </div>
+
+            <div class="package-options">
+                <div class="package-option" id="x1" data-bottles="1" role="button" tabindex="0" aria-pressed="false">
+                    <h2>X1 बोतल / 1 Bottle</h2>
+                    <div class="price-row">
+                        <span class="price-old" aria-label="पुरानो मूल्य">Rs 2,100</span>
+                        <span class="price-new" aria-label="नयाँ मूल्य">Rs 1,600</span>
+                        <span class="save-pill" aria-label="तपाईंको बचत">save Rs 500</span>
+                    </div>
+                </div>
+
+                <div class="package-option selected" id="x2" data-bottles="2" role="button" tabindex="0" aria-pressed="true">
+                    <h2>X2 बोतल / 2 Bottles</h2>
+                    <div class="price-row">
+                        <span class="price-old">Rs 4,200</span>
+                        <span class="price-new">Rs 2,600</span>
+                        <span class="save-pill">save Rs 1,600</span>
+                    </div>
+                    <div class="badge">Best Choice</div>
+                </div>
+
+                <div class="package-option" id="x3" data-bottles="3" role="button" tabindex="0" aria-pressed="false">
+                    <h2>X3 बोतल / 3 Bottles</h2>
+                    <div class="price-row">
+                        <span class="price-old">Rs 6,300</span>
+                        <span class="price-new">Rs 3,500</span>
+                        <span class="save-pill">save Rs 2,800</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" type="submit">अर्डर गर्नुहोस् / Submit Order</button>
+        </form>
+
+        <div class="confirmation-modal" id="confirmationModal" aria-modal="true" role="dialog">
+            <div class="modal-content">
+                <h3>अर्डर पुष्टि गर्नुहोस् / Confirm Your Order</h3>
+
+                <p><b>नाम / Name:</b> <span id="confirmName"></span></p>
+                <p><b>मोबाइल नम्बर / Mobile:</b> <span id="confirmPhone"></span></p>
+                <p><b>ठेगाना / Address:</b> <span id="confirmAddress"></span></p>
+                <p><b>प्रदेश / Province:</b> <span id="confirmProvince"></span></p>
+                <p><b>प्याकेज / Package:</b> <span id="confirmPackage"></span></p>
+                <p><b>जम्मा / Total:</b> Rs <span id="confirmPrice"></span></p>
+
+                <div id="otpInputArea" style="display:none; margin-top:15px; border-top: 1px dashed #ccc; padding-top:10px;">
+                    <p style="color:var(--green-dark); font-weight:bold;">मोबाइलमा आएको कोड हाल्नुहोस् / Enter OTP:</p>
+                    <div class="input-group">
+                        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align:center; letter-spacing:4px; font-weight:bold; border-color:var(--green-main);">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="editOrderBtn" type="button" class="btn-secondary">अर्डर परिवर्तन गर्नुहोस् / Edit Order</button>
+                    <button id="confirmOrderBtn" type="button" class="btn">पुष्टि गर्नुहोस् / Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loadingOverlay">Loading... कृपया पर्खनुहोस्</div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('sprayForm');
+    const modal = document.getElementById('confirmationModal');
+    const overlay = document.getElementById('loadingOverlay');
+    const confirmBtn = document.getElementById('confirmOrderBtn');
+    const editBtn = document.getElementById('editOrderBtn');
+    const otpInputArea = document.getElementById('otpInputArea');
+
+    const OLD_UNIT_PRICE = 2100;
+    const BUNDLE_PRICES = { 1: 1600, 2: 2600, 3: 3500 };
+
+    function initPrices() {
+        document.querySelectorAll('#custom-form-container .package-option').forEach(opt => {
+            const bottles = Number(opt.getAttribute('data-bottles')) || 1;
+            const oldTotal = OLD_UNIT_PRICE * bottles;
+            const newTotal = (BUNDLE_PRICES[bottles] !== undefined)
+                ? BUNDLE_PRICES[bottles]
+                : BUNDLE_PRICES[1] * bottles;
+
+            opt.setAttribute('data-price', String(newTotal));
+
+            const oldEl = opt.querySelector('.price-old');
+            const newEl = opt.querySelector('.price-new');
+            const saveEl = opt.querySelector('.save-pill');
+
+            const fmt = (n) => new Intl.NumberFormat('ne-NP').format(n);
+            if (oldEl) oldEl.textContent = `Rs ${fmt(oldTotal)}`;
+            if (newEl) newEl.textContent = `Rs ${fmt(newTotal)}`;
+            if (saveEl) saveEl.textContent = `बचत Rs ${fmt(oldTotal - newTotal)}`;
+        });
+    }
+
+    function selectPackage(el) {
+        document.querySelectorAll('#custom-form-container .package-option').forEach(opt => {
+            opt.classList.remove('selected');
+            opt.setAttribute('aria-pressed', 'false');
+        });
+        el.classList.add('selected');
+        el.setAttribute('aria-pressed', 'true');
+    }
+
+    document.querySelectorAll('#custom-form-container .package-option').forEach(option => {
+        option.addEventListener('click', () => selectPackage(option));
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPackage(option); }
+        });
+    });
+
+    function openModal() {
+        modal.style.display = 'flex';
+        document.body.classList.add('modal-lock');
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+        otpInputArea.style.display = 'none'; // Reset OTP area
+        confirmBtn.textContent = "पुष्टि गर्नुहोस् / Confirm"; // Reset button text
+        document.body.classList.remove('modal-lock');
+    }
+    editBtn.addEventListener('click', closeModal);
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+
+        const selected = document.querySelector('#custom-form-container .package-option.selected');
+        if (!selected) {
+            alert('कृपया पहिले प्याकेज छान्नुहोस्।');
+            return;
+        }
+
+        const price = selected.getAttribute('data-price');
+        const packageName = selected.id.toUpperCase();
+
+        const fdPreview = new FormData(form);
+        fdPreview.set('package', packageName);
+        fdPreview.set('total', price);
+
+        document.getElementById('confirmName').textContent = fdPreview.get('name') || '';
+        document.getElementById('confirmPhone').textContent = fdPreview.get('phone') || '';
+        document.getElementById('confirmAddress').textContent = fdPreview.get('address') || '';
+        document.getElementById('confirmProvince').textContent = fdPreview.get('province') || '';
+        document.getElementById('confirmPackage').textContent = packageName;
+        document.getElementById('confirmPrice').textContent =
+            new Intl.NumberFormat('ne-NP').format(Number(price));
+
+        openModal();
+
+        // OTP INTEGRATION LOGIC STARTS HERE
+        confirmBtn.onclick = async function () {
+            const phone = document.getElementById('phone').value;
+            const otpValue = document.getElementById('otpCode').value;
+
+            // STEP 1: If OTP area is not visible, send OTP first
+            if (otpInputArea.style.display === 'none') {
+                overlay.style.display = 'flex';
+                overlay.textContent = "OTP पठाउँदै... / Sending OTP...";
+
+                try {
+                    const res = await fetch(`http://localhost:8080/send-otp?phone=${phone}`, { method: 'POST' });
+                    const text = await res.text();
+                    overlay.style.display = 'none';
+
+                    if (text === "OTP Sent") {
+                        otpInputArea.style.display = 'block';
+                        confirmBtn.textContent = "OTP रुजु गर्नुहोस् / Verify & Order";
+                        alert("तपाईँको मोबाइलमा ६ अंकको कोड पठाइएको छ।");
+                    } else {
+                        alert("SMS Error: " + text);
+                    }
+                } catch (err) {
+                    overlay.style.display = 'none';
+                    alert("Connection error while sending OTP");
+                }
+                return; // Wait for user to enter OTP
+            }
+
+            // STEP 2: If OTP area is visible, verify and then submit order
+            if (!otpValue || otpValue.length < 6) {
+                alert("कृपया ६ अंकको कोड हाल्नुहोस्।");
+                return;
+            }
+
+            overlay.style.display = 'flex';
+            overlay.textContent = "भेरिफाइ गर्दै... / Verifying...";
+
+            try {
+                const vRes = await fetch(`http://localhost:8080/verify-otp?phone=${phone}&otp=${otpValue}`, { method: 'POST' });
+                const status = await vRes.text();
+
+                if (status === "verified") {
+                    overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
+
+                    const response = await fetch('http://localhost:8080/Order', {
+                        method: 'POST',
+                        body: fdPreview
+                    });
+
+                    const result = await response.text();
+                    if (result === 'success') {
+                        window.location.href = 'https://hpsnepal.shop/thank-you/';
+                    } else {
+                        alert('Error: ' + result);
+                        overlay.style.display = 'none';
+                    }
+                } else {
+                    alert("गलत OTP! / Invalid OTP");
+                    overlay.style.display = 'none';
+                }
+            } catch (error) {
+                alert('त्रुटि भयो: ' + error.message);
+                overlay.style.display = 'none';
+            }
+        };
+    });
+
+    initPrices();
+</script>
+
+</body>
+</html>
