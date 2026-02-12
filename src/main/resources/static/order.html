@@ -678,7 +678,7 @@
                     const result = await response.text();
                     if (result === 'success') {
                         // Ensure this URL is correct (usually no slash at the end for .html)
-                        window.location.href = '/thankyou.html';
+                        window.location.href = 'thankyou.html';
                     } else {
                         alert('Error: ' + result);
                         overlay.style.display = 'none';
