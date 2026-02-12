@@ -37,7 +37,7 @@ public class OtpController {
         try {
             // FIX: URLEncoder handles the spaces in "Your Easy Spray OTP is"
             // Without this, the URL becomes invalid and throws an Exception.
-            String message = "Your Easy Spray OTP is " + otp;
+            String message = "Your confirmation code for Herbal piles spray is  " + otp;
             String encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
 
             // Construct the URL using the encoded message
