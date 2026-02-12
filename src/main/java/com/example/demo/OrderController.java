@@ -23,43 +23,33 @@ public class OrderController {
     @Value("${sparrow.sender}")
     private String SENDER_ID;
 
-    // Use a single storage for OTPs
     private Map<String, String> otpStorage = new HashMap<>();
 
     @PostMapping("/send-otp")
     public String sendOtp(@RequestParam("phone") String phone) {
-        if (phone == null || phone.isEmpty()) return "Phone number is required";
-
         String otp = String.valueOf((int) (Math.random() * 900000) + 100000);
         otpStorage.put(phone, otp);
 
         try {
             String message = "Your confirmation code for Herbal piles spray is " + otp;
-            String encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
+            // Use .name() to satisfy the IntelliJ warning
+            String encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8.name());
 
             String url = "https://api.sparrowsms.com/v2/sms/?token=" + SPARROW_TOKEN
                     + "&from=" + SENDER_ID
                     + "&to=" + phone
                     + "&text=" + encodedMessage;
 
-            RestTemplate restTemplate = new RestTemplate();
-            String response = restTemplate.getForObject(url, String.class);
-
-            System.out.println("Sparrow API Response: " + response);
+            new RestTemplate().getForObject(url, String.class);
             return "OTP Sent";
         } catch (Exception e) {
-            e.printStackTrace();
-            return "Failed to send OTP: " + e.getMessage();
+            return "Failed: " + e.getMessage();
         }
     }
 
     @PostMapping("/verify-otp")
     public String verifyOtp(@RequestParam("phone") String phone, @RequestParam("otp") String otp) {
-        String savedOtp = otpStorage.get(phone);
-        if (savedOtp != null && savedOtp.equals(otp)) {
-            // Optional: otpStorage.remove(phone); // Remove after success
-            return "verified";
-        }
+        if (otp.equals(otpStorage.get(phone))) return "verified";
         return "invalid";
     }
 
@@ -73,12 +63,10 @@ public class OrderController {
             @RequestParam("total") String total
     ) {
         try {
-            System.out.println("DEBUG: Received order for " + name);
             Order newOrder = new Order(name, phone, address, province, orderPackage, total);
             sheetsService.addOrderToSheet(newOrder);
             return "success";
         } catch (Exception e) {
-            e.printStackTrace();
             return "failed: " + e.getMessage();
         }
     }
