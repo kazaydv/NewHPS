@@ -619,6 +619,8 @@
         openModal();
 
         // OTP INTEGRATION LOGIC STARTS HERE
+        // ... (keep your existing variables at the top)
+
         confirmBtn.onclick = async function () {
             const phone = document.getElementById('phone').value;
             const otpValue = document.getElementById('otpCode').value;
@@ -629,7 +631,8 @@
                 overlay.textContent = "OTP पठाउँदै... / Sending OTP...";
 
                 try {
-                    const res = await fetch(`//send-otp?phone=${phone`, { method: 'POST' });
+                    // FIXED: Removed http://localhost:8080
+                    const res = await fetch(`/send-otp?phone=${phone}`, { method: 'POST' });
                     const text = await res.text();
                     overlay.style.display = 'none';
 
@@ -644,10 +647,10 @@
                     overlay.style.display = 'none';
                     alert("Connection error while sending OTP");
                 }
-                return; // Wait for user to enter OTP
+                return;
             }
 
-            // STEP 2: If OTP area is visible, verify and then submit order
+            // STEP 2: Verify and then submit order
             if (!otpValue || otpValue.length < 6) {
                 alert("कृपया ६ अंकको कोड हाल्नुहोस्।");
                 return;
@@ -657,6 +660,7 @@
             overlay.textContent = "भेरिफाइ गर्दै... / Verifying...";
 
             try {
+                // This one was already relative - good job!
                 const vRes = await fetch(`/verify-otp?phone=${phone}&otp=${otpValue}`, {
                     method: 'POST'
                 });
@@ -665,6 +669,7 @@
                 if (status === "verified") {
                     overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
 
+                    // FIXED: Removed http://localhost:8080
                     const response = await fetch('/Order', {
                         method: 'POST',
                         body: fdPreview
@@ -672,7 +677,8 @@
 
                     const result = await response.text();
                     if (result === 'success') {
-                        window.location.href = 'https://thank-you.html/';
+                        // Ensure this URL is correct (usually no slash at the end for .html)
+                        window.location.href = '/thank-you.html';
                     } else {
                         alert('Error: ' + result);
                         overlay.style.display = 'none';
