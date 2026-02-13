@@ -12,7 +12,145 @@
     <link rel="preload" as="image" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTznesVzl8X48HchEiht7ukNimrzf_GBgTKFKmHmzffhpbDqb7zftPVJx9VKdF1vwr-AI-2P3tfH5Sbr7RC2PJ3TQ" />
     <link rel="icon" type="image/png" href="/Images/favicon.png">
 </head>
+
 <body>
+<!-- ✅ Sticky Top Promo Banner (NO GAP, NO OFFSET, PERFECT MOBILE) -->
+<style>
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+
+    :root {
+        --promoBar-height: 42px;
+        --promoBar-height-sm: 38px;
+        --promoBar-bg: #FDE68A;
+        --promoBar-fg: #000;
+        --promoBar-interval: 3000;
+    }
+
+    /* ===== Banner ===== */
+    #promoBar1 {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 99999;
+        height: var(--promoBar-height);
+        background: var(--promoBar-bg);
+        color: var(--promoBar-fg);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: 800;
+        font-size: 20px;
+        text-align: center;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    #promoBar1::before,
+    #promoBar1::after {
+        content: none !important;
+        display: none !important;
+    }
+
+    @media (max-width: 768px) {
+        #promoBar1 {
+            height: var(--promoBar-height-sm);
+            font-size: 16px;
+        }
+    }
+
+    /* ===== Stack animation ===== */
+    #promoBar1 .promo-stack {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #promoBar1 .promo-msg {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity .35s ease, transform .35s ease;
+        white-space: nowrap;
+    }
+
+    #promoBar1 .promo-msg.is-active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ❌ Remove offset completely */
+    #promoBar1-offset {
+        display: none !important;
+        height: 0 !important;
+    }
+
+    /* Ensure next section touches the banner */
+    .first-section {
+        margin-top: var(--promoBar-height);
+    }
+
+    @media (max-width: 768px) {
+        .first-section {
+            margin-top: var(--promoBar-height-sm);
+        }
+    }
+</style>
+
+<!-- Banner -->
+<div id="promoBar1" class="promo-bar" role="region" aria-label="Promotion">
+    <div class="promo-stack" id="promoBar1-stack">
+        <div class="promo-msg is-active">🎁 24% Discount</div>
+        <div class="promo-msg">🚚 Free Cash on Delivery all over Nepal</div>
+    </div>
+</div>
+
+<!-- ❌ Spacer removed but kept hidden to avoid theme errors -->
+<div id="promoBar1-offset"></div>
+
+<script>
+    (function() {
+        var bar = document.getElementById('promoBar1');
+        var stack = document.getElementById('promoBar1-stack');
+        if (!bar || !stack) return;
+
+        var msgs = Array.from(stack.querySelectorAll('.promo-msg'));
+        if (msgs.length <= 1) return;
+
+        var index = 0;
+        var paused = false;
+        var interval = 3000;
+
+        function show(i) {
+            msgs.forEach((msg, idx) => {
+                msg.classList.toggle('is-active', idx === i);
+                msg.setAttribute('aria-hidden', idx !== i);
+            });
+        }
+
+        function nextMsg() {
+            if (!paused) {
+                index = (index + 1) % msgs.length;
+                show(index);
+            }
+        }
+
+        setInterval(nextMsg, interval);
+
+        bar.addEventListener("mouseenter", () => paused = true);
+        bar.addEventListener("mouseleave", () => paused = false);
+
+    })();
+</script>
 <!-- Floating WhatsApp Image Button -->
 <a
         href="https://wa.me/9779764379199?text=Hello!"
