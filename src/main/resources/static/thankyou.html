@@ -182,7 +182,7 @@
     </div>
 </div>
 <!-- Meta Pixel Code -->
-<script>
+<script th:inline="javascript">
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -191,10 +191,16 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
+
     fbq('init', '1219813376789716');
-    fbq('track', 'Purchase');
+    fbq('track', 'PageView');
+
+    /* Grab the dynamic price from Java */
+    var price = [[${purchaseValue}]];
+
+    fbq('track', 'Purchase', {
+        value: price,
+        currency: 'NPR'
+    });
 </script>
-<noscript><img height="1" width="1" style="display:none"
-               src="https://www.facebook.com/tr?id=1219813376789716&ev=PageView&noscript=1"
-/></noscript>
 <!-- End Meta Pixel Code -->
