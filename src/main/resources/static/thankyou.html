@@ -181,7 +181,6 @@
         </a>
     </div>
 </div>
-<!-- Meta Pixel Code -->
 <script th:inline="javascript">
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -195,12 +194,12 @@
     fbq('init', '1219813376789716');
     fbq('track', 'PageView');
 
-    /* Grab the dynamic price from Java */
-    var price = [[${purchaseValue}]];
+    var price = /*[[${purchaseValue}]]*/ 0;
 
-    fbq('track', 'Purchase', {
-        value: price,
-        currency: 'NPR'
-    });
+    if(price > 0){
+        fbq('track', 'Purchase', {
+            value: price,
+            currency: 'NPR'
+        });
+    }
 </script>
-<!-- End Meta Pixel Code -->
