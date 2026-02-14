@@ -62,7 +62,7 @@ public class OrderController {
         return "invalid";
     }
 
-    @PostMapping(value = "/Order", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/order", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String placeOrder(
             @RequestParam("name") String name,
             @RequestParam("phone") String phone,
