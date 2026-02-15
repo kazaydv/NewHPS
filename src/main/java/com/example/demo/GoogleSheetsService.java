@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,21 +23,19 @@ import java.util.List;
 public class GoogleSheetsService {
 
     private static final String APPLICATION_NAME = "Easy Spray Order System";
-
-    // तपाईँको Spreadsheet ID यहाँ सुरक्षित छ
     private static final String SPREADSHEET_ID = "1d5bL0IOwCJ9BBqIhs_LX2LZ7SVAYB8D3Af0swE0oSKg";
 
     public void addOrderToSheet(Order order) throws IOException, GeneralSecurityException {
-        // १. Credentials लोड गर्नुहोस्
+        // 1. Load Credentials
         InputStream in = GoogleSheetsService.class.getResourceAsStream("/credentials.json");
         if (in == null) {
-            throw new IOException("फाइल फेला परेन: credentials.json (resources फोल्डरमा राख्नुहोस्)");
+            throw new IOException("File not found: credentials.json in resources folder");
         }
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(in)
                 .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS));
 
-        // २. Sheets API Service सेटअप गर्नुहोस्
+        // 2. Setup Sheets API Service
         Sheets service = new Sheets.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(),
                 GsonFactory.getDefaultInstance(),
@@ -44,13 +43,22 @@ public class GoogleSheetsService {
                 .setApplicationName(APPLICATION_NAME)
                 .build();
 
-        // ३. मिति र समयलाई सफा बनाउनुहोस् (उदा: 2026-02-12 17:30)
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String cleanTimestamp = LocalDateTime.now().format(formatter);
+        // 3. Find the ABSOLUTE last row (Ignoring gaps in the middle)
+        // We read Column A to count all existing rows including your manual gaps
+        ValueRange response = service.spreadsheets().values()
+                .get(SPREADSHEET_ID, "Sheet1!A:A")
+                .execute();
 
-        // ४. सिटमा राख्ने डाटाको लहर (Row) तयार पार्नुहोस्
+        List<List<Object>> values = response.getValues();
+        int trueLastRow = (values == null) ? 0 : values.size();
+
+        // 4. Set Nepal Timestamp (UTC+5:45)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String nepalTime = ZonedDateTime.now(ZoneId.of("Asia/Kathmandu")).format(formatter);
+
+        // 5. Prepare the data row
         List<Object> dataRow = Arrays.asList(
-                cleanTimestamp,       // सफा मिति र समय
+                nepalTime,
                 order.getName(),
                 order.getPhone(),
                 order.getAddress(),
@@ -59,14 +67,17 @@ public class GoogleSheetsService {
                 order.getTotal()
         );
 
-        ValueRange body = new ValueRange().setValues(Arrays.asList(dataRow));
+        ValueRange body = new ValueRange().setValues(Collections.singletonList(dataRow));
 
-        // ५. डाटा थप्नुहोस् (Sheet1!A1 ले पहिलो खाली रो मा डाटा थप्छ)
+        // 6. Use .update() instead of .append()
+        // This targets the row exactly after the last occupied row in the sheet
+        String targetRange = "Sheet1!A" + (trueLastRow + 1);
+
         service.spreadsheets().values()
-                .append(SPREADSHEET_ID, "Sheet1!A1", body)
+                .update(SPREADSHEET_ID, targetRange, body)
                 .setValueInputOption("USER_ENTERED")
                 .execute();
 
-        System.out.println("सफलतापूर्वक गुगल सिटमा डाटा पठाइयो: " + cleanTimestamp);
+        System.out.println("Order successfully saved at row " + (trueLastRow + 1) + " (Nepal Time: " + nepalTime + ")");
     }
 }
