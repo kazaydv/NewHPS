@@ -1314,16 +1314,16 @@
       if(!tabs)return;
       ings.forEach((g,i)=>{
         const li=document.createElement('li');
-        li.textContent=g.n;li.onclick=()=>sel(i);tabs.appendChild(li);
+        li.textContent=g.n;li.onclick=()=>sel(i,true);tabs.appendChild(li);
       });
-      function sel(i){
+      function sel(i,scroll){
         const g=ings[i];
         name.textContent=g.n;img.src=g.i;img.alt=g.n;desc.textContent=g.d;
         Array.from(tabs.children).forEach(el=>el.classList.remove('on'));
         tabs.children[i].classList.add('on');
-        tabs.children[i].scrollIntoView({inline:'center',behavior:'smooth'});
+        if(scroll)tabs.children[i].scrollIntoView({inline:'center',behavior:'smooth'});
       }
-      sel(0);
+      sel(0,false);
     }();
 
     /* TESTIMONIAL CAROUSEL */
