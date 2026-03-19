@@ -107,8 +107,8 @@
         @keyframes sh{40%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
         .btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(27,94,53,.35)}
         .btn-full{width:100%}
-        .btn-amber{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 8px 24px rgba(215,119,6,.28)}
-        .btn-white{background:#fff;color:var(--g);box-shadow:0 8px 20px rgba(0,0,0,.1)}
+        /* btn-white: only for dark/green backgrounds where green btn won't read */
+        .btn-white{background:#fff;color:var(--g);box-shadow:0 8px 20px rgba(0,0,0,.12)}
         .btn-white:hover{background:var(--gbg)}
         .btn svg{width:18px;height:18px;flex-shrink:0}
 
@@ -358,7 +358,7 @@
           border-radius:10px;overflow:hidden;
           box-shadow:0 2px 8px rgba(0,0,0,.08);
         }
-        .sym-img img{width:100%;height:100%;object-fit:cover}
+        .sym-img img{width:100%;height:100%;object-fit:contain;background:var(--gbg)}
         .sym-name{font-size:15px;font-weight:700;margin-bottom:4px;color:var(--ink)}
         .sym-desc{font-size:14px;color:var(--ink3);line-height:1.75}
         @media(min-width:600px){
@@ -456,7 +456,7 @@
           transition:border-color .2s,box-shadow .2s;
         }
         .cond-card:hover{border-color:var(--gm);box-shadow:0 4px 16px rgba(27,94,53,.08)}
-        .cond-card img{width:96px;min-width:96px;height:96px;object-fit:cover;flex-shrink:0}
+        .cond-card img{width:96px;min-width:96px;height:96px;object-fit:contain;background:var(--gbg);flex-shrink:0}
         .cond-body{padding:14px 16px}
         .cond-name{font-size:16px;font-weight:700;margin-bottom:2px;color:var(--ink)}
         .cond-en{font-size:12px;color:var(--gm);font-weight:600;margin-bottom:6px;letter-spacing:.03em}
@@ -464,7 +464,7 @@
         @media(min-width:640px){
           .cond-grid{flex-direction:row;gap:16px}
           .cond-card{flex-direction:column;align-items:stretch;flex:1}
-          .cond-card img{width:100%;min-width:unset;height:160px}
+          .cond-card img{width:100%;min-width:unset;height:160px;object-fit:contain;background:var(--gbg)}
           .cond-body{padding:16px}
         }
 
@@ -484,8 +484,8 @@
         }
         .ben-row:last-child{border-bottom:none}
         .ben-row:hover{background:var(--gbg)}
-        .ben-icon{width:52px;height:52px;min-width:52px;border-radius:10px;overflow:hidden;flex-shrink:0}
-        .ben-icon img{width:100%;height:100%;object-fit:cover}
+        .ben-icon{width:52px;height:52px;min-width:52px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--gbg)}
+        .ben-icon img{width:100%;height:100%;object-fit:contain}
         .ben-title{font-size:15px;font-weight:700;color:var(--g);margin-bottom:4px}
         .ben-desc{font-size:14px;color:var(--ink3);line-height:1.75}
         @media(min-width:700px){
@@ -548,7 +548,7 @@
         .ing-tabs li.on{background:var(--g);color:#fff;font-weight:700}
         .ing-tabs li:hover:not(.on){border-color:var(--gl)}
         .ing-detail{padding:20px;background:#fff}
-        .ing-detail img{width:100%;height:200px;object-fit:contain;border-radius:10px;margin-bottom:14px;background:var(--gbg);padding:12px}
+        .ing-detail img{width:100%;height:220px;object-fit:contain;border-radius:10px;margin-bottom:14px;background:var(--gbg)}
         .ing-detail h3{font-size:18px;font-weight:700;color:var(--g);margin-bottom:8px}
         .ing-detail p{font-size:15px;color:var(--ink3);line-height:1.85}
         @media(min-width:640px){
@@ -562,7 +562,7 @@
           .ing-tabs li:hover:not(.on){background:var(--gbg)}
           .ing-tabs li.on{background:var(--g)}
           .ing-detail{flex:1;padding:28px}
-          .ing-detail img{height:220px}
+          .ing-detail img{height:240px}
         }
 
         /* ─────────────────────────────────────
@@ -659,7 +659,7 @@
           transition:border-color .2s,box-shadow .2s;
         }
         .tcard:hover{border-color:var(--gm);box-shadow:0 4px 16px rgba(27,94,53,.07)}
-        .tc-img{width:100%;height:140px;object-fit:contain;border-radius:10px;margin-bottom:14px;background:var(--gbg);padding:8px}
+        .tc-img{width:100%;height:180px;object-fit:contain;border-radius:10px;margin-bottom:14px;background:var(--gbg)}
         .tc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
         .tc-name{font-size:15px;font-weight:700;color:var(--ink)}
         .tc-loc{font-size:12px;color:var(--ink3);margin-top:2px}
@@ -1229,7 +1229,7 @@
             <div class="stk-top"><span class="stk-avail">आजको स्टक</span><span class="stk-low">⚠ ७३% बिकिसक्यो</span></div>
             <div class="stk-bar"><div class="stk-fill"></div></div>
         </div>
-        <a href="order.html" class="btn btn-amber">
+        <a href="order.html" class="btn" style="margin:0 auto">
             Rs 1600/- मा Order गर्नुहोस् →
         </a>
         <p style="margin-top:14px;color:rgba(255,255,255,.35);font-size:13px">💵 Cash on Delivery &nbsp;·&nbsp; 🚚 Free Delivery</p>
