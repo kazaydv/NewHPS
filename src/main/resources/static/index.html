@@ -1,2589 +1,1047 @@
-<!-- wp:template-part {"slug":"header","theme":"twentytwentyfive","area":"header"} /-->
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Herbal Piles Spray – प्राकृतिक राहत</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Herbal Piles Spray – पाइल्सको प्राकृतिक समाधान</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Nepali&family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+          --g1:#0d5e2a;--g2:#16a34a;--g3:#22c55e;--g4:#dcfce7;
+          --amber:#f59e0b;--amber-d:#d97706;--red:#ef4444;
+          --cream:#fefce8;--warm:#fffbeb;
+          --text:#0f1a0d;--muted:#4b5563;--light:#f9fafb;
+          --shadow:0 20px 50px rgba(13,94,42,.12);
+          --radius:16px;
+        }
+        html{scroll-behavior:smooth;overflow-x:hidden}
+        body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+        img{max-width:100%;display:block;height:auto}
+        a{text-decoration:none}
 
-    <style>html, body { overflow-x: hidden; }</style>
+        /* ═══════ PROMO BAR ═══════ */
+        #promoBar{
+          position:fixed;top:0;left:0;right:0;z-index:99999;
+          background:linear-gradient(90deg,#0d5e2a,#16a34a,#0d5e2a);
+          background-size:200% 100%;animation:barShift 4s linear infinite;
+          height:44px;display:flex;align-items:center;justify-content:center;
+          color:#fff;font-weight:700;font-size:15px;gap:20px;
+          letter-spacing:.02em;
+        }
+        #promoBar .msg{display:none}
+        #promoBar .msg.active{display:flex;align-items:center;gap:8px}
+        #timerWrap{display:flex;align-items:center;gap:6px;font-size:13px}
+        #timerWrap span{background:rgba(255,255,255,.2);padding:2px 7px;border-radius:6px;font-weight:800;font-variant-numeric:tabular-nums}
+        @keyframes barShift{0%{background-position:0%}100%{background-position:200%}}
+        @media(max-width:600px){#promoBar{height:38px;font-size:13px}}
 
-    <link rel="preload" as="image" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTznesVzl8X48HchEiht7ukNimrzf_GBgTKFKmHmzffhpbDqb7zftPVJx9VKdF1vwr-AI-2P3tfH5Sbr7RC2PJ3TQ" />
-    <link rel="icon" type="image/png" href="/Images/favicon.png">
+        /* ═══════ STICKY MOBILE CTA ═══════ */
+        #mobileStickyBtn{
+          display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;
+          padding:10px 16px 14px;
+          background:linear-gradient(to top,#fff 80%,transparent);
+        }
+        #mobileStickyBtn a{
+          display:block;width:100%;text-align:center;padding:14px;
+          border-radius:999px;background:linear-gradient(135deg,#f97316,#ea580c);
+          color:#fff;font-weight:800;font-size:16px;
+          box-shadow:0 10px 30px rgba(234,88,12,.4);
+        }
+        @media(max-width:768px){#mobileStickyBtn{display:block}}
+
+        /* ═══════ SECTION OFFSET ═══════ */
+        .first-section{margin-top:44px}
+        @media(max-width:600px){.first-section{margin-top:38px}}
+
+        /* ═══════ WHATSAPP ═══════ */
+        .wa-float{position:fixed;bottom:70px;right:16px;z-index:9000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.5);transition:transform .25s}
+        .wa-float:hover{transform:scale(1.08)}
+        .wa-float svg{width:30px;height:30px;fill:#fff}
+
+        /* ═══════ GLOBAL SECTION STYLES ═══════ */
+        .sec{padding:clamp(40px,6vw,80px) clamp(16px,4vw,40px)}
+        .sec-inner{max-width:1200px;margin:0 auto}
+        .sec-tag{display:inline-block;background:var(--g4);color:var(--g1);font-size:13px;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:.05em;margin-bottom:14px;text-transform:uppercase}
+        .sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:800;line-height:1.25;color:var(--text)}
+        .sec-title .hl{color:var(--g2)}
+        .sec-title .hl-amber{color:var(--amber-d)}
+
+        /* ═══════ HERO ═══════ */
+        #hero{
+          background:linear-gradient(135deg,#f0fdf4 0%,#fefce8 50%,#f0fdf4 100%);
+          position:relative;overflow:hidden;padding:clamp(30px,4vw,60px) clamp(16px,4vw,40px) clamp(40px,5vw,70px);
+        }
+        #hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(34,197,94,.12),transparent 70%);pointer-events:none}
+        .hero-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--g3);border-radius:999px;padding:6px 16px;font-size:13px;font-weight:700;color:var(--g1);margin-bottom:18px;box-shadow:0 4px 12px rgba(22,163,74,.1)}
+        .hero-badge .dot{width:8px;height:8px;background:var(--g3);border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+        .hero-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,52px);font-weight:800;line-height:1.2;margin-bottom:14px;color:var(--text)}
+        .hero-title .brand{color:var(--g1)}
+        .hero-subtitle{font-size:clamp(16px,2vw,19px);color:var(--muted);line-height:1.7;margin-bottom:22px;font-weight:500}
+        .hero-subtitle b{color:var(--text);font-weight:700}
+        .hero-price-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;padding:14px 18px;background:#fff;border-radius:12px;border:2px solid #dcfce7;box-shadow:0 4px 14px rgba(22,163,74,.08)}
+        .hero-old{font-size:16px;text-decoration:line-through;color:#9ca3af;font-weight:500}
+        .hero-now{font-size:28px;font-weight:800;color:var(--g1)}
+        .hero-save{background:var(--red);color:#fff;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700}
+        .hero-benefits{list-style:none;margin-bottom:28px;display:grid;gap:10px}
+        .hero-benefits li{display:flex;align-items:flex-start;gap:10px;font-size:16px;font-weight:500;line-height:1.5}
+        .hero-benefits li .icon{width:22px;height:22px;min-width:22px;background:var(--g2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+        .hero-benefits li .icon svg{width:12px;height:12px;fill:#fff}
+        .hero-img-wrap{position:relative;text-align:center}
+        .hero-img{border-radius:24px;box-shadow:0 30px 70px rgba(13,94,42,.2);max-width:420px;margin:0 auto}
+        .hero-img-badge{position:absolute;bottom:20px;left:-10px;background:#fff;border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+        .hero-img-badge2{position:absolute;top:20px;right:-10px}
+        .stars-sm{color:var(--amber);font-size:12px;letter-spacing:1px}
+
+        /* ═══════ BIG CTA BTN ═══════ */
+        .cta-btn{
+          display:inline-flex;align-items:center;justify-content:center;gap:10px;
+          padding:16px 32px;border-radius:999px;
+          background:linear-gradient(135deg,#f97316,#ea580c);
+          color:#fff;font-weight:800;font-size:17px;letter-spacing:.02em;
+          box-shadow:0 12px 35px rgba(234,88,12,.4);
+          position:relative;overflow:hidden;transition:all .2s;
+          width:100%;max-width:440px;text-align:center;
+        }
+        .cta-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.4) 45%,transparent 60%);transform:translateX(-120%);animation:shine 3s ease-in-out infinite}
+        @keyframes shine{to{transform:translateX(120%)}}
+        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(234,88,12,.5)}
+        .cta-btn svg{width:20px;height:20px;fill:#fff}
+        .cta-sub{margin-top:10px;font-size:13px;color:var(--muted);text-align:center}
+        .cta-sub span{color:var(--g2);font-weight:700}
+
+        /* ═══════ SOCIAL PROOF BAR ═══════ */
+        #socialBar{background:var(--g1);color:#fff;padding:18px clamp(16px,4vw,40px)}
+        .social-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px}
+        .social-stat{text-align:center}
+        .social-num{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:#86efac}
+        .social-label{font-size:13px;color:rgba(255,255,255,.75);font-weight:500;margin-top:2px}
+
+        /* ═══════ TRUST ICONS ═══════ */
+        #trust{background:var(--cream);border-top:1px solid #fef08a;border-bottom:1px solid #fef08a;padding:22px clamp(16px,4vw,40px)}
+        .trust-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px}
+        .trust-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--g1)}
+        .trust-item svg{width:32px;height:32px;flex-shrink:0}
+
+        /* ═══════ PROBLEM SECTION ═══════ */
+        #problem{background:#fff}
+        .prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+        .prob-card{background:var(--light);border-radius:var(--radius);overflow:hidden;text-align:center;border:1.5px solid #f3f4f6;transition:all .3s}
+        .prob-card:hover{border-color:var(--g3);transform:translateY(-4px);box-shadow:0 14px 30px rgba(22,163,74,.1)}
+        .prob-card img{width:100%;height:220px;object-fit:cover}
+        .prob-card p{padding:14px;font-size:15px;font-weight:600;color:var(--text);line-height:1.5}
+
+        /* ═══════ COMPARISON TABLE ═══════ */
+        #compare{background:linear-gradient(180deg,#f0fdf4,#fff)}
+        .compare-table{width:100%;border-collapse:collapse;margin-top:36px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+        .compare-table th{padding:14px 18px;font-size:15px;font-weight:700;text-align:center}
+        .compare-table td{padding:12px 18px;font-size:14px;text-align:center;border-top:1px solid #f3f4f6}
+        .compare-table tr:hover td{background:#f9fafb}
+        .compare-table thead tr{background:var(--g1);color:#fff}
+        .col-us{background:linear-gradient(180deg,#dcfce7,#f0fdf4)!important;font-weight:700;color:var(--g1)!important}
+        .col-us-head{background:#16a34a!important}
+        .tick{color:var(--g2);font-size:18px;font-weight:800}
+        .cross{color:var(--red);font-size:18px}
+        .compare-label{font-weight:700;text-align:left!important;color:var(--text)}
+
+        /* ═══════ HOW IT WORKS ═══════ */
+        #howitworks{background:var(--warm)}
+        .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:36px;position:relative}
+        .steps-row::before{content:'';position:absolute;top:40px;left:calc(16.66% + 16px);right:calc(16.66% + 16px);height:2px;background:linear-gradient(90deg,var(--g3),var(--g3));background-size:8px 2px;z-index:0}
+        .step-card{background:#fff;border-radius:var(--radius);padding:28px 22px;text-align:center;box-shadow:0 6px 24px rgba(13,94,42,.07);position:relative;z-index:1}
+        .step-num{width:56px;height:56px;background:linear-gradient(135deg,var(--g2),var(--g1));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:#fff;margin:0 auto 16px;box-shadow:0 6px 18px rgba(22,163,74,.3)}
+        .step-title{font-size:17px;font-weight:700;margin-bottom:8px;color:var(--g1)}
+        .step-desc{font-size:14px;color:var(--muted);line-height:1.6}
+        .step-icon{font-size:28px;margin-bottom:10px}
+
+        /* ═══════ INGREDIENTS ═══════ */
+        #ingredients{background:#fff}
+        .ing-container{display:flex;border-radius:var(--radius);border:1.5px solid #e5e7eb;overflow:hidden;margin-top:28px;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+        .ing-list{width:32%;overflow-y:auto;border-right:1.5px solid #e5e7eb;padding:10px;max-height:500px;background:#f9fafb}
+        .ing-list::-webkit-scrollbar{width:4px}
+        .ing-list::-webkit-scrollbar-thumb{background:#d1fae5;border-radius:4px}
+        .ing-list ul{list-style:none;padding:0;margin:0}
+        .ing-list li{padding:9px 12px;cursor:pointer;font-size:15px;color:#333;margin-bottom:6px;border-radius:8px;transition:all .2s;text-align:left;font-weight:500}
+        .ing-list li:hover{background:#f0fdf4}
+        .ing-list li.active{background:var(--g1);color:#fff;font-weight:700}
+        .ing-detail{width:68%;padding:22px;display:flex;flex-direction:column;justify-content:center;background:#fff}
+        .ing-detail img{border-radius:10px;margin-bottom:14px;aspect-ratio:16/9;object-fit:cover;max-height:200px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+        .ing-detail h3{font-size:20px;font-weight:800;color:var(--g1);margin-bottom:8px}
+        .ing-detail p{font-size:15px;color:var(--muted);line-height:1.6}
+
+        /* ═══════ BENEFITS VIDEO SECTION ═══════ */
+        #benefits{background:var(--cream)}
+        .ben-grid{display:grid;grid-template-columns:1fr minmax(280px,420px) 1fr;gap:32px;align-items:center;margin-top:36px}
+        .ben-col{display:grid;gap:24px}
+        .ben-item{background:#fff;border-radius:var(--radius);padding:20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 16px rgba(13,94,42,.06);border:1.5px solid #dcfce7;opacity:0;transform:translateX(-20px);transition:all .6s}
+        .ben-item.from-right{transform:translateX(20px)}
+        .ben-item.visible{opacity:1;transform:translateX(0)}
+        .ben-icon-wrap{width:56px;height:56px;min-width:56px;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(22,163,74,.15)}
+        .ben-icon-wrap img{width:100%;height:100%;object-fit:cover}
+        .ben-item-title{font-size:16px;font-weight:700;color:var(--g1);margin-bottom:4px}
+        .ben-item-text{font-size:14px;color:var(--muted);line-height:1.5}
+        .ben-video-wrap{border-radius:18px;overflow:hidden;box-shadow:0 20px 50px rgba(13,94,42,.2)}
+        .ben-video-wrap video{width:100%;display:block}
+
+        /* ═══════ TESTIMONIALS ═══════ */
+        #testimonials{background:#fff}
+        .review-stats{display:flex;align-items:center;gap:30px;margin:24px 0 36px;flex-wrap:wrap}
+        .review-big-num{font-family:'Playfair Display',serif;font-size:64px;font-weight:800;color:var(--g1);line-height:1}
+        .review-stars-big{color:var(--amber);font-size:22px;letter-spacing:2px;margin-bottom:4px}
+        .review-total{font-size:14px;color:var(--muted)}
+        .carousel-wrap{position:relative}
+        .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0 20px;scrollbar-width:none}
+        .carousel::-webkit-scrollbar{display:none}
+        .rev-card{flex:0 0 calc(33.33% - 14px);scroll-snap-align:start;background:var(--light);border-radius:var(--radius);padding:22px;border:1.5px solid #f3f4f6;transition:all .3s}
+        .rev-card:hover{border-color:#dcfce7;box-shadow:0 10px 30px rgba(22,163,74,.08)}
+        .rev-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+        .rev-avatar{width:48px;height:48px;min-width:48px;border-radius:50%;object-fit:cover;border:2px solid #dcfce7}
+        .rev-name{font-size:15px;font-weight:700;margin-bottom:2px}
+        .rev-loc{font-size:12px;color:var(--muted)}
+        .rev-stars{color:var(--amber);font-size:14px;letter-spacing:1px}
+        .rev-text{font-size:14px;color:#374151;line-height:1.65;font-style:italic}
+        .rev-img{width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:12px}
+        .rev-verified{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--g2);background:#dcfce7;padding:3px 9px;border-radius:999px;margin-top:10px}
+        .carousel-nav{display:flex;gap:10px;justify-content:center;margin-top:12px}
+        .carousel-nav button{width:40px;height:40px;border-radius:50%;border:2px solid #e5e7eb;background:#fff;font-size:18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+        .carousel-nav button:hover{background:var(--g1);color:#fff;border-color:var(--g1)}
+
+        /* ═══════ FAQ ═══════ */
+        #faq{background:var(--warm)}
+        .faq-list{margin-top:32px;display:grid;gap:12px}
+        .faq-item{background:#fff;border-radius:var(--radius);border:1.5px solid #e5e7eb;overflow:hidden;transition:all .3s}
+        .faq-item.open{border-color:var(--g3)}
+        .faq-q{padding:18px 22px;font-size:16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+        .faq-q .arrow{width:28px;height:28px;border-radius:50%;background:var(--g4);display:flex;align-items:center;justify-content:center;transition:transform .3s;flex-shrink:0}
+        .faq-q .arrow svg{width:14px;height:14px;fill:var(--g1)}
+        .faq-item.open .arrow{transform:rotate(180deg);background:var(--g2)}
+        .faq-item.open .arrow svg{fill:#fff}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .faq-a-inner{padding:0 22px 18px;font-size:15px;color:var(--muted);line-height:1.7;border-top:1px solid #f3f4f6}
+
+        /* ═══════ GUARANTEE ═══════ */
+        #guarantee{background:linear-gradient(135deg,var(--g1) 0%,#0a4a20 100%);color:#fff;text-align:center}
+        .guarantee-icon{width:90px;height:90px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:40px;border:3px solid rgba(255,255,255,.3)}
+        .guarantee-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,38px);font-weight:800;color:#fff;margin-bottom:14px}
+        .guarantee-text{font-size:17px;line-height:1.7;color:rgba(255,255,255,.85);max-width:600px;margin:0 auto 30px}
+        .guarantee-points{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:36px}
+        .gpoint{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#86efac}
+        .gpoint svg{width:20px;height:20px;fill:#86efac;flex-shrink:0}
+
+        /* ═══════ URGENCY BLOCK ═══════ */
+        #urgency{background:#fff;border-top:3px solid var(--amber);border-bottom:3px solid var(--amber)}
+        .urgency-inner{max-width:700px;margin:0 auto;text-align:center;padding:clamp(30px,4vw,50px) 20px}
+        .urgency-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--text);margin-bottom:16px}
+        .urgency-title span{color:var(--red)}
+        .stock-bar-wrap{margin:20px auto;max-width:400px}
+        .stock-label{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:8px}
+        .stock-label .low{color:var(--red)}
+        .stock-bar{height:10px;background:#f3f4f6;border-radius:999px;overflow:hidden}
+        .stock-fill{height:100%;background:linear-gradient(90deg,var(--red),#f97316);border-radius:999px;width:73%;animation:fillBar 1.5s ease-out}
+        @keyframes fillBar{from{width:0}to{width:73%}}
+        .countdown-box{display:flex;gap:12px;justify-content:center;margin:20px 0}
+        .cd-unit{text-align:center;background:var(--g1);color:#fff;border-radius:10px;padding:8px 16px;min-width:64px}
+        .cd-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+        .cd-label{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;letter-spacing:.05em}
+        .cd-sep{font-size:28px;font-weight:800;color:var(--g1);align-self:flex-start;padding-top:8px}
+
+        /* ═══════ FINAL CTA ═══════ */
+        #finalcta{background:linear-gradient(135deg,#f0fdf4,#fefce8);text-align:center}
+        .final-price-box{background:#fff;border-radius:20px;padding:32px;max-width:520px;margin:0 auto 28px;box-shadow:var(--shadow);border:2px solid #dcfce7}
+        .final-product-name{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+        .final-old{font-size:18px;text-decoration:line-through;color:#9ca3af}
+        .final-price{font-family:'Playfair Display',serif;font-size:48px;font-weight:800;color:var(--g1);line-height:1}
+        .final-save-badge{display:inline-block;background:var(--red);color:#fff;padding:5px 16px;border-radius:999px;font-size:14px;font-weight:700;margin:8px 0}
+        .final-inclusions{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:16px 0;font-size:13px;font-weight:600;color:var(--g2)}
+        .final-inclusions span::before{content:'✓ '}
+
+        /* ═══════ FOOTER ═══════ */
+        footer{background:var(--text);color:rgba(255,255,255,.7);text-align:center;padding:28px 20px;font-size:14px}
+        footer strong{color:#fff}
+        footer .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:14px;flex-wrap:wrap}
+        footer .footer-links a{color:rgba(255,255,255,.6);font-size:13px;transition:color .2s}
+        footer .footer-links a:hover{color:#fff}
+
+        /* ═══════ FADE-IN UTILITY ═══════ */
+        .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:.1s}
+        .reveal-delay-2{transition-delay:.2s}
+        .reveal-delay-3{transition-delay:.3s}
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media(max-width:1024px){
+          .ben-grid{grid-template-columns:1fr;grid-template-rows:auto auto auto}
+          .ben-col{grid-template-columns:1fr 1fr}
+          .ben-video-wrap{max-width:500px;margin:0 auto;order:-1}
+        }
+        @media(max-width:900px){
+          .hero-wrap{grid-template-columns:1fr}
+          .hero-img{max-width:320px}
+          .prob-grid{grid-template-columns:repeat(2,1fr)}
+          .steps-row::before{display:none}
+          .steps-row{grid-template-columns:1fr}
+          .compare-table{font-size:12px}
+          .compare-table th,.compare-table td{padding:10px 8px}
+          .rev-card{flex:0 0 calc(80% - 14px)}
+          .ing-container{flex-direction:column}
+          .ing-list{width:100%;max-height:none;overflow-x:auto;overflow-y:hidden;border-right:none;border-bottom:1.5px solid #e5e7eb}
+          .ing-list ul{display:flex;gap:8px;padding:0 4px}
+          .ing-list li{white-space:nowrap;border-radius:999px;background:#eef2f7;font-size:13px;padding:7px 14px}
+          .ing-detail{width:100%}
+        }
+        @media(max-width:600px){
+          .hero-wrap{gap:24px}
+          .hero-img-badge,.hero-img-badge2{display:none}
+          .prob-grid{grid-template-columns:1fr 1fr}
+          .ben-col{grid-template-columns:1fr}
+          .final-inclusions{flex-direction:column;gap:8px;align-items:center}
+        }
+        @media(max-width:480px){
+          .rev-card{flex:0 0 90%}
+          .social-inner{justify-content:center;gap:24px}
+        }
+    </style>
 </head>
-
 <body>
-<!-- ✅ Sticky Top Promo Banner (NO GAP, NO OFFSET, PERFECT MOBILE) -->
-<style>
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden;
-    }
 
-    :root {
-        --promoBar-height: 42px;
-        --promoBar-height-sm: 38px;
-        --promoBar-bg: #FDE68A;
-        --promoBar-fg: #000;
-        --promoBar-interval: 3000;
-    }
+<!-- ═══════ PROMO BAR ═══════ -->
+<div id="promoBar">
+    <div class="msg active">🎁 &nbsp;24% Discount – Limited Time &nbsp;|&nbsp; <span id="timerWrap">⏰ Offer ends: <span id="cd-h">00</span>:<span id="cd-m">00</span>:<span id="cd-s">00</span></span></div>
+    <div class="msg">🚚 &nbsp;Free Cash on Delivery all over Nepal</div>
+</div>
 
-    /* ===== Banner ===== */
-    #promoBar1 {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 99999;
-        height: var(--promoBar-height);
-        background: var(--promoBar-bg);
-        color: var(--promoBar-fg);
+<!-- MOBILE STICKY CTA -->
+<div id="mobileStickyBtn"><a href="order.html">Order Now – Rs 1600/- &nbsp;→</a></div>
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+<!-- WHATSAPP -->
+<a href="https://wa.me/9779764379199?text=Hello!" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
 
-        font-weight: 800;
-        font-size: 20px;
-        text-align: center;
-        overflow: hidden;
-        width: 100%;
-    }
+<!-- ═══════ HERO ═══════ -->
+<section id="hero" class="first-section">
+    <div class="hero-wrap">
+        <div>
+            <div class="hero-badge"><span class="dot"></span> Nepal's #1 Herbal Piles Solution</div>
+            <h1 class="hero-title">
+                <span class="brand">Herbal Piles Spray</span> –<br>पाइल्सको दुखाइबाट<br>स्थायी मुक्ति
+            </h1>
+            <p class="hero-subtitle">
+                पाइल्स, फिसर र फिस्टुलाको समस्याबाट <b>बिना अपरेसन, घरमै बसेर</b> छुटकारा पाउनुहोस् –
+                100% प्राकृतिक जडीबुटीहरूको शक्तिशाली मिश्रण
+            </p>
+            <div class="hero-price-row">
+                <div>
+                    <div class="hero-old">Rs 2100/-</div>
+                    <div class="hero-now">Rs 1600/- <small style="font-size:14px;font-weight:500;color:var(--muted)">only</small></div>
+                </div>
+                <div class="hero-save">Save Rs 500/-</div>
+                <div style="margin-left:auto;text-align:right;font-size:13px">
+                    <div style="color:var(--amber);font-size:16px;letter-spacing:1px">★★★★★</div>
+                    <div style="color:var(--muted);font-weight:500">5000+ Happy Customers</div>
+                </div>
+            </div>
+            <ul class="hero-benefits">
+                <li><span class="icon"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></span>मलद्वारमा पलाएको मासुलाई बिस्तारै सुकाउँछ</li>
+                <li><span class="icon"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></span>जलन, चिलाउने र दुखाइबाट तुरुन्त राहत दिन्छ</li>
+                <li><span class="icon"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></span>मलद्वारबाट रगत र पिप बग्नु बन्द गर्छ</li>
+                <li><span class="icon"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></span>बिना अपरेसन, बिना दुखाइ – घरमै प्रयोग गर्नुस्</li>
+            </ul>
+            <a href="order.html" class="cta-btn">
+                <svg viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                अहिले नै Order गर्नुहोस्
+            </a>
+            <p class="cta-sub">🚚 <span>Free Delivery</span> all over Nepal &nbsp;|&nbsp; 💵 Cash on Delivery</p>
+        </div>
+        <div class="hero-img-wrap">
+            <img src="Images/Herbalpilesspray-8-scaled.png" alt="Herbal Piles Spray" class="hero-img" loading="lazy"/>
+            <div class="hero-img-badge">
+                <span style="font-size:20px">🌿</span>
+                <div><div style="font-size:14px;font-weight:800;color:var(--g1)">100% Natural</div><div style="font-size:11px;color:var(--muted)">Herbal Formula</div></div>
+            </div>
+            <div class="hero-img-badge hero-img-badge2">
+                <span style="font-size:20px">🏆</span>
+                <div><div style="font-size:14px;font-weight:800;color:var(--g1)">#1 In Nepal</div><div style="font-size:11px;color:var(--muted)">Best Seller</div></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    #promoBar1::before,
-    #promoBar1::after {
-        content: none !important;
-        display: none !important;
-    }
-
-    @media (max-width: 768px) {
-        #promoBar1 {
-            height: var(--promoBar-height-sm);
-            font-size: 16px;
-        }
-    }
-
-    /* ===== Stack animation ===== */
-    #promoBar1 .promo-stack {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    #promoBar1 .promo-msg {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity .35s ease, transform .35s ease;
-        white-space: nowrap;
-    }
-
-    #promoBar1 .promo-msg.is-active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* ❌ Remove offset completely */
-    #promoBar1-offset {
-        display: none !important;
-        height: 0 !important;
-    }
-
-    /* Ensure next section touches the banner */
-    .first-section {
-        margin-top: var(--promoBar-height);
-    }
-
-    @media (max-width: 768px) {
-        .first-section {
-            margin-top: var(--promoBar-height-sm);
-        }
-    }
-</style>
-
-<!-- Banner -->
-<div id="promoBar1" class="promo-bar" role="region" aria-label="Promotion">
-    <div class="promo-stack" id="promoBar1-stack">
-        <div class="promo-msg is-active">🎁 24% Discount</div>
-        <div class="promo-msg">🚚 Free Cash on Delivery all over Nepal</div>
+<!-- ═══════ SOCIAL PROOF BAR ═══════ -->
+<div id="socialBar">
+    <div class="social-inner">
+        <div class="social-stat">
+            <div class="social-num">5,000+</div>
+            <div class="social-label">Happy Customers</div>
+        </div>
+        <div class="social-stat">
+            <div class="social-num">4.9 ★</div>
+            <div class="social-label">Average Rating</div>
+        </div>
+        <div class="social-stat">
+            <div class="social-num">20+</div>
+            <div class="social-label">Natural Ingredients</div>
+        </div>
+        <div class="social-stat">
+            <div class="social-num">100%</div>
+            <div class="social-label">Cash on Delivery</div>
+        </div>
     </div>
 </div>
 
-<!-- ❌ Spacer removed but kept hidden to avoid theme errors -->
-<div id="promoBar1-offset"></div>
-
-<script>
-    (function() {
-        var bar = document.getElementById('promoBar1');
-        var stack = document.getElementById('promoBar1-stack');
-        if (!bar || !stack) return;
-
-        var msgs = Array.from(stack.querySelectorAll('.promo-msg'));
-        if (msgs.length <= 1) return;
-
-        var index = 0;
-        var paused = false;
-        var interval = 3000;
-
-        function show(i) {
-            msgs.forEach((msg, idx) => {
-                msg.classList.toggle('is-active', idx === i);
-                msg.setAttribute('aria-hidden', idx !== i);
-            });
-        }
-
-        function nextMsg() {
-            if (!paused) {
-                index = (index + 1) % msgs.length;
-                show(index);
-            }
-        }
-
-        setInterval(nextMsg, interval);
-
-        bar.addEventListener("mouseenter", () => paused = true);
-        bar.addEventListener("mouseleave", () => paused = false);
-
-    })();
-</script>
-<!-- Floating WhatsApp Image Button -->
-<a
-        href="https://wa.me/9779764379199?text=Hello!"
-        class="whatsapp-float-img"
-        target="_blank"
-        aria-label="Chat on WhatsApp"
->
-    <img
-            src="Images/whatsapp.png"
-            alt="WhatsApp Chat"
-    />
-</a>
-
-<style>
-    .whatsapp-float-img {
-        position: fixed;
-        bottom: 0px;
-        right: 20px;
-        z-index: 9999;
-    }
-
-    .whatsapp-float-img img {
-        width: 60px;
-        height: auto;
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .whatsapp-float-img img:hover {
-        transform: scale(1.08);
-    }
-</style>
-
-
-
-<!-- ✅ EASY PILES SPRAY – HERO SECTION -->
-<section id="epsHeroPro" class="eps-hero" role="region" aria-labelledby="epsHero-title">
-    <div class="eps-hero__wrap">
-
-        <!-- LEFT IMAGE -->
-        <div class="eps-hero__left">
-            <img src="Images/Herbalpilesspray-8-scaled.png"
-                 alt="Easy Piles Spray"
-                 class="eps-hero__img"
-                 loading="lazy" />
+<!-- ═══════ TRUST ICONS ═══════ -->
+<div id="trust">
+    <div class="trust-inner">
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g1)" stroke-width="2"><path d="M5 13l4 4L19 7"/><circle cx="12" cy="12" r="10"/></svg>
+            Dermatologically Tested
         </div>
-
-        <!-- RIGHT CONTENT -->
-        <div class="eps-hero__right">
-
-            <!-- TITLE -->
-            <h1 id="epsHero-title" class="eps-hero__title">
-                HERBAL PILES SPRAY
-            </h1>
-
-            <!-- SUBHEADLINE -->
-            <p class="eps-hero__subtitle">
-                प्राकृतिक तरिकाले <span>पाइल्स, फिसर र फिस्टुला</span>बाट पाउनुहोस राहत
-            </p>
-
-            <!-- PRICE AREA (row style) -->
-            <div class="eps-hero__price">
-                <div class="eps-hero__price-old">Rs 2100/-</div>
-                <div class="eps-hero__price-main">Rs 1600/- only</div>
-                <div class="eps-hero__price-save">Save Rs 500/-</div>
-            </div>
-
-            <!-- BENEFITS -->
-            <ul class="eps-hero__list">
-                <li>✅ मलद्वारमा पलाएको मासुलाई सुकाउँछ</li>
-                <li> ✅ जलन बाट राहत दिन्छ</li>
-                <li>✅ मलद्वार चिलाउनबाट राहत दिन्छ</li>
-                <li>✅ मलद्वारबाट रगत र पिप बग्नुबाट रोक्छ</li>
-            </ul>
-
-            <!-- THEME BUTTON -->
-            <a href="order.html" class="eps-hero-pro__cta">
-                Order Now
-            </a>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g1)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            GMP Certified
+        </div>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g1)" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+            Free Delivery in Nepal
+        </div>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g1)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+            Cash on Delivery
+        </div>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--g1)" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            NABL Lab Tested
         </div>
     </div>
-</section>
+</div>
 
-<style>
-    /* ---------- BASE WRAPPER ---------- */
-    #epsHeroPro {
-        --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* ---------- LAYOUT ---------- */
-    .eps-hero {
-        padding: 40px 30px;
-    }
-
-    .eps-hero__wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-        align-items: center;
-        gap: 40px;
-    }
-
-    .eps-hero__left {
-        text-align: center;
-    }
-
-    .eps-hero__img {
-        max-width: 400px;
-        width: 100%;
-        height: auto;
-    }
-
-    /* ---------- RIGHT SIDE ---------- */
-    .eps-hero__right {
-        text-align: left;
-    }
-
-    .eps-hero__title {
-        font-size: 40px;
-        font-weight: 800;
-        color: #059669;
-        margin-bottom: 10px;
-    }
-
-    .eps-hero__subtitle {
-        font-size: 22px;
-        font-weight: 600;
-        line-height: 1.6;
-        margin-bottom: 18px;
-    }
-
-    .eps-hero__subtitle span {
-        color: #059669;
-        font-weight: 700;
-    }
-
-    /* ---------- PRICE (ROW STYLE) ---------- */
-    .eps-hero__price {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 22px;
-    }
-
-    .eps-hero__price-old {
-        font-size: 22px;
-        font-weight: 600;
-        text-decoration: line-through;
-        color: black;
-    }
-
-    .eps-hero__price-main {
-        font-size: 26px;
-        font-weight: 800;
-        color: #059669;
-    }
-
-    .eps-hero__price-save {
-        background: #ef4444;
-        color: #fff;
-        font-size: 15px;
-        font-weight: 700;
-        padding: 4px 14px;
-        border-radius: 999px;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
-    }
-
-    /* ---------- BENEFITS ---------- */
-    .eps-hero__list {
-        list-style: none;
-        padding: 0;
-        font-size: 22px;
-        max-width: 600px;
-        margin: 26px auto 30px;
-        text-align: left;
-    }
-
-    .eps-hero__list li {
-        margin-bottom: 12px;
-    }
-
-    /* ---------- CTA BUTTON + SHINE ---------- */
-    .eps-hero-pro__cta {
-        display: inline-flex;
-        justify-content: center;
-        width: 100%;
-        max-width: 500px;
-        padding: 13px 18px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: #fff;
-        font-weight: 800;
-        font-size: 15px;
-        text-decoration: none;
-        letter-spacing: 0.03em;
-        box-shadow: var(--shadow-soft);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
-    }
-
-    /* shining animation */
-    .eps-hero-pro__cta::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-                110deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.45) 45%,
-                rgba(255, 255, 255, 0) 60%
-        );
-        transform: translateX(-120%);
-        pointer-events: none;
-        animation: epsHeroProShine 3.5s ease-in-out infinite;
-    }
-
-    .eps-hero-pro__cta:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 22px 40px rgba(234, 88, 12, 0.45);
-        opacity: 0.98;
-    }
-
-    .eps-hero-pro__cta:active {
-        transform: translateY(0);
-        box-shadow: var(--shadow-soft);
-    }
-
-    @keyframes epsHeroProShine {
-        to {
-            transform: translateX(120%);
-        }
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 900px) {
-        .eps-hero__wrap {
-            grid-template-columns: 1fr;
-        }
-
-        .eps-hero-pro__cta {
-            max-width: 90%;
-        }
-    }
-
-    @media (max-width: 600px) {
-
-        .eps-hero {
-            padding: 0 12px 16px; /* TOP padding = 0 */
-        }
-
-        .eps-hero__img {
-            max-width: 300px;
-            margin-top: 0;
-        }
-
-        .eps-hero__title {
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-
-        .eps-hero__subtitle {
-            font-size: 18px;
-            margin-bottom: 14px;
-        }
-
-        /* price row on mobile */
-        .eps-hero__price {
-            gap: 6px;
-        }
-
-        .eps-hero__price-old {
-            font-size: 14px;
-        }
-
-        .eps-hero__price-main {
-            font-size: 20px;
-        }
-
-        .eps-hero__price-save {
-            font-size: 13px;
-            padding: 3px 10px;
-        }
-
-        .eps-hero__list {
-            font-size: 18px;
-            margin: 12px 0 16px;
-        }
-
-        .eps-hero__list li {
-            margin-bottom: 8px;
-        }
-
-        .eps-hero-pro__cta {
-            max-width: 90%;
-            font-size: 16px;
-            padding: 14px 18px;
-            margin-top: 10px;
-        }
-    }
-</style>
-
-
-
-
-<!-- ✅ TRUST / BENEFIT ICON ROW -->
-<section id="epsTrustRow" class="eps-trust-row" aria-label="Delivery and product benefits">
-    <div class="eps-trust-row__wrap">
-
-        <!-- ITEM 1 -->
-        <div class="eps-trust-row__item">
-            <img
-                    src="Images/freedelivery.png"
-                    alt="Free Shipping"
-                    class="eps-trust-row__icon"
-                    loading="lazy"
-            />
-            <p class="eps-trust-row__text">Free Delivery All Over Nepal</p>
+<!-- ═══════ PROBLEM AGITATION ═══════ -->
+<section id="problem" class="sec">
+    <div class="sec-inner">
+        <div class="reveal" style="text-align:center;margin-bottom:10px">
+            <span class="sec-tag">के तपाईंलाई पनि यस्तो हुन्छ?</span>
         </div>
-
-        <!-- ITEM 2 -->
-        <div class="eps-trust-row__item">
-            <img
-                    src="Images/natural.png"
-                    alt="100% Natural"
-                    class="eps-trust-row__icon"
-                    loading="lazy"
-            />
-            <p class="eps-trust-row__text">100% Natural</p>
-        </div>
-
-        <!-- ITEM 3 -->
-        <div class="eps-trust-row__item">
-            <img
-                    src="Images/cash on delivery.png"
-                    alt="Cash on Delivery"
-                    class="eps-trust-row__icon"
-                    loading="lazy"
-            />
-            <p class="eps-trust-row__text">Cash on Delivery</p>
-        </div>
-
-    </div>
-</section>
-
-<style>
-    /* ===== TRUST / BENEFIT ROW ===== */
-    .eps-trust-row {
-        padding: 24px 20px 10px;
-        background: #ffffff;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    .eps-trust-row__wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: nowrap;          /* ALWAYS SINGLE ROW */
-        gap: 10px;
-    }
-
-    .eps-trust-row__item {
-        text-align: center;
-        flex: 1;
-        min-width: 0;               /* allows shrinking */
-    }
-
-    .eps-trust-row__icon {
-        width: 100%;
-        max-width: 110px;           /* shrinkable size */
-        height: auto;
-        margin: 0 auto 6px;
-    }
-
-    .eps-trust-row__text {
-        margin: 0;
-        font-size: 15px;
-        font-weight: 700;
-        color: #059669;
-        /* ❌ removed white-space: nowrap; to allow wrapping on small screens */
-    }
-
-    /* 🔧 MOBILE — still 1 row, but text wraps under each icon */
-    @media (max-width: 600px) {
-        .eps-trust-row__wrap {
-            gap: 4px;
-        }
-
-        .eps-trust-row__item {
-            flex: 0 0 33.33%;         /* exactly 3 per row */
-        }
-
-        .eps-trust-row__icon {
-            max-width: 70px;          /* smaller icons for mobile */
-        }
-
-        .eps-trust-row__text {
-            font-size: 11px;
-            line-height: 1.3;
-            padding: 0 2px;
-            white-space: normal;      /* allow multi-line */
-            overflow-wrap: anywhere;  /* wrap long words if needed */
-        }
-    }
-</style>
-
-
-<section class="eps-symptoms" aria-labelledby="eps-symptoms-title">
-    <div class="eps-symptoms__wrap">
-
-        <h2 id="eps-symptoms-title" class="eps-symptoms__title">
-            यदि तपाईंमा यस्ता लक्षणहरू बारम्बार देखिन्छन् भने <span>बेवास्ता नगर्नुहोस्</span>
+        <h2 class="sec-title reveal" style="text-align:center">
+            यी <span class="hl">कष्टदायक लक्षणहरू</span> देख्नुभएको छ?<br>
+            <span style="font-size:clamp(16px,1.8vw,20px);font-weight:500;color:var(--muted)">बेवास्ता गर्नु खतरनाक हुन सक्छ</span>
         </h2>
-
-        <div class="eps-symptoms__grid">
-
-            <!-- Symptom 1 -->
-            <article class="eps-symptom">
-                <div class="eps-symptom__img">
-                    <img src="Images/p01.jpg.jpeg" alt="मलद्वार वरिपरि चिलाउने">
-                </div>
-                <p class="eps-symptom__text">
-                    मलद्वार वरिपरि बारम्बार <br>चिलाउने वा असहज हुने
-                </p>
-            </article>
-
-            <!-- Symptom 2 -->
-            <article class="eps-symptom">
-                <div class="eps-symptom__img">
-                    <img src="Images/p02.jpg.jpeg" alt="मलद्वारमा दुख्ने वा पोल्ने">
-                </div>
-                <p class="eps-symptom__text">
-                    दिसा गर्दा वा हिड्दा–बस्दा <br>मलद्वारमा दुखाइ वा पोल्ने
-                </p>
-            </article>
-
-            <!-- Symptom 3 -->
-            <article class="eps-symptom">
-                <div class="eps-symptom__img">
-                    <img src="Images/p03.jpg.jpeg" alt="रेक्टममा गाठो">
-                </div>
-                <p class="eps-symptom__text">
-                    मलद्वार / गुदा भित्र <br>गाठो वा सुन्निएको जस्तो महसुस हुनु
-                </p>
-            </article>
-
-            <!-- Symptom 4 -->
-            <article class="eps-symptom">
-                <div class="eps-symptom__img">
-                    <img src="Images/p04.png" alt="बस्दा दुख्ने वा थिचिएको">
-                </div>
-                <p class="eps-symptom__text">
-                    लामो समय बस्दा <br>चसक्क दुख्ने, थिचिएको वा जल्ने महसुस हुनु
-                </p>
-            </article>
-
+        <div class="prob-grid">
+            <div class="prob-card reveal reveal-delay-1">
+                <img src="Images/p01.jpg.jpeg" alt="चिलाउने" loading="lazy"/>
+                <p>मलद्वार वरिपरि बारम्बार <strong>चिलाउने</strong> वा असहज हुने</p>
+            </div>
+            <div class="prob-card reveal reveal-delay-2">
+                <img src="Images/p02.jpg.jpeg" alt="दुख्ने" loading="lazy"/>
+                <p>दिसा गर्दा वा हिड्दा–बस्दा मलद्वारमा <strong>दुखाइ वा पोल्ने</strong></p>
+            </div>
+            <div class="prob-card reveal reveal-delay-3">
+                <img src="Images/p03.jpg.jpeg" alt="गाठो" loading="lazy"/>
+                <p>मलद्वार भित्र <strong>गाठो वा सुन्निएको</strong> जस्तो महसुस हुनु</p>
+            </div>
+            <div class="prob-card reveal" style="transition-delay:.4s">
+                <img src="Images/p04.png" alt="जल्ने" loading="lazy"/>
+                <p>लामो समय बस्दा <strong>चसक्क दुख्ने, जल्ने</strong> महसुस हुनु</p>
+            </div>
         </div>
+        <p class="reveal" style="text-align:center;margin-top:28px;font-size:18px;font-weight:700;color:var(--red);line-height:1.6">
+            ⚠️ यी लक्षणहरूलाई सामान्य नठान्नुहोस्!<br>
+            <span style="font-size:15px;color:var(--muted);font-weight:500">समयमा ध्यान नदिए पाइल्स, फिसर वा फिस्टुलामा परिणत हुन सक्छ</span>
+        </p>
     </div>
 </section>
 
-<style>
-    .eps-symptoms {
-        padding: 50px 16px 60px;
-        background: #ffffff;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    .eps-symptoms__wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .eps-symptoms__title {
-        font-size: clamp(24px, 3vw, 34px);
-        font-weight: 800;
-        color: #0b2935;
-        margin-bottom: 32px;
-        line-height: 1.4;
-    }
-
-    .eps-symptoms__title span {
-        color: #059669;
-    }
-
-    .eps-symptoms__grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 30px;
-    }
-
-    .eps-symptom {
-        text-align: center;
-    }
-
-    .eps-symptom__img {
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-        margin-bottom: 14px;
-    }
-
-    .eps-symptom__img img {
-        width: 100%;
-        height: 260px;
-        object-fit: cover;
-        display: block;
-    }
-
-    .eps-symptom__text {
-        font-size: 16px;
-        font-weight: 600;
-        color: #111827;
-        line-height: 1.5;
-    }
-
-    /* Tablet + Mobile (2 items per row) */
-    @media (max-width: 900px) {
-        .eps-symptoms__grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 22px;
-        }
-
-        .eps-symptom__img img {
-            height: 220px;
-        }
-    }
-
-    /* Extra tweaks for small mobile only */
-    @media (max-width: 600px) {
-        .eps-symptoms {
-            padding: 40px 12px 45px;
-        }
-
-        .eps-symptom__img img {
-            height: 200px;
-        }
-
-        .eps-symptom__text {
-            font-size: 15px;
-        }
-    }
-</style>
-
-
-
-
-
-<!-- ✅ BENEFITS – HERBAL PILES SPRAY -->
-<section id="eps-benefits" class="eps-scope eps-benefits" aria-labelledby="eps-benefits-title">
-    <div class="eps-benefits__wrap">
-        <h2 id="eps-benefits-title" class="eps-benefits__title">
-            <span class="t-green">Herbal Piles Spray</span> का मुख्य फाइदाहरू
+<!-- ═══════ COMPARISON TABLE ═══════ -->
+<section id="compare" class="sec">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">किन Herbal Piles Spray?</span>
+        </div>
+        <h2 class="sec-title reveal" style="text-align:center;margin-bottom:4px">
+            अपरेसन वा अन्य क्रिमभन्दा <span class="hl">किन बेहतर?</span>
         </h2>
-
-        <div class="eps-benefits__grid">
-            <!-- Benefit 1 (top-left desktop) -->
-            <div class="eps-benefit eps-benefit--1">
-                <figure class="eps-benefit__figure">
-                    <img
-                            src="Images/1s80q9i-4_10ci0ci000000000000028.png"
-                            alt="मलद्वारबाट रगत र पिप बग्न कम गर्न मद्दत"
-                            loading="lazy"
-                            width="160"
-                            height="160"
-                    />
-                </figure>
-                <p class="eps-benefit__caption">
-                    मलद्वारबाट <span class="hl">रगत र पिप</span>  बगनु बाट रोक्छ
-                </p>
-            </div>
-
-            <!-- Benefit 2 (bottom-left desktop) -->
-            <div class="eps-benefit eps-benefit--2">
-                <figure class="eps-benefit__figure">
-                    <img
-                            src="Images/h7qnt3-7_10ci0ci000000000000028.png"
-                            alt="पलाएको मासु (Piles Lump) सुकाउन मद्दत"
-                            loading="lazy"
-                            width="160"
-                            height="160"
-                    />
-                </figure>
-                <p class="eps-benefit__caption">
-                    मलद्वारमा पलाएको <span class="hl">मासु (Piles Lump)</span> बिस्तारै
-                    सुकाउन मद्दत गर्छ
-                </p>
-            </div>
-
-            <!-- Center: video -->
-            <div class="eps-benefits__media">
-                <video class="eps-benefits__video"
-                       src="Videos/EPS-1.mp4"
-                       autoplay muted loop playsinline preload="metadata"
-                       poster="http://localhost/EasyPS/wp-content/uploads/2025/11/EPS-poster.jpg">
-                </video>
-            </div>
-
-            <!-- Benefit 3 (top-right desktop) -->
-            <div class="eps-benefit eps-benefit--3">
-                <figure class="eps-benefit__figure">
-                    <img
-                            src="Videos/p9sip5-6_10ci0ci000000000000028.png"
-                            alt="दुखाइ र असहजता कम गर्न मद्दत"
-                            loading="lazy"
-                            width="160"
-                            height="160"
-                    />
-                </figure>
-                <p class="eps-benefit__caption">
-                    पाइल्सको <span class="hl">दुखाइ र बस्दा वा हिँड्दा हुने असहजता</span> कम गर्छ
-                </p>
-            </div>
-
-            <!-- Benefit 4 (bottom-right desktop) -->
-            <div class="eps-benefit eps-benefit--4">
-                <figure class="eps-benefit__figure">
-                    <img
-                            src="Videos/gtdgrc-5_10ci0ci000000000000028.png"
-                            alt="चिलाउने, पोल्ने र जलनबाट राहत"
-                            loading="lazy"
-                            width="160"
-                            height="160"
-                    />
-                </figure>
-                <p class="eps-benefit__caption">
-                    मलद्वार <span class="hl">चिलाउने, पोल्ने र जलन</span> हुने बाट राहत दिन
-                    तथा छाला निको हुन मद्दत गर्छ
-                </p>
-            </div>
-
-            <!-- 📱 Extra sub-heading for mobile (under video) -->
-            <h3 class="eps-benefits__subhead-mobile">
-                Herbal Piles Spray को प्रयोग गर्दा पाइल्सलाई छुइराख्न पर्दैन
-            </h3>
+        <p class="reveal" style="text-align:center;color:var(--muted);margin-bottom:24px">हेर्नुहोस् – तुलनात्मक अध्ययन</p>
+        <div class="reveal" style="overflow-x:auto">
+            <table class="compare-table">
+                <thead>
+                <tr>
+                    <th style="text-align:left;background:var(--g1)">विशेषता</th>
+                    <th class="col-us-head">✅ Herbal Piles Spray</th>
+                    <th>अपरेसन / Surgery</th>
+                    <th>सामान्य क्रिम / Gel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="compare-label">घरमै प्रयोग</td>
+                    <td class="col-us tick">✔ हो</td>
+                    <td class="cross">✘ अस्पताल चाहिन्छ</td>
+                    <td class="tick">✔ हो</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">दुखाइ रहित</td>
+                    <td class="col-us tick">✔ पोल्दैन</td>
+                    <td class="cross">✘ धेरै दुख्छ</td>
+                    <td>⚠️ कहिलेकाहीं पोल्छ</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">प्राकृतिक जडीबुटी</td>
+                    <td class="col-us tick">✔ 20+ Herbs</td>
+                    <td class="cross">✘ Chemical</td>
+                    <td class="cross">✘ Chemical</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">खर्च</td>
+                    <td class="col-us tick">✔ Rs 1600 मात्र</td>
+                    <td class="cross">✘ Rs 50,000+</td>
+                    <td>⚠️ Variable</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">छिटो राहत</td>
+                    <td class="col-us tick">✔ पहिलो प्रयोगमै</td>
+                    <td class="cross">✘ हप्तौं लाग्छ</td>
+                    <td>⚠️ थोरै</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">Side Effects</td>
+                    <td class="col-us tick">✔ शून्य</td>
+                    <td class="cross">✘ जोखिम धेरै</td>
+                    <td class="cross">✘ हुन सक्छ</td>
+                </tr>
+                <tr>
+                    <td class="compare-label">Cash on Delivery</td>
+                    <td class="col-us tick">✔ उपलब्ध</td>
+                    <td class="cross">✘</td>
+                    <td>⚠️ कहिलेकाहीं</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-
     </div>
 </section>
 
-<style>
-    /* ===== BENEFITS SECTION STYLES ===== */
-    #eps-benefits *{box-sizing:border-box;}
-    #eps-benefits img,
-    #eps-benefits video{display:block;max-width:100%;height:auto;}
-
-    #eps-benefits.eps-benefits{
-        --green:#0e9f4a;
-        --black:#0b0b0b;
-        --maxw:1200px;
-        --pad-x:clamp(16px,4vw,32px);
-        --gap:clamp(18px,4vw,40px);
-        background:#ffffff;
-        color:var(--black);
-        text-align:center;
-        margin-top:30px;
-        padding:clamp(20px,4vw,48px) var(--pad-x) clamp(24px,6vw,52px);
-        overflow:hidden;
-    }
-
-    #eps-benefits .eps-benefits__wrap{
-        max-width:var(--maxw);
-        margin:0 auto;
-    }
-
-    #eps-benefits .eps-benefits__title{
-        margin:0 0 8px;
-        font-weight:800;
-        font-size:clamp(20px,3.2vw,32px);
-        line-height:1.35;
-    }
-    #eps-benefits .eps-benefits__title .t-green{color:var(--green);}
-
-    /* === GRID LAYOUT WITH AREAS === */
-    #eps-benefits .eps-benefits__grid{
-        display:grid;
-        gap:var(--gap);
-        align-items:start;
-        grid-template-columns:1fr minmax(260px,480px) 1fr;
-        grid-template-areas:
-      "b1 video b3"
-      "b2 video b4";
-    }
-
-    /* Area assignments for desktop */
-    #eps-benefits .eps-benefit--1{grid-area:b1;}
-    #eps-benefits .eps-benefit--2{grid-area:b2;}
-    #eps-benefits .eps-benefit--3{grid-area:b3;}
-    #eps-benefits .eps-benefit--4{grid-area:b4;}
-    #eps-benefits .eps-benefits__media{grid-area:video;}
-
-    /* Mobile-only subheading (hidden desktop) */
-    #eps-benefits .eps-benefits__subhead-mobile{
-        display:none;
-        margin:10px 0 0;
-        font-size:15px;
-        font-weight:800;
-        color:#111827;
-    }
-
-    /* Base animation state for benefit cards & media */
-    #eps-benefits .eps-benefit,
-    #eps-benefits .eps-benefits__media,
-    #eps-benefits .eps-benefits__cta{
-        opacity:0;
-        transform:translateY(18px);
-        transition:
-                opacity .6s ease,
-                transform .6s ease,
-                box-shadow .25s ease;
-    }
-
-    #eps-benefits .eps-benefit.is-visible,
-    #eps-benefits .eps-benefits__media.is-visible,
-    #eps-benefits .eps-benefits__cta.is-visible{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    #eps-benefits .eps-benefit{
-        display:grid;
-        gap:10px;
-        justify-items:center;
-    }
-
-    #eps-benefits .eps-benefit__figure{
-        width:clamp(110px,14vw,160px);
-        height:clamp(110px,14vw,160px);
-        border-radius:50%;
-        overflow:hidden;
-        margin:0 auto;
-        box-shadow:0 10px 20px rgba(0,0,0,.08);
-    }
-
-    #eps-benefits .eps-benefit__caption{
-        font-size:clamp(14px,2vw,17px);
-        font-weight:600;
-        line-height:1.5;
-        margin:0;
-    }
-    #eps-benefits .eps-benefit__caption .hl{
-        color:var(--green);
-        font-weight:800;
-    }
-
-    #eps-benefits .eps-benefits__media{
-        display:grid;
-        place-items:center;
-    }
-    #eps-benefits .eps-benefits__video{
-        width:100%;
-        max-width:520px;
-        aspect-ratio:4/3;
-        border-radius:10px;
-        background:#000;
-        object-fit:cover;
-        box-shadow:0 12px 26px rgba(0,0,0,.16);
-    }
-
-    /* ===== Responsive ===== */
-
-    /* Tablet: just stack into single column keeping order by areas */
-    @media (max-width:1024px){
-        #eps-benefits .eps-benefits__grid{
-            grid-template-columns:1fr;
-            grid-template-areas:
-        "video"
-        "b1"
-        "b2"
-        "b3"
-        "b4";
-        }
-    }
-
-    /* Mobile: video first, then mobile heading, then 2-per-row benefits */
-    @media (max-width:640px){
-        #eps-benefits.eps-benefits{
-            padding-inline:16px;
-        }
-
-        #eps-benefits .eps-benefits__grid{
-            grid-template-columns:repeat(2,minmax(0,1fr));
-            gap:18px;
-            grid-template-areas:
-        "video video"
-        "subhead subhead"
-        "b1 b2"
-        "b3 b4";
-        }
-
-        #eps-benefits .eps-benefits__media{
-            grid-area:video;
-        }
-
-        #eps-benefits .eps-benefits__subhead-mobile{
-            display:block;
-            grid-area:subhead;
-            font-size:14px;
-        }
-
-        #eps-benefits .eps-benefit__caption{
-            font-size:13.5px;
-        }
-    }
-</style>
-
-<script>
-    /* Scroll-in animation for benefits cards, video & CTA */
-    document.addEventListener('DOMContentLoaded', function () {
-        var animatedNodes = Array.prototype.slice.call(
-            document.querySelectorAll(
-                '#eps-benefits .eps-benefit,' +
-                '#eps-benefits .eps-benefits__media,' +
-                '#eps-benefits .eps-benefits__cta'
-            )
-        );
-        if (!animatedNodes.length) return;
-
-        // Fallback: if IntersectionObserver not supported, just reveal all
-        if (!('IntersectionObserver' in window)) {
-            animatedNodes.forEach(function (el, idx) {
-                el.classList.add('is-visible');
-                el.style.transitionDelay = (idx * 0.12) + 's';
-            });
-            return;
-        }
-
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    var el = entry.target;
-                    var idx = animatedNodes.indexOf(el);
-                    el.classList.add('is-visible');
-                    el.style.transitionDelay = (idx * 0.12) + 's'; // subtle stagger
-                    io.unobserve(el);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        animatedNodes.forEach(function (el) {
-            io.observe(el);
-        });
-    });
-</script>
-
-
-
-<!-- ✨ Enhanced Minimal Condition Section for Herbal Piles Spray -->
-<section class="eps-conditions">
-    <div class="eps-conditions__wrap">
-
-        <h2 class="eps-conditions__title">
-            सर्व सम्पन्न गुण भएको <span class="highlight">Herbal Piles Spray</span>
-            ले दिन्छ पाइल्स, फिसर र फिस्टुलाबाट छुटकारा !
+<!-- ═══════ CONDITIONS ═══════ -->
+<section id="conditions" class="sec" style="background:var(--light)">
+    <div class="sec-inner" style="text-align:center">
+        <span class="sec-tag reveal">कुन कुन अवस्थामा काम गर्छ?</span>
+        <h2 class="sec-title reveal">
+            <span class="hl">Herbal Piles Spray</span> ले दिन्छ राहत
         </h2>
-
-
-
-        <div class="eps-conditions__grid">
-
-            <!-- CARD 1 -->
-            <div class="eps-condition">
-                <img src="Images/piles.png"
-                     alt="पाइल्स (Piles)" loading="lazy" />
-                <h3>पाइल्स <span>(Piles)</span></h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px);margin-top:36px" class="reveal">
+            <div style="background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow);border:2px solid #dcfce7">
+                <img src="Images/piles.png" alt="पाइल्स" style="border-radius:12px;margin-bottom:16px;width:100%" loading="lazy"/>
+                <h3 style="color:var(--g1);font-size:20px;font-weight:800;margin-bottom:6px">पाइल्स <span style="color:var(--muted);font-weight:500;font-size:16px">(Piles/Hemorrhoids)</span></h3>
+                <p style="font-size:14px;color:var(--muted);line-height:1.6">मलद्वार र मलाशयमा सूजन आएका नसाहरूको उपचार</p>
             </div>
-
-            <!-- CARD 2 -->
-            <div class="eps-condition">
-                <img src="Images/fissure.png"
-                     alt="फिसर (Fissure)" loading="lazy" />
-                <h3>फिसर <span>(Fissure)</span></h3>
+            <div style="background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow);border:2px solid #dcfce7">
+                <img src="Images/fissure.png" alt="फिसर" style="border-radius:12px;margin-bottom:16px;width:100%" loading="lazy"/>
+                <h3 style="color:var(--g1);font-size:20px;font-weight:800;margin-bottom:6px">फिसर <span style="color:var(--muted);font-weight:500;font-size:16px">(Anal Fissure)</span></h3>
+                <p style="font-size:14px;color:var(--muted);line-height:1.6">मलद्वारमा भएको घाउ वा चिरेको ठाउँको छिटो निको पार्न</p>
             </div>
-
-            <!-- CARD 3 -->
-            <div class="eps-condition">
-                <img src="Images/fistula.png"
-                     alt="फिस्टुला (Fistula)" loading="lazy" />
-                <h3>फिस्टुला <span>(Fistula)</span></h3>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<style>
-    /* ======= MINIMAL & ELEGANT CONDITION SECTION (with animation) ======= */
-
-    .eps-conditions {
-        background: #ffffff;
-        padding: clamp(40px, 6vw, 70px) clamp(18px, 4vw, 40px);
-        text-align: center;
-        position: relative;
-    }
-
-    .eps-conditions__wrap {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    .eps-conditions__title {
-        font-size: clamp(22px, 3vw, 34px);
-        font-weight: 800;
-        line-height: 1.4;
-        color: #111;
-        margin-bottom: 10px;
-    }
-
-    .eps-conditions__title .highlight {
-        color: #0f7a36;
-    }
-
-    .eps-conditions__hint {
-        font-size: 14px;
-        color: #4b5563;
-        margin: 0 0 24px;
-    }
-
-    /* GRID (desktop / large screens) */
-    .eps-conditions__grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: clamp(20px, 4vw, 40px);
-        justify-items: center;
-    }
-
-    /* CARDS (with base animation state) */
-    .eps-condition {
-        background: #f9fafb;
-        padding: 22px;
-        border-radius: 16px;
-        text-align: center;
-        max-width: 320px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        transition:
-                transform .25s ease,
-                box-shadow .25s ease,
-                opacity .6s ease;
-
-        /* animation start state (for desktop/tablet) */
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    .eps-condition.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .eps-condition:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.10);
-    }
-
-    .eps-condition img {
-        width: 100%;
-        max-width: 300px;
-        border-radius: 12px;
-        margin-bottom: 14px;
-    }
-
-    .eps-condition h3 {
-        margin: 0 0 8px;
-        font-size: 20px;
-        font-weight: 700;
-        color: #111;
-    }
-
-    .eps-condition h3 span {
-        color: #16a34a;
-        font-weight: 600;
-    }
-
-    /* ===== TABLET & MOBILE: horizontal scroll, next card peeking ===== */
-    @media (max-width: 768px) {
-
-        .eps-conditions__grid {
-            display: flex;
-            overflow-x: auto;
-            gap: 18px;
-            padding-bottom: 6px;
-
-            /* allow next card to peek on the right */
-            padding-right: 40px;
-
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .eps-conditions__grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        .eps-condition {
-            flex: 0 0 78%;
-            max-width: none;
-            opacity: 1;           /* 🔒 always visible, no fade */
-            transform: none;      /* 🔒 no up/down translate on scroll */
-            transition: box-shadow .25s ease, transform .25s ease;
-        }
-
-        .eps-condition:hover {
-            transform: translateY(-2px);
-        }
-    }
-
-    @media (max-width: 480px) {
-        .eps-condition {
-            flex: 0 0 82%;  /* slightly narrower so next one is clearly visible */
-        }
-    }
-
-    /* Optional subtle right fade to suggest more content */
-    @media (max-width: 768px) {
-        .eps-conditions::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 80px; /* roughly below title/hint */
-            width: 40px;
-            height: calc(100% - 80px);
-            background: linear-gradient(to right, transparent, #ffffff);
-            pointer-events: none;
-        }
-    }
-</style>
-
-<script>
-    /* Scroll-in animation for condition cards (desktop & large screens only) */
-    document.addEventListener('DOMContentLoaded', function () {
-        var cards = Array.prototype.slice.call(
-            document.querySelectorAll('.eps-conditions .eps-condition')
-        );
-        if (!cards.length) return;
-
-        // On small screens, we skip the translateY animation to avoid vertical "jump" feeling
-        if (window.innerWidth <= 768 || !('IntersectionObserver' in window)) {
-            cards.forEach(function (card) {
-                card.classList.add('is-visible');
-                card.style.transitionDelay = '0s';
-                card.style.opacity = '1';
-                card.style.transform = 'none';
-            });
-            return;
-        }
-
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    var el = entry.target;
-                    var idx = cards.indexOf(el);
-                    el.classList.add('is-visible');
-                    el.style.transitionDelay = (idx * 0.12) + 's';
-                    io.unobserve(el);
-                }
-            });
-        }, { threshold: 0.25 });
-
-        cards.forEach(function (card) {
-            io.observe(card);
-        });
-    });
-</script>
-
-
-
-
-
-
-
-<style>
-    /* -------------------------
-       HERBAL PILES SECTION ONLY
-       All styles scoped to #herbal-piles-section
-    --------------------------*/
-
-    #herbal-piles-section {
-        font-family: "Poppins", sans-serif;
-        padding: 20px;
-        background:transparent;
-    }
-
-    #herbal-piles-section .piles-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 1px solid rgba(72, 187, 120, 0.25);
-        padding: 22px;
-        box-shadow: 0 8px 22px rgba(15, 97, 55, 0.15);
-        max-width: 900px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    #herbal-piles-section .tag {
-        background: #c6f6d5;
-        color: #2f855a;
-        padding: 6px 12px;
-        border-radius: 30px;
-        display: inline-flex;
-        align-items: center;
-        font-size: 0.8rem;
-        font-weight: 600;
-        gap: 6px;
-    }
-
-    #herbal-piles-section h2 {
-        font-size: 1.4rem;
-        font-weight: 600;
-        margin-top: 10px;
-    }
-
-    #herbal-piles-section .subtitle {
-        color: #555;
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-
-    /* Steps Box */
-    #herbal-piles-section .steps-box {
-        background: rgba(198, 246, 213, 0.25);
-        border: 1px dashed #2f855a;
-        padding: 14px;
-        border-radius: 16px;
-    }
-
-    #herbal-piles-section .steps-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #2f855a;
-        margin-bottom: 10px;
-        display: flex;
-        gap: 6px;
-        align-items: center;
-    }
-
-    #herbal-piles-section .steps-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 12px;
-    }
-
-    #herbal-piles-section .step-item {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 10px;
-    }
-
-    #herbal-piles-section .step-number {
-        width: 26px;
-        height: 26px;
-        background: #2f855a;
-        color: #fff;
-        border-radius: 50%;
-        font-size: 0.85rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #herbal-piles-section .step-text-title {
-        font-size: 0.95rem;
-        font-weight: 600;
-    }
-
-    #herbal-piles-section .step-text-desc {
-        color: #555;
-        font-size: 0.82rem;
-        margin-top: 2px;
-    }
-
-    /* Image Area */
-    #herbal-piles-section .bottle-area {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-    }
-
-    #herbal-piles-section .bottle-image {
-        width: 180px;
-        max-width: 100%;
-        border-radius: 14px;
-        box-shadow: 0 10px 25px rgba(15, 97, 55, 0.18);
-        border: 1px solid rgba(72, 187, 120, 0.25);
-        background: #fff;
-    }
-
-    /* Responsive */
-    @media (min-width: 768px) {
-        #herbal-piles-section .piles-card {
-            grid-template-columns: 1.3fr 1fr;
-        }
-    }
-</style>
-
-<section id="herbal-piles-section">
-    <div class="piles-card">
-
-        <!-- LEFT SIDE CONTENT -->
-        <div>
-            <div class="tag">🌿 Herbal Piles Spray</div>
-
-            <h2>हर्बल पाइल्स स्प्रे कसरी प्रयोग गर्ने? (३ सजिलो चरण)</h2>
-
-            <p class="subtitle">छिटो आरामको लागि यी ३ सरल चरणहरू पालना गर्नुहोस्:</p>
-
-            <div class="steps-box">
-                <div class="steps-title">✅ प्रयोग गर्ने तरिका (3 Steps)</div>
-
-                <ol class="steps-list">
-                    <li class="step-item">
-                        <div class="step-number">1</div>
-                        <div>
-                            <div class="step-text-title">प्रभावित भाग सफा गरेर सुखाउनुहोस्</div>
-                            <p class="step-text-desc">हल्का साबुन र पानीले सफा गरी नरम कपडाले राम्ररी सुखाउनुहोस्।</p>
-                        </div>
-                    </li>
-
-                    <li class="step-item">
-                        <div class="step-number">2</div>
-                        <div>
-                            <div class="step-text-title">१–२ पटक स्प्रे गर्नुहोस्</div>
-                            <p class="step-text-desc">बोतललाई केही दूरीमा राखेर प्रभावित स्थानमा १–२ पटक स्प्रे गर्नुहोस्।</p>
-                        </div>
-                    </li>
-
-                    <li class="step-item">
-                        <div class="step-number">3</div>
-                        <div>
-                            <div class="step-text-title">सुक्न दिनुहोस्</div>
-                            <p class="step-text-desc">स्प्रे प्राकृतिक रूपमा सुक्न दिनुहोस् अनि मात्र बस्नुहोस् वा कपडा लगाउनुहोस्।</p>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- RIGHT SIDE BOTTLE IMAGE -->
-        <div class="bottle-area">
-            <img
-                    src="Images/favicon.png"
-                    alt="Herbal Piles Spray Bottle"
-                    class="bottle-image"
-            >
-        </div>
-
-    </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-<section class="spray-story">
-    <div class="spray-story__wrap">
-
-        <!-- IMAGE FIRST ON MOBILE -->
-        <div class="spray-story__image">
-            <img
-                    src="Images/Gemini_Generated_Image_j9ipbej9ipbej9ip.png"
-                    alt="Herbal Piles Spray प्रयोग गरेपछि सन्तुष्ट ग्राहक"
-            >
-        </div>
-
-        <!-- TEXT AREA -->
-        <div class="spray-story__content">
-            <p class="spray-story__label">तपाईंको यात्रा</p>
-
-            <h2 class="spray-story__title">
-                पाइल्सको समस्या देखि<br>
-                <span>सहज जीवनतर्फ</span>
-            </h2>
-
-            <p class="spray-story__text">
-                Herbal Piles Spray ले धेरैलाई पीडा, जलन र असहजता कम गर्दै सामान्य जीवनमा फर्किन
-                मद्दत गरेको छ। अब तपाईं पनि राहतका साथ खुसी–खुसी आफ्नो दिन बिताउन सक्नुहुन्छ।
-            </p>
-
-            <a href="order.html" class="spray-story__cta">
-                Order Now
-            </a>
-        </div>
-
-    </div>
-</section>
-
-
-<style>
-    :root {
-        --spray-green: #059669;
-        --spray-text-main: #0b2935;
-        --spray-text-muted: #4b5563;
-        --spray-bg-card: #ffffff;
-        --spray-bg-section: #f1fff7;
-    }
-
-    .spray-story {
-        padding: 50px 20px;
-        background: var(--spray-bg-section);
-        font-family: system-ui, sans-serif;
-    }
-
-    .spray-story__wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: var(--spray-bg-card);
-        border-radius: 24px;
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    /* IMAGE — reduced height */
-    .spray-story__image img {
-        width: 100%;
-        height: 380px; /* Smaller height */
-        object-fit: cover;
-        display: block;
-    }
-
-    /* CONTENT */
-    .spray-story__content {
-        padding: 40px 48px;
-    }
-
-    .spray-story__label {
-        display: inline-block;
-        font-size: 14px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--spray-green);
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    .spray-story__title {
-        font-size: 32px;
-        line-height: 1.3;
-        font-weight: 800;
-        color: var(--spray-text-main);
-        margin-bottom: 18px;
-    }
-
-    .spray-story__title span {
-        color: var(--spray-green);
-    }
-
-    .spray-story__text {
-        font-size: 16px;
-        line-height: 1.7;
-        color: var(--spray-text-muted);
-        margin-bottom: 26px;
-        max-width: 460px;
-    }
-
-    /* CTA BUTTON */
-    .spray-story__cta {
-        display: inline-flex;
-        text-align: center;
-        justify-content: center;
-        padding: 12px 26px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: #fff;
-        width:500px;
-        font-weight: 700;
-        font-size: 15px;
-        text-decoration: none;
-        letter-spacing: 0.03em;
-        box-shadow: 0 18px 35px rgba(234, 88, 12, 0.35);
-        transition: transform 0.15s ease, opacity 0.15s ease;
-    }
-
-    .spray-story__cta:hover {
-        transform: translateY(-2px);
-        opacity: 0.97;
-    }
-
-    /* RESPONSIVE — mobile image first */
-    @media (max-width: 900px) {
-        .spray-story__wrap {
-            grid-template-columns: 1fr;
-            text-align: left;
-        }
-
-        .spray-story__image img {
-            height: 260px; /* smaller height for mobile */
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .spray-story__content {
-            padding: 24px 20px 30px;
-        }
-
-        .spray-story__cta {
-            width: 90%;           /* 🔥 90% width on mobile */
-            text-align: center;
-            justify-content: center;
-            font-size: 16px;
-            padding: 14px 18px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .spray-story {
-            padding: 35px 12px;
-        }
-
-        .spray-story__title {
-            font-size: 26px;
-        }
-
-        .spray-story__text {
-            font-size: 15px;
-        }
-    }
-</style>
-
-
-
-
-
-
-<section class="triple-action" aria-labelledby="tripleActionTitle">
-    <div class="triple-action__inner">
-
-        <div class="triple-action__items">
-
-            <!-- 1 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Dermatologically-tested.jpg?v=1727688938">
-                </div>
-                <div class="triple-action__text">Dermatologically Tested</div>
-            </div>
-
-            <!-- 2 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Instant-relief.jpg?v=1727688883">
-                </div>
-                <div class="triple-action__text">Instant Relief</div>
-            </div>
-
-            <!-- 3 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/No-hurt-formula.jpg?v=1727688883">
-                </div>
-                <div class="triple-action__text">No-Hurt Formula</div>
-            </div>
-
-            <!-- 4 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Rapid-cooling.jpg?v=1727688883">
-                </div>
-                <div class="triple-action__text">Rapid Cooling</div>
-            </div>
-
-            <!-- 5 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Made-in-GMP-facility.jpg?v=1727688883">
-                </div>
-                <div class="triple-action__text">Made in GMP Facility</div>
-            </div>
-
-            <!-- 6 -->
-            <div class="triple-action__item">
-                <div class="triple-action__icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/NABL-lab-tested.jpg?v=1727688883">
-                </div>
-                <div class="triple-action__text">NABL Lab Tested</div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<style>
-    :root {
-        --triple-green: #059669;
-        --triple-text: #0b2935;
-    }
-
-    .triple-action {
-        padding: 40px 16px 50px;
-        background: #fff;
-    }
-
-    .triple-action__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .triple-action__items {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-    }
-
-    .triple-action__item {
-        text-align: center;
-        flex: 0 1 150px;
-        max-width: 180px;
-    }
-
-    .triple-action__icon {
-        width: 88px;
-        height: 88px;
-        margin: 0 auto 10px;
-    }
-
-    .triple-action__icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    .triple-action__text {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--triple-green);
-    }
-
-
-    /* ⭐ FORCE 2 ITEMS PER ROW FOR ANY SCREEN BELOW 900px */
-    @media (max-width: 900px) {
-        .triple-action__item {
-            flex: 0 1 45% !important;
-            max-width: 45% !important;
-        }
-        .triple-action__items {
-            gap: 24px;
-        }
-    }
-
-</style>
-
-
-
-
-
-
-
-<!-- Ingredients -->
-<section class="eps-scope eps-ingredients" aria-labelledby="eps-ingredients-title">
-    <div class="eps-ingredients__wrap">
-        <h2 id="eps-ingredients-title" class="eps-ingredients__headline">
-            <span class="t-green">प्राकृतिक जडीबुटीहरूको शक्तिशाली</span> मिश्रणले पाइल्स, फिसर, फिस्टुला को घरमै समाधान
-        </h2>
-
-        <div class="ingredient-container">
-            <div class="ingredient-list">
-                <ul id="ingredientList"></ul>
-            </div>
-
-            <div class="ingredient-details">
-                <img id="ingredientImage" src="" alt="" width="800" height="600" loading="lazy">
-                <h3 id="ingredientName"></h3>
-                <p id="ingredientDescription"></p>
+            <div style="background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow);border:2px solid #dcfce7">
+                <img src="Images/fistula.png" alt="फिस्टुला" style="border-radius:12px;margin-bottom:16px;width:100%" loading="lazy"/>
+                <h3 style="color:var(--g1);font-size:20px;font-weight:800;margin-bottom:6px">फिस्टुला <span style="color:var(--muted);font-weight:500;font-size:16px">(Fistula)</span></h3>
+                <p style="font-size:14px;color:var(--muted);line-height:1.6">मलद्वार वरिपरि भएका असामान्य नली वा घाउको उपचार</p>
             </div>
         </div>
     </div>
 </section>
 
-<style>
-    .eps-scope *{box-sizing:border-box;}
-    .eps-scope img{max-width:100%;display:block;height:auto;}
-    .eps-ingredients{
-        --green:#0e9f4a;--black:#0b0b0b;
-        background:#fff;color:var(--black);
-        text-align:center;margin-top:30px;
-        padding:clamp(20px,4vw,54px) clamp(16px,4vw,32px);
-        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    }
-    .eps-ingredients__wrap{max-width:1200px;margin:0 auto;}
-    .eps-ingredients__headline{
-        font-size:clamp(22px,3vw,34px);
-        font-weight:800;line-height:1.4;
-        color:#0b0b0b;
-        margin-bottom:clamp(16px,3vw,28px);
-    }
-    .eps-ingredients__headline .t-green{color:#0e9f4a;}
-
-    .ingredient-container{
-        display:flex;
-        border-radius:12px;
-        border:1px solid #e5e7eb;
-        overflow:hidden;
-    }
-
-    .ingredient-list{
-        width:30%;
-        overflow-y:auto;
-        border-right:1px solid #e5e7eb;
-        padding:10px;
-        max-height:600px;
-        background:#f9fafb;
-    }
-    .ingredient-list ul{list-style:none;padding:0;margin:0;}
-    .ingredient-list li{
-        padding:10px;
-        cursor:pointer;
-        font-size:16px;
-        color:#333;
-        margin-bottom:8px;
-        transition:background-color .25s ease,color .25s ease;
-        border-radius:8px;
-        text-align:left;
-    }
-    .ingredient-list li:hover{background:#f3f4f6;}
-    .ingredient-list li.active{
-        background:#0e9f4a;
-        color:#fff;
-        font-weight:600;
-    }
-
-    .ingredient-details{
-        width:70%;
-        padding:20px;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        line-height:1.5;
-        text-align:left;
-        background:#ffffff;
-    }
-    .ingredient-details img{
-        border-radius:8px;margin-bottom:15px;
-        box-shadow:0 4px 10px rgba(0,0,0,.08);
-        aspect-ratio:4/3;object-fit:cover;
-        background:#f6f7f8;
-    }
-    .ingredient-details h3{
-        font-size:22px;margin:0 0 8px;
-        color:var(--green);font-weight:800;
-    }
-    .ingredient-details p{
-        font-size:16px;color:#555;margin:0;
-    }
-
-    /* 🔽 Mobile & small tablet – better UX */
-    @media (max-width:768px){
-        .ingredient-container{
-            flex-direction:column;
-            border-radius:14px;
-        }
-
-        .ingredient-list{
-            width:100%;
-            max-height:none;
-            border-right:none;
-            border-bottom:1px solid #e5e7eb;
-            padding:8px 6px 10px;
-            overflow-x:auto;
-            overflow-y:hidden;
-            background:#f9fafb;
-            -webkit-overflow-scrolling:touch;
-        }
-
-        .ingredient-list::-webkit-scrollbar{
-            display:none;
-        }
-
-        .ingredient-list ul{
-            display:flex;
-            gap:8px;
-            padding:0 4px;
-        }
-
-        .ingredient-list li{
-            margin-bottom:0;
-            padding:8px 14px;
-            border-radius:999px;
-            white-space:nowrap;
-            font-size:14px;
-            text-align:center;
-            background:#eef2f7;
-        }
-
-        .ingredient-list li.active{
-            background:#0e9f4a;
-            color:#fff;
-        }
-
-        .ingredient-details{
-            width:100%;
-            text-align:left;
-            padding:14px 12px 18px;
-        }
-
-        .ingredient-details img{
-            margin-bottom:10px;
-        }
-
-        .ingredient-details h3{
-            font-size:18px;
-            margin-bottom:6px;
-            text-align:left;
-        }
-
-        .ingredient-details p{
-            font-size:14px;
-            text-align:left;
-        }
-    }
-</style>
-
-<script>
-    const ingredients = [
-        {
-            nameTH: "Haritaki",
-            image: "Images/haritaki.png",
-            desc: "पाचन शक्ति सन्तुलन गर्न र शरीरको सफाइमा मद्दत गर्ने महत्वपूर्ण आयुर्वेदिक जडीबुटी।"
-        },
-        {
-            nameTH: "Suran",
-            image: "Images/suran.png",
-            desc: "आन्द्रा र पेटसम्बन्धी असहजता कम गर्न परम्परागत रूपमा प्रयोग हुने कन्द।"
-        },
-        {
-            nameTH: "Haridara (Turmeric)",
-            image: "Images/haridra.jpeg",
-            desc: "सूजन र संक्रमण कम गर्न सहयोग गर्ने बलियो प्राकृतिक एन्टिअक्सिडेन्ट।"
-        },
-        {
-            nameTH: "Lodhra",
-            image: "Images/lodhra.jpg",
-            desc: "रक्तस्राव कम गर्न र कोमल टिस्युहरू मजबुत बनाउन प्रयोग गरिने जडीबुटी।"
-        },
-        {
-            nameTH: "Yastimadhu (Licorice)",
-            image: "Images/Yastimadhu-Licorice.jpg",
-            desc: "जलन र चिलाउने कम गर्न तथा छाला शान्त पार्न मद्दत गर्दछ।"
-        },
-        {
-            nameTH: "Daruharidra",
-            image: "Images/Daruharidra.jpg",
-            desc: "छाला र रक्तशुद्धिका लागि प्रसिद्ध आयुर्वेदिक बोट।"
-        },
-        {
-            nameTH: "Nirgundi",
-            image: "Images/Nirgundi.jpg",
-            desc: "सूजन, दुखाइ र संक्रमण नियन्त्रणका लागि प्रयोग हुने जडीबुटी।"
-        },
-        {
-            nameTH: "Manjistha",
-            image: "Images/Manjistha.png",
-            desc: "रक्तशुद्धि र छाला सम्बन्धी समस्यामा उपयोगी मानिने बोट।"
-        },
-        {
-            nameTH: "Lajjawati",
-            image: "Images/Lajjawati-Jhar.png",
-            desc: "संवेदनशील छालाको हेरचाह र सूजन घटाउन सहयोग गर्ने बोट।"
-        },
-        {
-            nameTH: "Dhubo",
-            image: "Images/dubo.jpg",
-            desc: "रक्तस्राव रोक्न र घाउ निको पार्न लोक चिकित्सामा प्रयोग हुने घाँस।"
-        },
-        {
-            nameTH: "Kustha",
-            image: "Images/Kustha.png",
-            desc: "त्वचा र शरीरको शुद्धिकरणमा प्रयोग हुने सुगन्धित जडीबुटी।"
-        },
-        {
-            nameTH: "Mahanimba",
-            image: "Images/Mahanimba.jpg",
-            desc: "ब्याक्टेरिया र संक्रमण विरुद्ध लड्न मद्दत गर्ने कडुवा बोट (निम वर्ग)।"
-        },
-        {
-            nameTH: "Nilakama",
-            image: "Images/nilkama.jpg",
-            desc: "परम्परागत रूपमा रक्तशुद्धि र छाला सन्तुलनका लागि प्रयोग हुने जडीबुटी।"
-        },
-        {
-            nameTH: "Kutki",
-            image: "Images/Kutki.jpg",
-            desc: "कलेजो तथा मेटाबोलिज्म सन्तुलनमा सहयोग पुर्‍याउने औषधिजन्य बोट।"
-        },
-        {
-            nameTH: "Jaipahal",
-            image: "Images/Jaipahal.jpg",
-            desc: "रक्तसञ्चार सुधार र तातोपन सन्तुलन राख्न मद्दत गर्ने मसला।"
-        },
-        {
-            nameTH: "Padhnakh",
-            image: "Images/padmank.jpg",
-            desc: "आयुर्वेदिक मिश्रणमा सन्तुलन र शक्ति दिन थपिने सहयोगी जडीबुटी।"
-        },
-        {
-            nameTH: "Baumika",
-            image: "Images/Baumika.png",
-            desc: "स्थानीय रूपले सूजन र दुखाइ कम गर्न प्रयोग हुने भुइँ-आधारित जडीबुटी।"
-        },
-        {
-            nameTH: "Til oil (Sesame oil)",
-            image: "Images/Til-oil-Sesame-oil.jpg",
-            desc: "छाला नरम, पोषणयुक्त र लचिलो राख्न प्रयोग हुने आधार तेल।"
-        },
-        {
-            nameTH: "Bee wax",
-            image: "Images/Bee-wax.jpeg",
-            desc: "छालामा सुरक्षात्मक तह बनाइ नमी जोगाउन मद्दत गर्ने प्राकृतिक मैन।"
-        },
-        {
-            nameTH: "Nilo tooth",
-            image: "Images/sweetpea-king-tut-2-1-scaled.jpg",
-            desc: "परम्परागत हर्बल संयोजनमा सन्तुलन र अतिरिक्त आरामका लागि प्रयोग हुने घटक।"
-        }
-    ];
-
-    const listEl = document.getElementById('ingredientList');
-    const imgEl  = document.getElementById('ingredientImage');
-    const nameEl = document.getElementById('ingredientName');
-    const descEl = document.getElementById('ingredientDescription');
-
-    function renderList(){
-        listEl.innerHTML = '';
-        ingredients.forEach((ing, i) => {
-            const li = document.createElement('li');
-            li.id = 'ingredient' + (i + 1);
-            li.textContent = ing.nameTH;
-            li.onclick = () => changeContent(i);
-            listEl.appendChild(li);
-        });
-    }
-
-    function changeContent(index){
-        const ing = ingredients[index];
-        nameEl.textContent = ing.nameTH || '';
-        if (ing.image) {
-            imgEl.src = ing.image;
-            imgEl.style.display = 'block';
-        } else {
-            imgEl.style.display = 'none';
-        }
-        imgEl.alt = ing.nameTH || 'जडीबुटी';
-        descEl.textContent = ing.desc || '';
-        Array.from(listEl.children).forEach(li => li.classList.remove('active'));
-        const target = document.getElementById('ingredient' + (index + 1));
-        if (target) target.classList.add('active');
-    }
-
-    window.addEventListener('load', () => {
-        renderList();
-        if (ingredients.length) changeContent(0);
-    });
-</script>
-
-
-
-
-
-
-
-
-<!-- ✅ Testimonials (Nepali – Herbal Piles Spray) -->
-<!-- ✅ Testimonials (Nepali – Herbal Piles Spray) -->
-<section class="eps-reviews-section" aria-labelledby="eps-review-title">
-    <h2 id="eps-review-title" class="eps-review-title">
-        Herbal Piles Spray प्रयोग गरेपछि हाम्रा ग्राहकहरूको अनुभव
-    </h2>
-
-    <div class="eps-carousel" id="epsCarousel" aria-label="उत्पादनका समीक्षा स्वचालित रूपमा सरकाइएका">
-        <!-- Review 1 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="वास्तविक नेपाली प्रयोगकर्ताको परिणाम">
-                <span class="eps-proof-img" data-src="Images/testimonial.png" role="img" aria-label="वास्तविक नेपाली प्रयोगकर्ताको परिणाम"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “पहिले बस्दा–उठ्दा सानो काम गर्दा पनि चस्स दुख्थ्यो। ३ दिन लगातार Herbal Piles Spray लगाएँ,
-                अहिले बस्न, हिँड्न र काम गर्न धेरै हल्का लागेको छ। राति सुत्दा पनि दुखाइले ब्यूँझिनु परेन।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">रामबहादुर थापा • काठमाडौँ</div>
-                <div class="eps-stars">★★★★★</div>
+<!-- ═══════ BENEFITS + VIDEO ═══════ -->
+<section id="benefits" class="sec">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">मुख्य फाइदाहरू</span>
+            <h2 class="sec-title">Herbal Piles Spray ले <span class="hl">कसरी काम गर्छ?</span></h2>
+        </div>
+        <div class="ben-grid" style="margin-top:36px">
+            <!-- LEFT -->
+            <div class="ben-col">
+                <div class="ben-item">
+                    <div class="ben-icon-wrap"><img src="Images/1s80q9i-4_10ci0ci000000000000028.png" alt="Blood Stop"/></div>
+                    <div>
+                        <div class="ben-item-title">रगत बग्नु बन्द गर्छ</div>
+                        <div class="ben-item-text">मलद्वारबाट रगत र पिप बगनु बाट रोक्छ र घाउ छिटो निको पार्छ</div>
+                    </div>
+                </div>
+                <div class="ben-item">
+                    <div class="ben-icon-wrap"><img src="Images/h7qnt3-7_10ci0ci000000000000028.png" alt="Lump Dry"/></div>
+                    <div>
+                        <div class="ben-item-title">पलाएको मासु सुकाउँछ</div>
+                        <div class="ben-item-text">मलद्वारमा पलाएको Piles Lump बिस्तारै सुकाउन मद्दत गर्छ</div>
+                    </div>
+                </div>
             </div>
-        </article>
-
-        <!-- Review 2 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="नेपाली ग्राहकको फोटो समीक्षा">
-                <span class="eps-proof-img" data-src="Images/testimonial-5.png" role="img" aria-label="नेपाली ग्राहकको फोटो समीक्षा"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “दिसा जाँदा हरेकपटक रगत बग्दा धेरै डर लाग्थ्यो। स्प्रे ४–५ दिन लगाउँदा रगत करिब रोकियो,
-                सूजन पनि धेरै घटेको छ। घरमै बसेर यस्तो सुधार हुन्छ भनेर कल्पना गरेको थिइनँ।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">सुष्मा केसी • पोखरा</div>
-                <div class="eps-stars">★★★★★</div>
+            <!-- CENTER VIDEO -->
+            <div class="ben-video-wrap">
+                <video src="Videos/EPS-1.mp4" autoplay muted loop playsinline preload="metadata"></video>
             </div>
-        </article>
-
-        <!-- Review 3 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="समीक्षालाई समर्थन गर्ने नेपाली प्रयोगकर्ता फोटो">
-                <span class="eps-proof-img" data-src="Images/testimonial-3.png" role="img" aria-label="समीक्षालाई समर्थन गर्ने नेपाली प्रयोगकर्ता फोटो"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “क्रिम र ट्याब्लेट धेरै बदलें, केही दिन मात्रै राहत मिल्थ्यो। Herbal Piles Spray भने
-                छिटो सोसिन्छ, पोल्दैन र बिस्तारै गाठो पनि सानो हुँदै गएको जस्तो लागिरहेको छ। अब यही प्रयोग गरिरहेकी छु।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">प्रकाश अधिकारी • भरतपुर</div>
-                <div class="eps-stars">★★★★★</div>
+            <!-- RIGHT -->
+            <div class="ben-col">
+                <div class="ben-item from-right">
+                    <div class="ben-icon-wrap"><img src="Videos/p9sip5-6_10ci0ci000000000000028.png" alt="Pain Relief"/></div>
+                    <div>
+                        <div class="ben-item-title">दुखाइ र असहजता कम</div>
+                        <div class="ben-item-text">पाइल्सको दुखाइ र बस्दा वा हिँड्दा हुने असहजता कम गर्छ</div>
+                    </div>
+                </div>
+                <div class="ben-item from-right">
+                    <div class="ben-icon-wrap"><img src="Videos/gtdgrc-5_10ci0ci000000000000028.png" alt="Soothing"/></div>
+                    <div>
+                        <div class="ben-item-title">जलनबाट तुरुन्त राहत</div>
+                        <div class="ben-item-text">मलद्वार चिलाउने, पोल्ने र जलन हुने बाट राहत र छाला निको गर्छ</div>
+                    </div>
+                </div>
             </div>
-        </article>
-
-        <!-- Review 4 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="प्रयोगकर्ताबाट आएको नेपाली फोटो समीक्षा">
-                <span class="eps-proof-img" data-src="Images/testimonial-2.png" role="img" aria-label="प्रयोगकर्ताबाट आएको नेपाली फोटो समीक्षा"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “आमा बनेपछि बवासीरको धेरै समस्या भयो। स्प्रे लगाउँदा चिसो–आरामदायी लाग्छ,
-                एक हप्ताभित्रै घाउ धमिलो हुँदै गएको महसुस भयो। बच्चालाई सम्हाल्न र बस्न–उठ्न पनि सजिलो भयो।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">रीता बस्नेत • भक्तपुर</div>
-                <div class="eps-stars">★★★★★</div>
-            </div>
-        </article>
-
-        <!-- Review 5 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="सवारी चालक नेपाली ग्राहकको समीक्षा फोटो">
-                <span class="eps-proof-img" data-src="Images/testimonial-9.png" role="img" aria-label="सवारी चालक नेपाली ग्राहकको समीक्षा फोटो"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “दिनभरि बस चलाउँदा बस्नै नसक्ने जस्तो हुन्थ्यो। बिहान अफिस निस्कँदा र राति सुत्नुअघि
-                स्प्रे लगाउँछु। अहिले लामो ड्युटी हुँदा पनि खुर्पेटो जस्तो दुखाइ हुँदैन, आरामले काम गर्न सकेको छु।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">दिपेश गुरुङ • बुटवल</div>
-                <div class="eps-stars">★★★★☆</div>
-            </div>
-        </article>
-
-        <!-- Review 6 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="नेपाली महिला ग्राहकको समीक्षा">
-                <span class="eps-proof-img" data-src="Images/testimonial-7.png" role="img" aria-label="नेपाली महिला ग्राहकको समीक्षा"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “पहिले मलद्वार वरिपरि धेरै चिलाउने र जल्ने गर्थ्यो। Herbal Piles Spray ले सतह नरम र चिसो राखिदिन्छ,
-                सूजन पनि घटेको छ। पानी धेरै पिउँछु, फाइबर खानेकुरा खान्छु, त्यससँगै यो स्प्रे जोडेर चलाउँदा नतिजा राम्रो देखियो।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">मीना रिजाल • धरान</div>
-                <div class="eps-stars">★★★★★</div>
-            </div>
-        </article>
-
-        <!-- Review 7 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="वास्तविक नेपाली ग्राहकको फोटो समीक्षा">
-                <span class="eps-proof-img" data-src="Images/testimonial-10.png" role="img" aria-label="वास्तविक नेपाली ग्राहकको फोटो समीक्षा"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “स्प्रे भएकोले हातले घाउ छोएर क्रिम लगाउनुपर्दैन, टाढैबाट सिधै छर्कन पाइन्छ।
-                चाँडै सोसिन्छ, कपडामा दाग पनि परेको छैन। अहिले त घरको फर्स्ट एड बक्समै स्थायी राखेको छु।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">कुमार श्रेष्ठ • विराटनगर</div>
-                <div class="eps-stars">★★★★☆</div>
-            </div>
-        </article>
-
-        <!-- Review 8 -->
-        <article class="eps-review-card">
-            <figure class="eps-proof" aria-label="थप नेपाली ग्राहक समीक्षा फोटो">
-                <span class="eps-proof-img" data-src="Images/testimonial-8.png" role="img" aria-label="थप नेपाली ग्राहक समीक्षा फोटो"></span>
-                <span class="eps-proof-guard" aria-hidden="true"></span>
-            </figure>
-            <p class="eps-review-text">
-                “गन्ध नरम छ, हल्का जडीबुटीको फ्रेसी सुगन्ध मात्रै आउँछ। सुरुमा २ बोतल अर्डर गरेको थिएँ,
-                अहिले परिवारका लागि पनि राख्न भनेर ३ बोतलको प्याकेज लिईरहेको छु।”
-            </p>
-            <div class="eps-review-user">
-                <div class="eps-review-name">सन्तोष लामिछाने • नेपालगञ्ज</div>
-                <div class="eps-stars">★★★★★</div>
-            </div>
-        </article>
+        </div>
     </div>
-
-    <div class="eps-carousel-controls">
-        <button id="epsPrev" aria-label="अघिल्लो समीक्षा">‹</button>
-        <button id="epsNext" aria-label="अर्को समीक्षा">›</button>
-    </div>
-
-    <a class="eps-cta-btn" href="order.html">
-        Order Now
-    </a>
 </section>
 
+<!-- ═══════ HOW TO USE ═══════ -->
+<section id="howitworks" class="sec">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">प्रयोग गर्ने तरिका</span>
+            <h2 class="sec-title">मात्र <span class="hl">३ सजिलो चरण</span> – घरमै प्रयोग गर्नुहोस्</h2>
+        </div>
+        <div class="steps-row">
+            <div class="step-card reveal reveal-delay-1">
+                <div class="step-num">1</div>
+                <div class="step-icon">🧼</div>
+                <div class="step-title">सफा गरेर सुखाउनुहोस्</div>
+                <p class="step-desc">हल्का साबुन र पानीले प्रभावित भाग राम्ररी सफा गरी नरम कपडाले सुखाउनुहोस्</p>
+            </div>
+            <div class="step-card reveal reveal-delay-2">
+                <div class="step-num">2</div>
+                <div class="step-icon">💨</div>
+                <div class="step-title">१–२ पटक स्प्रे गर्नुहोस्</div>
+                <p class="step-desc">बोतललाई केही दूरीमा राखेर प्रभावित स्थानमा सिधै १–२ पटक स्प्रे गर्नुहोस्</p>
+            </div>
+            <div class="step-card reveal reveal-delay-3">
+                <div class="step-num">3</div>
+                <div class="step-icon">✨</div>
+                <div class="step-title">प्राकृतिक रूपमा सुक्न दिनुहोस्</div>
+                <p class="step-desc">स्प्रे सुकेपछि मात्र बस्नुहोस् वा कपडा लगाउनुहोस् – कुनै पर्खाइ छैन</p>
+            </div>
+        </div>
+        <div class="reveal" style="text-align:center;margin-top:28px">
+            <p style="font-size:16px;font-weight:700;color:var(--g1);background:var(--g4);padding:14px 22px;border-radius:12px;display:inline-block">
+                💡 दिनमा २–३ पटक प्रयोग गर्नुहोस् | परिणाम देख्न ३–७ दिन लाग्न सक्छ
+            </p>
+        </div>
+    </div>
+</section>
 
-<style>
-    .eps-reviews-section{
-        --cta:#F59E0B;
-        --cta-hover:#D97706;
-        --cta-active:#B45309;
-        --cta-shadow:rgba(245,158,11,.32);
-        --cta-glow:rgba(251,191,36,.45);
-        --card-bg:#fff;
-        --text:#0b0b0b;
-        --star:#facc15;
-        --proof-w:220px;
-        --proof-h:165px;
-    }
-    .eps-reviews-section{
-        padding:clamp(32px,6vw,70px) 0;
-        background:#fff;
-        color:var(--text);
-        user-select:none;
-        -webkit-touch-callout:none;
-    }
-    .eps-review-title{
-        font-size:clamp(24px,3vw,38px);
-        font-weight:800;
-        margin:0 16px 22px;
-        text-align:center;
-        opacity:0;
-        transform:translateY(16px);
-        transition:opacity .5s ease,transform .5s ease;
-    }
-    .eps-reviews-section.is-visible .eps-review-title{
-        opacity:1;
-        transform:translateY(0);
-    }
+<!-- ═══════ INGREDIENTS ═══════ -->
+<section id="ingredients" class="sec" style="background:var(--light)">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">के के छन् यसमा?</span>
+            <h2 class="sec-title">20+ <span class="hl">प्राकृतिक जडीबुटीहरू</span> को शक्तिशाली मिश्रण</h2>
+            <p style="color:var(--muted);margin-top:10px;font-size:16px">जडीबुटी चयन गरेर थप जानकारी हेर्नुहोस्</p>
+        </div>
+        <div class="ing-container reveal" style="margin-top:28px">
+            <div class="ing-list"><ul id="ingList"></ul></div>
+            <div class="ing-detail">
+                <img id="ingImg" src="" alt="" loading="lazy"/>
+                <h3 id="ingName"></h3>
+                <p id="ingDesc"></p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    .eps-carousel,
-    .eps-carousel-controls{
-        --page-gutter:16px;
-        max-width:1200px;
-        margin:0 auto;
-        padding:0 var(--page-gutter);
-    }
-    .eps-carousel{
-        display:flex;
-        overflow-x:auto;
-        scroll-snap-type:x mandatory;
-        gap:20px;
-        padding:10px 0 24px;
-        scrollbar-width:none;
-    }
-    .eps-carousel::-webkit-scrollbar{display:none;}
+<!-- ═══════ TESTIMONIALS ═══════ -->
+<section id="testimonials" class="sec">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">हाम्रा ग्राहकहरूको अनुभव</span>
+            <h2 class="sec-title">5000+ नेपालीहरूले <span class="hl">भोगेको परिवर्तन</span></h2>
+        </div>
+        <div class="review-stats reveal">
+            <div>
+                <div class="review-big-num">4.9</div>
+                <div class="review-stars-big">★★★★★</div>
+                <div class="review-total">5000+ Reviews</div>
+            </div>
+            <div style="display:grid;gap:6px;flex:1;max-width:300px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px">
+                    <span style="font-weight:700;color:var(--muted);min-width:14px">5★</span>
+                    <div style="flex:1;height:7px;background:#e5e7eb;border-radius:999px;overflow:hidden"><div style="width:88%;height:100%;background:var(--amber);border-radius:999px"></div></div>
+                    <span style="color:var(--muted);font-size:12px">88%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px">
+                    <span style="font-weight:700;color:var(--muted);min-width:14px">4★</span>
+                    <div style="flex:1;height:7px;background:#e5e7eb;border-radius:999px;overflow:hidden"><div style="width:9%;height:100%;background:var(--amber);border-radius:999px"></div></div>
+                    <span style="color:var(--muted);font-size:12px">9%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px">
+                    <span style="font-weight:700;color:var(--muted);min-width:14px">3★</span>
+                    <div style="flex:1;height:7px;background:#e5e7eb;border-radius:999px;overflow:hidden"><div style="width:3%;height:100%;background:var(--amber);border-radius:999px"></div></div>
+                    <span style="color:var(--muted);font-size:12px">3%</span>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-wrap">
+            <div class="carousel" id="reviewCarousel">
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">रामबहादुर थापा</div><div class="rev-loc">📍 काठमाडौँ</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★★</div>
+                    </div>
+                    <p class="rev-text">"पहिले बस्दा–उठ्दा सानो काम गर्दा पनि चस्स दुख्थ्यो। ३ दिन लगातार Herbal Piles Spray लगाएँ, अहिले बस्न, हिँड्न र काम गर्न धेरै हल्का लागेको छ।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial-5.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">सुष्मा केसी</div><div class="rev-loc">📍 पोखरा</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★★</div>
+                    </div>
+                    <p class="rev-text">"दिसा जाँदा हरेकपटक रगत बग्दा धेरै डर लाग्थ्यो। स्प्रे ४–५ दिन लगाउँदा रगत करिब रोकियो, सूजन पनि धेरै घटेको छ।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial-3.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">प्रकाश अधिकारी</div><div class="rev-loc">📍 भरतपुर</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★★</div>
+                    </div>
+                    <p class="rev-text">"क्रिम र ट्याब्लेट धेरै बदलें, केही दिन मात्रै राहत मिल्थ्यो। Herbal Piles Spray भने छिटो सोसिन्छ, गाठो पनि सानो हुँदै गएको छ।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial-2.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">रीता बस्नेत</div><div class="rev-loc">📍 भक्तपुर</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★★</div>
+                    </div>
+                    <p class="rev-text">"आमा बनेपछि बवासीरको धेरै समस्या भयो। एक हप्ताभित्रै घाउ धमिलो हुँदै गएको महसुस भयो। बच्चालाई सम्हाल्न र बस्न–उठ्न सजिलो भयो।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial-9.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">दिपेश गुरुङ</div><div class="rev-loc">📍 बुटवल</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★☆</div>
+                    </div>
+                    <p class="rev-text">"दिनभरि बस चलाउँदा बस्नै नसक्ने जस्तो हुन्थ्यो। अहिले लामो ड्युटी हुँदा पनि आरामले काम गर्न सकेको छु।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+                <div class="rev-card">
+                    <img class="rev-img" src="Images/testimonial-7.png" alt="Review" loading="lazy"/>
+                    <div class="rev-top">
+                        <div><div class="rev-name">मीना रिजाल</div><div class="rev-loc">📍 धरान</div></div>
+                        <div class="rev-stars" style="margin-left:auto">★★★★★</div>
+                    </div>
+                    <p class="rev-text">"पहिले मलद्वार वरिपरि धेरै चिलाउने र जल्ने गर्थ्यो। Herbal Piles Spray ले सतह नरम र चिसो राखिदिन्छ, सूजन पनि घटेको छ।"</p>
+                    <div class="rev-verified"><svg viewBox="0 0 12 12" width="12" height="12" fill="var(--g2)"><path d="M2 6l3 3 5-5"/></svg> Verified Purchase</div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button id="revPrev" aria-label="Previous">‹</button>
+                <button id="revNext" aria-label="Next">›</button>
+            </div>
+        </div>
+    </div>
+</section>
 
-    .eps-review-card{
-        flex:0 0 86%;
-        max-width:520px;
-        scroll-snap-align:center;
-        background:var(--card-bg);
-        padding:18px;
-        border-radius:14px;
-        box-shadow:0 10px 24px rgba(0,0,0,0.08);
-        text-align:center;
-        opacity:0;
-        transform:translateY(22px);
-        transition:opacity .5s ease,transform .5s ease;
-    }
-    .eps-review-card.is-visible{
-        opacity:1;
-        transform:translateY(0);
-    }
+<!-- ═══════ FAQ ═══════ -->
+<section id="faq" class="sec">
+    <div class="sec-inner">
+        <div style="text-align:center" class="reveal">
+            <span class="sec-tag">सामान्य प्रश्नहरू</span>
+            <h2 class="sec-title">अक्सर सोधिने <span class="hl">प्रश्नहरू (FAQ)</span></h2>
+        </div>
+        <div class="faq-list reveal" style="max-width:800px;margin:0 auto">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    Herbal Piles Spray कति दिनमा काम गर्छ?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">अधिकांश ग्राहकहरूले पहिलो प्रयोगमै जलन र चिलाउनेबाट राहत महसुस गर्छन्। पूर्ण परिणामको लागि नियमित ७–१४ दिन प्रयोग गर्न सुझाइन्छ।</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    के यो Spray गर्दा दुख्छ?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">होइन। Herbal Piles Spray "No-Hurt Formula" मा बनेको छ। यो छर्कँदा चिसो र आरामदायी अनुभव हुन्छ। पोल्ने वा दुख्ने गर्दैन।</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    के यो सबैले प्रयोग गर्न सक्छन्?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">यो Dermatologically Tested र 100% प्राकृतिक जडीबुटीहरूबाट बनेको छ। तर गर्भवती महिला, सानो बच्चाहरू वा विशेष स्वास्थ्य समस्या भएकाहरूले प्रयोग गर्नुअघि चिकित्सकसँग सल्लाह लिनुहोस्।</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    Delivery कति दिनमा आउँछ?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">काठमाडौँ उपत्यकामा १–२ कार्य दिनभित्र र नेपालका अन्य क्षेत्रमा ३–५ कार्य दिनभित्र Delivery पुग्छ। Cash on Delivery उपलब्ध छ।</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    के यो Herbal Spray ले Piles पूरै निको पार्छ?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">Herbal Piles Spray ले दुखाइ, जलन, सूजन र रगत बग्नु कम गर्न धेरै प्रभावकारी छ। उत्तम परिणामको लागि पर्याप्त पानी पिउनुस्, फाइबरयुक्त खाना खानुस् र नियमित प्रयोग गर्नुस्।</div></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFAQ(this)">
+                    Cash on Delivery कसरी गर्ने?
+                    <span class="arrow"><svg viewBox="0 0 14 14"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+                </div>
+                <div class="faq-a"><div class="faq-a-inner">Order गर्दा "Cash on Delivery" छनौट गर्नुस्। Delivery आउँदा उत्पादन प्राप्त गरेपछि मात्र पैसा तिर्नुहोस्। पहिले कुनै payment चाहिँदैन।</div></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    .eps-proof{
-        position:relative;
-        width:var(--proof-w);
-        height:var(--proof-h);
-        margin:0 auto 14px;
-        border-radius:10px;
-        overflow:hidden;
-        box-shadow:0 4px 12px rgba(0,0,0,.08);
-        background:#f3f5f7;
-    }
-    .eps-proof-img{
-        display:block;
-        width:100%;
-        height:100%;
-        background-repeat:no-repeat;
-        background-position:center;
-        background-size:cover;
-        pointer-events:none;
-        -webkit-user-drag:none;
-    }
-    .eps-proof-guard{
-        position:absolute;
-        inset:0;
-        background:transparent;
-        pointer-events:auto;
-    }
-    .eps-review-text{
-        font-size:15px;
-        line-height:1.6;
-        color:#111;
-        margin-bottom:12px;
-    }
-    .eps-review-user{font-weight:700;}
-    .eps-review-name{
-        font-size:15px;
-        margin-bottom:2px;
-    }
-    .eps-stars{
-        color:var(--star);
-        letter-spacing:1px;
-    }
-    .eps-carousel-controls{
-        margin:6px auto 22px;
-        display:flex;
-        gap:12px;
-        justify-content:center;
-    }
-    .eps-carousel-controls button{
-        width:44px;
-        height:44px;
-        border-radius:100px;
-        background:#f1f5f9;
-        border:none;
-        font-size:22px;
-        cursor:pointer;
-        transition:background .2s;
-    }
-    .eps-carousel-controls button:hover{background:#e5e9ef;}
+<!-- ═══════ GUARANTEE ═══════ -->
+<section id="guarantee" class="sec">
+    <div class="sec-inner reveal" style="text-align:center">
+        <div class="guarantee-icon">🛡️</div>
+        <h2 class="guarantee-title">हाम्रो वाचा – तपाईंको सन्तुष्टि</h2>
+        <p class="guarantee-text">
+            Herbal Piles Spray 100% प्राकृतिक, परीक्षण-प्रमाणित फार्मुलाबाट बनेको छ।
+            हामी प्रत्येक ग्राहकको स्वास्थ्य र सन्तुष्टिलाई सर्वोच्च प्राथमिकता दिन्छौँ।
+        </p>
+        <div class="guarantee-points">
+            <div class="gpoint"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> 100% प्राकृतिक</div>
+            <div class="gpoint"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> No Side Effects</div>
+            <div class="gpoint"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Lab Tested</div>
+            <div class="gpoint"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Free Delivery</div>
+            <div class="gpoint"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg> Cash on Delivery</div>
+        </div>
+        <a href="order.html" class="cta-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);max-width:420px;margin:0 auto">
+            अहिले नै Order गर्नुहोस् →
+        </a>
+    </div>
+</section>
 
-    /* CTA button (same style as hero) + animated entrance */
-    .eps-cta-btn {
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        width:88%;
-        max-width:360px;
-        margin:20px auto 0;
-        padding:14px 22px;
-        font-size:16px;
-        font-weight:800;
-        letter-spacing:0.4px;
-        text-decoration:none;
-        border-radius:999px;
-        border:none;
-        background:linear-gradient(135deg,#f97316,#ea580c);
-        color:#fff;
-        box-shadow:0 18px 45px rgba(234, 88, 12, 0.35);
-        cursor:pointer;
-        position:relative;
-        overflow:hidden;
-        transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
-        opacity:0;
-        transform:translateY(16px);
-    }
-    .eps-cta-btn.is-visible{
-        opacity:1;
-        transform:translateY(0);
-    }
+<!-- ═══════ URGENCY ═══════ -->
+<section id="urgency" class="sec" style="padding:clamp(24px,4vw,50px) 20px">
+    <div class="urgency-inner">
+        <div class="urgency-title reveal">⚡ <span>सीमित स्टक</span> – छिट्टो Order गर्नुहोस्!</div>
+        <p class="reveal" style="color:var(--muted);font-size:15px;margin-bottom:16px">आजको विशेष Discount समाप्त हुँदैछ</p>
+        <div class="stock-bar-wrap reveal">
+            <div class="stock-label"><span>उपलब्ध स्टक</span><span class="low">⚠️ ७३% बिकिसक्यो!</span></div>
+            <div class="stock-bar"><div class="stock-fill"></div></div>
+        </div>
+        <p class="reveal" style="font-size:14px;color:var(--red);font-weight:600;margin-bottom:16px">🔥 आज मात्र <strong>Rs 500/- छुट</strong></p>
+        <div class="countdown-box reveal">
+            <div class="cd-unit"><div class="cd-num" id="cdH">00</div><div class="cd-label">HOURS</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cdM">00</div><div class="cd-label">MINS</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cdS">00</div><div class="cd-label">SECS</div></div>
+        </div>
+        <a href="order.html" class="cta-btn reveal" style="margin:24px auto 0">
+            Rs 1600/- मा Order गर्नुहोस् →
+        </a>
+        <p style="margin-top:12px;font-size:13px;color:var(--muted)">💵 Cash on Delivery &nbsp;|&nbsp; 🚚 Free Delivery</p>
+    </div>
+</section>
 
-    .eps-cta-btn::after {
-        content:"";
-        position:absolute;
-        inset:0;
-        background:linear-gradient(
-                110deg,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.45) 45%,
-                rgba(255,255,255,0) 60%
-        );
-        transform:translateX(-120%);
-        animation:epsCtaShine 4s ease-in-out infinite;
-    }
-    @keyframes epsCtaShine{
-        to{transform:translateX(120%);}
-    }
+<!-- ═══════ FINAL CTA ═══════ -->
+<section id="finalcta" class="sec">
+    <div class="sec-inner reveal" style="text-align:center">
+        <span class="sec-tag">अहिले नै शुरु गर्नुहोस्</span>
+        <h2 class="sec-title" style="margin-bottom:24px">पाइल्सको दुखाइबाट <span class="hl">आजदेखि</span> मुक्ति!</h2>
+        <div class="final-price-box">
+            <div class="final-product-name">Herbal Piles Spray – 1 Bottle</div>
+            <div class="final-old">Rs 2100/-</div>
+            <div class="final-price">Rs 1600/-</div>
+            <div class="final-save-badge">🎉 Save Rs 500/- (24% OFF)</div>
+            <div class="final-inclusions">
+                <span>Free Delivery All Nepal</span>
+                <span>Cash on Delivery</span>
+                <span>100% Natural</span>
+            </div>
+        </div>
+        <a href="order.html" class="cta-btn" style="margin:0 auto 12px">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            अहिले नै Order गर्नुहोस्
+        </a>
+        <p class="cta-sub">🔒 Safe & Secure &nbsp;|&nbsp; 💵 Cash on Delivery &nbsp;|&nbsp; 🚚 Free Delivery</p>
+        <div style="margin-top:20px;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap">
+            <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Dermatologically-tested.jpg?v=1727688938" style="width:60px;height:60px;object-fit:contain;border-radius:8px" alt="Tested" loading="lazy"/>
+            <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/Made-in-GMP-facility.jpg?v=1727688883" style="width:60px;height:60px;object-fit:contain;border-radius:8px" alt="GMP" loading="lazy"/>
+            <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/NABL-lab-tested.jpg?v=1727688883" style="width:60px;height:60px;object-fit:contain;border-radius:8px" alt="NABL" loading="lazy"/>
+            <img src="https://cdn.shopify.com/s/files/1/0602/2440/5694/files/No-hurt-formula.jpg?v=1727688883" style="width:60px;height:60px;object-fit:contain;border-radius:8px" alt="No Hurt" loading="lazy"/>
+        </div>
+    </div>
+</section>
 
-    .eps-cta-btn:hover {
-        transform:translateY(-2px);
-        box-shadow:0 22px 45px rgba(234, 88, 12, 0.5);
-        opacity:.97;
-    }
-    .eps-cta-btn:active {
-        transform:translateY(0);
-        box-shadow:0 14px 35px rgba(234, 88, 12, 0.4);
-    }
-
-    @media (max-width: 640px) {
-        .eps-cta-btn{
-            width:94%;
-            font-size:15px;
-            padding:12px 16px;
-        }
-    }
-
-    @media (min-width:768px){
-        .eps-review-card{flex:0 0 31%;}
-    }
-    @media (min-width:1200px){
-        .eps-review-card{flex:0 0 30%;}
-    }
-</style>
-
-<script>
-    // Lazy-load background images
-    (function(){
-        const nodes=document.querySelectorAll('.eps-proof-img[data-src]');
-        nodes.forEach(n=>{
-            const url=n.getAttribute('data-src');
-            if(url){
-                n.style.backgroundImage=`url("${url}")`;
-                n.removeAttribute('data-src');
-            }
-        });
-    })();
-
-    // Carousel auto-scroll + controls
-    (function(){
-        const carousel=document.getElementById('epsCarousel');
-        const prev=document.getElementById('epsPrev');
-        const next=document.getElementById('epsNext');
-        if(!carousel)return;
-        let cards=Array.from(carousel.querySelectorAll('.eps-review-card'));
-        let positions=[];
-        let i=0;
-        const INTERVAL_MS=3500;
-        let timer=null;
-        let paused=false;
-
-        function computePositions(){
-            cards=Array.from(carousel.querySelectorAll('.eps-review-card'));
-            const padLeft=parseInt(getComputedStyle(carousel).paddingLeft||"0",10);
-            positions=cards.map(card=>card.offsetLeft - padLeft);
-        }
-        function goTo(index,behavior='smooth'){
-            if(!positions.length)return;
-            i=(index+positions.length)%positions.length;
-            carousel.scrollTo({left:positions[i],behavior});
-        }
-        function nextSlide(){goTo(i+1);}
-        function prevSlide(){goTo(i-1);}
-
-        function start(){
-            stop();
-            timer=setInterval(()=>{ if(!paused) nextSlide(); },INTERVAL_MS);
-        }
-        function stop(){
-            if(timer) clearInterval(timer);
-            timer=null;
-        }
-
-        carousel.addEventListener('mouseenter',()=>paused=true);
-        carousel.addEventListener('mouseleave',()=>paused=false);
-        carousel.addEventListener('touchstart',()=>{paused=true;},{passive:true});
-        carousel.addEventListener('touchend',()=>{paused=false;},{passive:true});
-
-        if(prev)prev.addEventListener('click',()=>{paused=true;prevSlide();});
-        if(next)next.addEventListener('click',()=>{paused=true;nextSlide();});
-
-        window.addEventListener('resize',()=>{computePositions();goTo(i,'auto');});
-        window.addEventListener('load',()=>{computePositions();goTo(0,'auto');start();});
-        computePositions();goTo(0,'auto');start();
-
-        document.addEventListener('visibilitychange',()=>{
-            if(document.hidden) stop(); else start();
-        });
-    })();
-
-    // Scroll-in animation using IntersectionObserver
-    (function(){
-        const section=document.querySelector('.eps-reviews-section');
-        if(!section || !('IntersectionObserver' in window)) return;
-
-        const title=section.querySelector('.eps-review-title');
-        const cards=Array.from(section.querySelectorAll('.eps-review-card'));
-        const cta=section.querySelector('.eps-cta-btn');
-
-        const observer=new IntersectionObserver((entries)=>{
-            entries.forEach(entry=>{
-                if(entry.isIntersecting){
-                    section.classList.add('is-visible');
-
-                    // Stagger cards
-                    cards.forEach((card,idx)=>{
-                        setTimeout(()=>card.classList.add('is-visible'), idx*120);
-                    });
-
-                    // CTA after cards
-                    if(cta){
-                        setTimeout(()=>cta.classList.add('is-visible'), cards.length*120 + 200);
-                    }
-
-                    observer.disconnect();
-                }
-            });
-        },{threshold:0.25});
-
-        observer.observe(section);
-    })();
-
-    // Disable right-click etc. inside this section (optional)
-    (function(){
-        const scope=document.querySelector('.eps-reviews-section');
-        if(!scope)return;
-        scope.addEventListener('contextmenu',e=>e.preventDefault(),{capture:true});
-        scope.addEventListener('dragstart',e=>e.preventDefault(),{capture:true});
-        scope.addEventListener('keydown',(e)=>{
-            if((e.ctrlKey||e.metaKey)&&['s','u','p'].includes(e.key.toLowerCase())) e.preventDefault();
-            if(e.key==='F12') e.preventDefault();
-        });
-    })();
-</script>
-
-<!-- ✅ Footer (Clean & Mobile Optimized) -->
-<footer class="easy-footer" role="contentinfo">
-    <style>
-        .easy-footer {
-            width: 100%;
-            background: transparent;
-            color: #222;
-            text-align: center;
-            padding: 30px 16px 20px;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .easy-footer p {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        .easy-footer strong {
-            color: #000;
-        }
-
-        .easy-footer small {
-            display: block;
-            margin-top: 6px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-            max-width: 320px;
-        }
-
-        /* Mobile Optimization */
-        @media (max-width: 640px) {
-            .easy-footer {
-                margin: 0px;
-                width:90%;
-            }
-            .easy-footer p {
-                font-size: 15px;
-            }
-            .easy-footer small {
-                font-size: 13px;
-                max-width: 90%;
-            }
-        }
-    </style>
-
-    <p>© Copyright 2025 <strong>Herbal Piles Spray</strong>. All rights reserved.</p>
-    <small>A natural herbal spray designed to provide relief from piles, fissures, and fistula.</small>
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+    <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="order.html">Order Now</a>
+    </div>
+    <p>© 2025 <strong>Herbal Piles Spray</strong>. All Rights Reserved. | A natural herbal spray for piles, fissures, and fistula.</p>
+    <p style="margin-top:8px;font-size:12px;color:rgba(255,255,255,.4)">Disclaimer: यो उत्पादन कुनै रोग निदान, उपचार वा रोकथामको लागि बनाइएको होइन। चिकित्सकको सल्लाह अनिवार्य छ।</p>
 </footer>
 
+<!-- BOTTOM PADDING FOR MOBILE STICKY BTN -->
+<div style="height:60px;display:none" class="mobile-pad"></div>
+<style>@media(max-width:768px){.mobile-pad{display:block}}</style>
 
-<!-- CTA COLOR OVERRIDES -->
-<style>
-    :root{
-        --cta:#F59E0B;--cta-hover:#D97706;--cta-active:#B45309;--cta-shadow:rgba(245,158,11,.32);--cta-glow:rgba(251,191,36,.45);
-    }
-    #epsHero1 .eps-cta,#eps-benefits .eps-btn--primary,.eps-testimonial .eps-btn--primary{
-        background:var(--cta)!important;color:#fff!important;box-shadow:0 8px 18px var(--cta-shadow)!important;
-    }
-    #epsHero1 .eps-cta:hover,#eps-benefits .eps-btn--primary:hover,.eps-testimonial .eps-btn--primary:hover{background:var(--cta-hover)!important;}
-    #epsHero1 .eps-cta:active,#eps-benefits .eps-btn--primary:active,.eps-testimonial .eps-btn--primary:active{background:var(--cta-active)!important;}
-    #epsHero1 .eps-cta:focus-visible,#eps-benefits .eps-btn--primary:focus-visible,.eps-testimonial .eps-btn--primary:focus-visible{
-        outline:3px solid var(--cta-glow);outline-offset:2px;
-    }
-    #epsHero1 .eps-cta::after,#eps-benefits .eps-btn::after,.eps-testimonial .eps-btn::after{
-        background:linear-gradient(110deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.26) 45%,rgba(255,255,255,0) 62%)!important;
-    }
-</style>
+<script>
+    /* ═══ PROMO BAR TICKER ═══ */
+    (function(){
+      const msgs=document.querySelectorAll('#promoBar .msg');
+      let i=0;
+      setInterval(()=>{
+        msgs[i].classList.remove('active');
+        i=(i+1)%msgs.length;
+        msgs[i].classList.add('active');
+      },3500);
+    })();
 
+    /* ═══ COUNTDOWN TIMER (3 hours from page load) ═══ */
+    (function(){
+      const key='hps_timer_end';
+      let end=localStorage.getItem(key);
+      if(!end||Date.now()>end){
+        end=Date.now()+3*60*60*1000;
+        try{localStorage.setItem(key,end)}catch(e){}
+      }
+      function update(ids){
+        const diff=Math.max(0,end-Date.now());
+        const h=Math.floor(diff/3600000);
+        const m=Math.floor((diff%3600000)/60000);
+        const s=Math.floor((diff%60000)/1000);
+        const pad=n=>String(n).padStart(2,'0');
+        ids.forEach(([hEl,mEl,sEl])=>{
+          if(hEl)hEl.textContent=pad(h);
+          if(mEl)mEl.textContent=pad(m);
+          if(sEl)sEl.textContent=pad(s);
+        });
+        if(diff<=0) clearInterval(t);
+      }
+      const t=setInterval(()=>update([
+        [document.getElementById('cd-h'),document.getElementById('cd-m'),document.getElementById('cd-s')],
+        [document.getElementById('cdH'),document.getElementById('cdM'),document.getElementById('cdS')]
+      ]),1000);
+      update([
+        [document.getElementById('cd-h'),document.getElementById('cd-m'),document.getElementById('cd-s')],
+        [document.getElementById('cdH'),document.getElementById('cdM'),document.getElementById('cdS')]
+      ]);
+    })();
+
+    /* ═══ SCROLL REVEAL ═══ */
+    (function(){
+      if(!('IntersectionObserver' in window)){
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+        return;
+      }
+      const io=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.15});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    })();
+
+    /* ═══ BEN ITEMS ANIMATION ═══ */
+    (function(){
+      if(!('IntersectionObserver' in window)){
+        document.querySelectorAll('.ben-item').forEach(el=>el.classList.add('visible'));
+        return;
+      }
+      const io=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.2});
+      document.querySelectorAll('.ben-item').forEach(el=>io.observe(el));
+    })();
+
+    /* ═══ FAQ ACCORDION ═══ */
+    function toggleFAQ(el){
+      const item=el.parentElement;
+      const ans=item.querySelector('.faq-a');
+      const inner=item.querySelector('.faq-a-inner');
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight='0';
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        ans.style.maxHeight=(inner.scrollHeight+18)+'px';
+      }
+    }
+
+    /* ═══ INGREDIENTS ═══ */
+    const ingredients=[
+      {name:"Haritaki",image:"Images/haritaki.png",desc:"पाचन शक्ति सन्तुलन गर्न र शरीरको सफाइमा मद्दत गर्ने महत्वपूर्ण आयुर्वेदिक जडीबुटी।"},
+      {name:"Suran",image:"Images/suran.png",desc:"आन्द्रा र पेटसम्बन्धी असहजता कम गर्न परम्परागत रूपमा प्रयोग हुने कन्द।"},
+      {name:"Haridra (Turmeric)",image:"Images/haridra.jpeg",desc:"सूजन र संक्रमण कम गर्न सहयोग गर्ने बलियो प्राकृतिक एन्टिअक्सिडेन्ट।"},
+      {name:"Lodhra",image:"Images/lodhra.jpg",desc:"रक्तस्राव कम गर्न र कोमल टिस्युहरू मजबुत बनाउन प्रयोग गरिने जडीबुटी।"},
+      {name:"Yastimadhu (Licorice)",image:"Images/Yastimadhu-Licorice.jpg",desc:"जलन र चिलाउने कम गर्न तथा छाला शान्त पार्न मद्दत गर्दछ।"},
+      {name:"Daruharidra",image:"Images/Daruharidra.jpg",desc:"छाला र रक्तशुद्धिका लागि प्रसिद्ध आयुर्वेदिक बोट।"},
+      {name:"Nirgundi",image:"Images/Nirgundi.jpg",desc:"सूजन, दुखाइ र संक्रमण नियन्त्रणका लागि प्रयोग हुने जडीबुटी।"},
+      {name:"Manjistha",image:"Images/Manjistha.png",desc:"रक्तशुद्धि र छाला सम्बन्धी समस्यामा उपयोगी मानिने बोट।"},
+      {name:"Lajjawati",image:"Images/Lajjawati-Jhar.png",desc:"संवेदनशील छालाको हेरचाह र सूजन घटाउन सहयोग गर्ने बोट।"},
+      {name:"Dhubo",image:"Images/dubo.jpg",desc:"रक्तस्राव रोक्न र घाउ निको पार्न लोक चिकित्सामा प्रयोग हुने घाँस।"},
+      {name:"Kustha",image:"Images/Kustha.png",desc:"त्वचा र शरीरको शुद्धिकरणमा प्रयोग हुने सुगन्धित जडीबुटी।"},
+      {name:"Mahanimba",image:"Images/Mahanimba.jpg",desc:"ब्याक्टेरिया र संक्रमण विरुद्ध लड्न मद्दत गर्ने कडुवा बोट।"},
+      {name:"Til Oil (Sesame)",image:"Images/Til-oil-Sesame-oil.jpg",desc:"छाला नरम, पोषणयुक्त र लचिलो राख्न प्रयोग हुने आधार तेल।"},
+      {name:"Bee Wax",image:"Images/Bee-wax.jpeg",desc:"छालामा सुरक्षात्मक तह बनाइ नमी जोगाउन मद्दत गर्ने प्राकृतिक मैन।"}
+    ];
+    (function(){
+      const list=document.getElementById('ingList');
+      const img=document.getElementById('ingImg');
+      const name=document.getElementById('ingName');
+      const desc=document.getElementById('ingDesc');
+      if(!list)return;
+      ingredients.forEach((ing,i)=>{
+        const li=document.createElement('li');
+        li.textContent=ing.name;
+        li.onclick=()=>select(i);
+        list.appendChild(li);
+      });
+      function select(i){
+        const ing=ingredients[i];
+        name.textContent=ing.name;
+        img.src=ing.image;
+        img.alt=ing.name;
+        img.style.display='block';
+        desc.textContent=ing.desc;
+        Array.from(list.children).forEach(el=>el.classList.remove('active'));
+        list.children[i].classList.add('active');
+      }
+      select(0);
+    })();
+
+    /* ═══ REVIEW CAROUSEL ═══ */
+    (function(){
+      const c=document.getElementById('reviewCarousel');
+      const prev=document.getElementById('revPrev');
+      const next=document.getElementById('revNext');
+      if(!c)return;
+      let cards=Array.from(c.querySelectorAll('.rev-card'));
+      let idx=0;let timer;let paused=false;
+      function getPos(){return cards.map(el=>el.offsetLeft)}
+      function go(i,beh='smooth'){
+        const pos=getPos();
+        idx=(i+cards.length)%cards.length;
+        c.scrollTo({left:pos[idx]||0,behavior:beh});
+      }
+      function start(){timer=setInterval(()=>{if(!paused)go(idx+1)},4000)}
+      if(prev)prev.onclick=()=>{paused=true;go(idx-1)};
+      if(next)next.onclick=()=>{paused=true;go(idx+1)};
+      c.addEventListener('mouseenter',()=>paused=true);
+      c.addEventListener('mouseleave',()=>paused=false);
+      window.addEventListener('load',()=>{go(0,'auto');start()});
+    })();
+</script>
 </body>
 </html>
-
-<!-- Meta Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1649090619608444');
-    fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-               src="https://www.facebook.com/tr?id=1649090619608444&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
