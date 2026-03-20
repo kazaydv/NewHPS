@@ -248,72 +248,115 @@
         @media (min-width: 769px) { .wa { bottom: 24px; } }
 
         /* ═══════════════════════════════
-           §1 HERO
+           §1 HERO — REDESIGNED
         ═══════════════════════════════ */
         #hook {
-          padding-top: clamp(40px, 8vw, 60px);
-          padding-bottom: clamp(36px, 7vw, 52px);
+          padding-top: clamp(36px, 8vw, 56px);
+          padding-bottom: clamp(40px, 8vw, 60px);
         }
-        .ba-card {
+
+        /* Two-column hero grid */
+        .hero-grid {
           display: grid;
-          grid-template-columns: 1fr 34px 1fr;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(24px, 5vw, 40px);
+          align-items: center;
+          margin-bottom: 32px;
+        }
+
+        /* LEFT — copy */
+        .hero-copy { display: flex; flex-direction: column; }
+        .hero-copy .eyebrow { margin-bottom: 14px; }
+        .hero-copy .h-xl    { margin-bottom: 18px; }
+        .hero-copy .body-lg { margin-bottom: 24px; }
+
+        /* RIGHT — product image */
+        .hero-img-wrap {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-img-bg {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse 70% 70% at 50% 55%, var(--orange-lt) 0%, transparent 72%);
+          border-radius: 50%;
+        }
+        .hero-img-wrap img {
+          position: relative;
+          width: clamp(160px, 36vw, 260px);
+          height: clamp(160px, 36vw, 260px);
+          object-fit: contain;
+          filter: drop-shadow(0 16px 36px rgba(222,113,32,.22));
+          animation: floatImg 4s ease-in-out infinite;
+          z-index: 1;
+        }
+        @keyframes floatImg {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-10px); }
+        }
+
+        /* Cert badge ribbon */
+        .hero-badge {
+          position: absolute;
+          bottom: 10px;
+          right: 0;
           background: var(--white);
           border: 1px solid var(--line);
-          border-radius: var(--r);
-          overflow: hidden;
-          margin: 22px 0 26px;
+          border-radius: 8px;
+          padding: 7px 12px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          box-shadow: 0 4px 16px rgba(0,0,0,.07);
+          z-index: 2;
+          white-space: nowrap;
         }
-        .ba-side { padding: clamp(14px,3vw,20px) clamp(12px,3vw,18px); font-size: 14px; line-height: 1.7; }
-        .ba-side.before { background: #fff8f8; border-right: 1px solid var(--line); }
-        .ba-side.after  { background: #f5fbf7; }
-        .ba-label {
-          font-size: 10px; font-weight: 800;
-          letter-spacing: .15em; text-transform: uppercase;
-          margin-bottom: 10px; display: block; opacity: .65;
+        .hero-badge-ico { font-size: 16px; }
+        .hero-badge-txt { font-size: 11px; font-weight: 700; color: var(--black); line-height: 1.3; }
+        .hero-badge-sub { font-size: 10px; color: var(--muted); font-weight: 400; }
+
+        /* Product name strip */
+        .hero-prod-name {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 16px;
         }
-        .ba-side.before .ba-label { color: var(--red); }
-        .ba-side.after  .ba-label { color: var(--green); }
-        .ba-side li {
-          display: flex; align-items: flex-start;
-          gap: 7px; margin-bottom: 7px;
-          font-size: clamp(12px, 2.5vw, 14px); color: var(--body-c);
+        .hero-prod-name span {
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--black);
+          letter-spacing: .01em;
         }
-        .ba-side li:last-child { margin-bottom: 0; }
-        .ba-mid {
-          display: flex; align-items: center; justify-content: center;
-          background: var(--white); color: var(--orange);
-          font-family: var(--font-d); font-size: 22px;
-          border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+        .hero-prod-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 20px;
         }
-        .prod-row {
-          display: flex; align-items: center;
-          gap: clamp(12px,3vw,18px);
-          background: var(--white); border: 1px solid var(--line);
-          border-radius: var(--r);
-          padding: clamp(12px,3vw,16px) clamp(14px,3.5vw,20px);
-          margin-bottom: 22px;
-        }
-        .prod-row img {
-          width: clamp(54px,14vw,70px); height: clamp(54px,14vw,70px);
-          object-fit: contain; flex-shrink: 0;
-          filter: drop-shadow(0 3px 8px rgba(0,0,0,.1));
-        }
-        .pn { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 7px; line-height: 1.3; }
-        .pc { display: flex; gap: 5px; flex-wrap: wrap; }
-        .pc span {
-          font-size: 10px; font-weight: 700;
-          letter-spacing: .04em; text-transform: uppercase;
-          background: var(--green-lt); color: var(--green);
-          padding: 3px 8px; border-radius: 3px; white-space: nowrap;
+        .hero-prod-tags .tag {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: .04em;
+          text-transform: uppercase;
+          background: var(--green-lt);
+          color: var(--green);
+          padding: 3px 9px;
+          border-radius: 3px;
+          white-space: nowrap;
         }
 
-
-        .price-block { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        /* Price */
+        .price-block { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
         .pw  { font-size: 16px; text-decoration: line-through; color: var(--muted); }
         .pc2 { font-size: 17px; font-weight: 600; color: var(--body-c); align-self: flex-end; padding-bottom: 5px; }
         .pn2 { font-family: var(--font-d); font-size: clamp(48px,12vw,60px); color: var(--black); line-height: 1; }
         .ps  { background: var(--orange); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; align-self: flex-start; margin-top: 10px; }
-        .trust-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 28px; }
+
+        /* Trust badges */
+        .trust-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 22px; }
         .tbadge {
           display: flex; align-items: center; gap: 5px;
           background: var(--white); border: 1px solid var(--line);
@@ -321,11 +364,36 @@
           font-size: 12px; font-weight: 600; color: var(--body-c);
           white-space: nowrap; line-height: 1;
         }
-@media (max-width: 768px) {
-  .cta-group.rv.d3 .cta {
-    display: none;
-  }
-}
+
+        /* Hero divider */
+        .hero-divider {
+          width: 100%;
+          height: 1px;
+          background: var(--line);
+          margin: 28px 0;
+        }
+
+        /* Mobile stacking */
+        @media (max-width: 600px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+          }
+          .hero-img-wrap {
+            order: -1;
+            padding: 10px 0 4px;
+          }
+          .hero-img-wrap img {
+            width: clamp(150px, 50vw, 200px);
+            height: clamp(150px, 50vw, 200px);
+          }
+          .hero-badge {
+            bottom: 4px;
+            right: clamp(0px, 4vw, 20px);
+          }
+          /* Hide desktop CTA in hero on mobile (sticky bar handles it) */
+          .cta-group.rv.d3 { display: none; }
+        }
+
         /* ═══════════════════════════════
            §2 PROBLEM
         ═══════════════════════════════ */
@@ -652,48 +720,76 @@
 
 <div class="page">
 
-    <!-- §1  HOOK -->
+    <!-- §1  HOOK — REDESIGNED HERO -->
     <section id="hook">
+
+        <!-- Top eyebrow -->
         <span class="eyebrow rv">पाइल्स · फिसर · फिस्टुला</span>
 
-        <h1 class="h-xl rv d1" style="margin-bottom: 14px;">
-            पाइल्सको पीडा अब<br>
-            <span class="accent">लुकाएर होइन,</span><br>
-            सजिलै भगाएर ढुक्क हुनुहोस्!
-        </h1>
+        <!-- Two-column hero grid -->
+        <div class="hero-grid rv d1">
 
-        <p class="body-lg rv d1" style="margin-bottom: 22px;">
-            हिँड्दा-बस्दा हुने असह्य जलन, रगत देखिने समस्या र कसैलाई भन्न नसकिने त्यो अप्ठ्यारोपन — हामी बुझ्छौं, यो कति कष्टकर हुन्छ। धेरैलाई लाग्छ कि <strong>'अपरेशन' बाहेक अरू उपाय छैन</strong>, तर अब त्यस्तो सोचिरहनु पर्दैन।
-        </p>
+            <!-- LEFT: Copy -->
+            <div class="hero-copy">
+                <h1 class="h-xl" style="margin-bottom: 16px;">
+                    पाइल्सको पीडा अब<br>
+                    <span class="accent">लुकाएर होइन,</span><br>
+                    सजिलै भगाएर<br>ढुक्क हुनुहोस्!
+                </h1>
 
+                <p class="body-lg" style="margin-bottom: 22px;">
+                    हिँड्दा-बस्दा हुने असह्य जलन, रगत देखिने समस्या — अब घरैबाट, पूरै गोपनीयतासाथ समाधान गर्नुहोस्।
+                </p>
 
-        <div class="prod-row rv d2">
-            <img src="Images/Herbalpilesspray-8-scaled.png" alt="Herbal Piles Spray" loading="eager"/>
-            <div>
-                <div class="pn">Herbal Piles Spray</div>
-                <div class="pc">
-                    <span>२०+ जडीबुटी</span>
-                    <span>GMP Certified</span>
-                    <span>हात नलगाउने</span>
-                    <span>अपरेसन नचाहिने</span>
+                <!-- Product name + tags -->
+                <div class="hero-prod-name">
+                    <span>Herbal Piles Spray</span>
+                </div>
+                <div class="hero-prod-tags">
+                    <span class="tag">२०+ जडीबुटी</span>
+                    <span class="tag">GMP Certified</span>
+                    <span class="tag">हात नलगाउने</span>
+                    <span class="tag">अपरेसन नचाहिने</span>
+                </div>
+
+                <!-- Price -->
+                <div class="price-block">
+                    <span class="pw">Rs 2,100/-</span>
+                    <span class="pc2">Rs</span>
+                    <span class="pn2">1,600/-</span>
+                    <span class="ps">Rs 500 छुट</span>
                 </div>
             </div>
-        </div>
 
-        <div class="price-block rv d2">
-            <span class="pw">Rs 2,100/-</span>
-            <span class="pc2">Rs</span>
-            <span class="pn2">1,600/-</span>
-            <span class="ps">Rs 500 छुट</span>
-        </div>
+            <!-- RIGHT: Product image -->
+            <div class="hero-img-wrap">
+                <div class="hero-img-bg"></div>
+                <img
+                        src="Images/Herbalpilesspray-8-scaled.png"
+                        alt="Herbal Piles Spray bottle"
+                        loading="eager"
+                />
+                <!-- Floating cert badge -->
+                <div class="hero-badge">
+                    <span class="hero-badge-ico">🔬</span>
+                    <div>
+                        <div class="hero-badge-txt">Lab Tested</div>
+                        <div class="hero-badge-sub">NABL + GMP Certified</div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="trust-row rv d3">
+        </div><!-- /hero-grid -->
+
+        <!-- Trust badges — full width below grid -->
+        <div class="trust-row rv d2">
             <div class="tbadge">⭐ 4.9 / 5</div>
             <div class="tbadge">👥 १,०००+ ग्राहक</div>
             <div class="tbadge">🧪 Lab Tested</div>
             <div class="tbadge">🚚 Free Delivery</div>
         </div>
 
+        <!-- CTA — hidden on mobile (sticky bar handles it) -->
         <div class="cta-group rv d3">
             <a href="order.html" class="cta">Order Now →</a>
             <div class="cta-micro">
@@ -702,6 +798,7 @@
                 <span>🚚 Nepal भरि Free</span>
             </div>
         </div>
+
     </section>
 
 
@@ -863,7 +960,7 @@
     </section>
 
 
-    <!-- §6  TARGETING — updated copywriting -->
+    <!-- §6  TARGETING -->
     <section class="sec rv">
 
         <h2 class="h-lg" style="margin-bottom: 10px;">
@@ -929,7 +1026,6 @@
 
         <div class="rev-scroll-wrap">
             <div class="rev-scroll" id="revScroll">
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">रामबहादुर थापा</div><div class="tc-loc">📍 काठमाडौँ · बस चालक</div></div>
@@ -940,7 +1036,6 @@
                     <img src="Images/testimonial.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">सुष्मा केसी</div><div class="tc-loc">📍 पोखरा · गृहिणी</div></div>
@@ -951,7 +1046,6 @@
                     <img src="Images/testimonial-5.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">प्रकाश अधिकारी</div><div class="tc-loc">📍 भरतपुर · शिक्षक</div></div>
@@ -962,7 +1056,6 @@
                     <img src="Images/testimonial-3.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">रीता बस्नेत</div><div class="tc-loc">📍 भक्तपुर · आमा</div></div>
@@ -973,7 +1066,6 @@
                     <img src="Images/testimonial-2.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">दिपेश गुरुङ</div><div class="tc-loc">📍 बुटवल · व्यापारी</div></div>
@@ -984,7 +1076,6 @@
                     <img src="Images/testimonial-9.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
                 <div class="tcard">
                     <div class="tc-meta">
                         <div><div class="tc-name">मीना रिजाल</div><div class="tc-loc">📍 धरान · नर्स</div></div>
@@ -995,7 +1086,6 @@
                     <img src="Images/testimonial-7.png" alt="" class="tc-photo" loading="lazy"/>
                     <div class="tc-verified">Verified Purchase</div>
                 </div>
-
             </div>
 
             <div class="rev-nav">
@@ -1009,15 +1099,14 @@
     </section>
 
 
+    <!-- §8  FAQ -->
     <section class="sec rv">
-
         <h2 class="h-lg" style="margin-bottom: 20px;">
             सबैभन्दा धेरै<br>
             <span class="accent">सोधिने प्रश्नहरू।</span>
         </h2>
 
         <div class="obj-list">
-
             <div class="obj-item">
                 <div class="obj-q" onclick="tog(this)">
                     <span class="obj-q-text">"मैले पहिले धेरै क्रिम र औषधि चलाएँ तर निको भएन, यो स्प्रेले चाहिँ कसरी काम गर्छ र?"</span>
@@ -1028,7 +1117,6 @@
                     तपाईँको शंका जायज छ। धेरैजसो क्रिम छालाको माथिल्लो सतहमा मात्र बस्छन् र चलाउँदा झन् पोल्ने वा फोहोर हुने डर हुन्छ। यो <strong>Herbal Piles Spray</strong> विशेष गरी 'Deep Penetration' प्रविधिको लागि बनाइएको हो। स्प्रे गर्दा यसका <strong>२०+ जडीबुटीहरू</strong> सिधै प्रभावित ठाउँको भित्रसम्म पुग्छन्। यो कुनै साधारण मलम होइन, यो समस्याको फेदसम्म पुग्ने आधुनिक उपचार हो।
                 </div></div>
             </div>
-
             <div class="obj-item">
                 <div class="obj-q" onclick="tog(this)">
                     <span class="obj-q-text">"अनलाइनबाट मगाउँदा सामान नक्कली पर्ला कि भन्ने डर लाग्छ, कसरी पत्याउने?"</span>
@@ -1036,10 +1124,9 @@
                     <span class="obj-arr">+</span>
                 </div>
                 <div class="obj-body"><div class="obj-inner">
-                    हामी बुझ्छौं, आजकल अनलाइनमा विश्वास गर्न गाह्रो छ। त्यसैले हामीले <strong>Cash on Delivery</strong> को सुविधा दिएका छौं। सामान तपाईँको हातमा परेपछि, प्याकेट चेक गरेर मात्र पैसा बुझाउनुहोस्। साथै, यो प्रोडक्ट <strong>NABL Lab Tested र GMP Certified</strong> छ—हामी गुणस्तरमा कुनै सम्झौता गर्दैनौं।
+                    हामी बुझ्छौं, आजकल अनलाइनमा विश्वास गर्न गाह्रो छ। त्यसैले हामीले <strong>Cash on Delivery</strong> को सुविधा दिएका छौं। सामान तपाईँको हातमा परेपछि, प्याकेट चेक गरेर मात्र पैसा बुझाउनुहोस्। साथै, यो प्रोडक्ट <strong>NABL Lab Tested र GMP Certified</strong> छ — हामी गुणस्तरमा कुनै सम्झौता गर्दैनौं।
                 </div></div>
             </div>
-
             <div class="obj-item">
                 <div class="obj-q" onclick="tog(this)">
                     <span class="obj-q-text">"डेलिभरी लिएर आउँदा घरकाले वा छिमेकीले थाहा पाउँछन् कि? मलाई अलि लाज लाग्छ।"</span>
@@ -1050,7 +1137,6 @@
                     <strong>ढुक्क हुनुहोस्, तपाईँको गोपनीयता हाम्रो पहिलो प्राथमिकता हो।</strong> हामी यसलाई एउटा Plain Packaging (साधारण बट्टा) मा प्याक गरेर पठाउँछौं। बाहिर न त प्रोडक्टको नाम हुन्छ, न त कम्पनीको। डेलिभरी गर्ने मान्छेलाई समेत भित्र के छ भन्ने थाहा हुँदैन।
                 </div></div>
             </div>
-
             <div class="obj-item">
                 <div class="obj-q" onclick="tog(this)">
                     <span class="obj-q-text">"यसले अरु केही समस्या (Side Effect) त गर्दैन? मेरो छाला अलि सेन्सिटिभ छ।"</span>
@@ -1061,7 +1147,6 @@
                     यो पूर्ण रूपमा आयुर्वेदिक जडीबुटीबाट बनेको हो। यसमा कुनै पनि हानिकारक केमिकल्स वा स्टेरोइड (Steroid) छैन। यो <strong>Dermatologically Tested</strong> पनि छ, जसको अर्थ यो संवेदनशील छालाका लागि सुरक्षित छ। प्रयोग गर्दा हल्का चिसो र आरामदायी महसुस हुन्छ, पोल्ने वा चिलाउने हुँदैन।
                 </div></div>
             </div>
-
             <div class="obj-item">
                 <div class="obj-q" onclick="tog(this)">
                     <span class="obj-q-text">"मैले आज अर्डर गरेँ भने कहिलेसम्म मेरो हातमा आइपुग्छ? डेलिभरी चार्ज कति लाग्छ?"</span>
@@ -1069,10 +1154,9 @@
                     <span class="obj-arr">+</span>
                 </div>
                 <div class="obj-body"><div class="obj-inner">
-                    तपाईँले आजै अर्डर गर्नुभयो भने काठमाडौँ भित्र <strong>१ देखि २ दिन</strong> र बाहिर <strong>३ देखि ५ दिन</strong> भित्र आइपुग्छ। र सबैभन्दा खुसीको कुरा—डेलिभरी <strong>पूर्णतः नि:शुल्क</strong> छ। तपाईँले सामानको मूल्य रु १,६०० बाहेक एक पैसा पनि थप तिर्नु पर्दैन।
+                    तपाईँले आजै अर्डर गर्नुभयो भने काठमाडौँ भित्र <strong>१ देखि २ दिन</strong> र बाहिर <strong>३ देखि ५ दिन</strong> भित्र आइपुग्छ। र सबैभन्दा खुसीको कुरा — डेलिभरी <strong>पूर्णतः नि:शुल्क</strong> छ। तपाईँले सामानको मूल्य रु १,६०० बाहेक एक पैसा पनि थप तिर्नु पर्दैन।
                 </div></div>
             </div>
-
         </div>
     </section>
 
@@ -1262,7 +1346,7 @@
       goTo(0,true);
     }();
 
-
+    /* ── FAQ ACCORDION ── */
     function tog(btn){
       var item=btn.parentElement;
       var body=item.querySelector('.obj-body');
