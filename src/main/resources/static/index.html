@@ -165,7 +165,7 @@
           color: var(--black);
           line-height: 1.4;
         }
-        .benefits-strip-title span { color: var(--green); }
+        .benefits-strip-title span { color: var(--orange); }
 
         .ben-strip-grid {
           display: grid;
@@ -189,8 +189,8 @@
           transition: border-color .2s, box-shadow .2s, transform .2s;
         }
         .ben-card:hover {
-          border-color: var(--green);
-          box-shadow: 0 8px 28px rgba(20,92,46,.1);
+          border-color: var(--orange);
+          box-shadow: 0 8px 28px rgba(222,113,32,.1);
           transform: translateY(-3px);
         }
         .ben-card::before {
@@ -198,7 +198,7 @@
           position: absolute;
           top: 0; left: 0; right: 0;
           height: 3px;
-          background: linear-gradient(90deg, var(--green), var(--green-md));
+          background: linear-gradient(90deg, var(--orange), var(--orange-dk));
           opacity: 0;
           transition: opacity .2s;
         }
@@ -208,8 +208,8 @@
           width: 52px;
           height: 52px;
           border-radius: 14px;
-          background: var(--green-lt);
-          border: 1.5px solid rgba(20,92,46,.15);
+          background: var(--orange-lt);
+          border: 1.5px solid rgba(222,113,32,.15);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -218,7 +218,7 @@
         .ben-icon-wrap svg {
           width: 26px;
           height: 26px;
-          stroke: var(--green);
+          stroke: var(--orange);
           fill: none;
           stroke-width: 1.8;
           stroke-linecap: round;
@@ -241,8 +241,8 @@
           display: inline-flex;
           align-items: center;
           gap: 5px;
-          background: var(--green-lt);
-          color: var(--green);
+          background: var(--orange-lt);
+          color: var(--orange);
           font-size: 11px;
           font-weight: 800;
           letter-spacing: .04em;
@@ -267,7 +267,7 @@
           justify-content: center;
           gap: 8px;
         }
-        .ben-strip-note strong { color: var(--green); }
+        .ben-strip-note strong { color: var(--orange); }
 
         /* ═══ SYMPTOM STRIP ═══ */
         .symptom-strip { background: var(--black); padding: clamp(40px,6vw,72px) 0; }
@@ -335,7 +335,7 @@
         .pv-tag  { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; margin-bottom: 9px; }
         .tag-ext { background: var(--red-lt);   color: var(--red);   }
         .tag-int { background: #fef8e8;         color: #9a6500;      }
-        .tag-phi { background: var(--green-lt); color: var(--green); }
+        .tag-phi { background: var(--orange-lt); color: var(--orange); }
         .pv-text { font-size: clamp(13px,1.1vw,14px); color: var(--body-c); line-height: 1.8; }
         .pv-text b { color: var(--ink); }
 
@@ -361,7 +361,7 @@
         .ben-grid { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 16px; }
         .bg-item { background: var(--white); padding: clamp(14px,2vw,22px) clamp(10px,1.5vw,16px); text-align: center; border-right: 1px solid var(--line); transition: background .15s; }
         .bg-item:last-child { border-right: none; }
-        .bg-item:hover { background: var(--green-lt); }
+        .bg-item:hover { background: var(--orange-lt); }
         .bg-ico   { font-size: 24px; margin-bottom: 7px; }
         .bg-title { font-size: clamp(12px,1vw,14px); font-weight: 700; color: var(--black); margin-bottom: 4px; line-height: 1.4; }
         .bg-desc  { font-size: clamp(11px,.9vw,12px); color: var(--muted); line-height: 1.6; }
@@ -379,12 +379,12 @@
         .oh-title { font-size: clamp(13px,1.1vw,15px); font-weight: 700; color: #fff; line-height: 1.3; }
 
         /* ✅ OFFER PILL — GREEN */
-        .oh-pill  { background: var(--green); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+        .oh-pill  { background: var(--orange); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
 
         .offer-body { background: var(--white); padding: clamp(20px,3vw,32px) clamp(18px,3vw,28px); }
         .anchor-box { background: var(--red-lt); border: 1px solid rgba(181,48,48,.12); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: clamp(13px,1.05vw,15px); color: var(--body-c); line-height: 1.8; }
         .anchor-box b { color: var(--red); }
-        .anchor-box .vs-label { font-weight: 700; color: var(--green); display: block; margin-top: 5px; }
+        .anchor-box .vs-label { font-weight: 700; color: var(--orange); display: block; margin-top: 5px; }
         .vstack { display: flex; flex-direction: column; margin-bottom: 22px; }
         .vs-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
         .vs-row:last-child { border-bottom: none; }
@@ -419,10 +419,10 @@
         .tc-name { font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.3; }
         .tc-loc  { font-size: 12px; color: var(--muted); margin-top: 2px; }
         .tc-stars { color: var(--orange); font-size: 13px; flex-shrink: 0; }
-        .tc-result { display: inline-block; font-size: 12px; font-weight: 700; background: var(--green-lt); color: var(--green); padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; align-self: flex-start; }
+        .tc-result { display: inline-block; font-size: 12px; font-weight: 700; background: var(--orange-lt); color: var(--orange); padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; align-self: flex-start; }
         .tc-quote  { font-size: 14px; color: var(--body-c); line-height: 1.85; border-left: 3px solid var(--line); padding-left: 13px; font-style: italic; flex: 1; }
         .tc-photo  { width: 100%; height: 150px; object-fit: contain; border-radius: 10px; background: var(--bg); margin-top: 14px; flex-shrink: 0; }
-        .tc-verified { margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: .04em; text-transform: uppercase; }
+        .tc-verified { margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: .04em; text-transform: uppercase; }
         .rev-nav  { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
         .rev-dots { display: flex; gap: 6px; }
         .rev-dot  { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .2s, width .2s; cursor: pointer; }
@@ -463,7 +463,7 @@
         .cp-now  { font-family: var(--font-d); font-size: clamp(50px,8vw,70px); color: var(--black); line-height: 1; }
 
         /* ✅ CLOSE SAVE BADGE — GREEN */
-        .cp-save { background: var(--green); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 10px; }
+        .cp-save { background: var(--orange); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 10px; }
 
         /* FOOTER */
         footer { border-top: 1px solid var(--line); padding: clamp(24px,4vw,40px) var(--px); text-align: center; font-size: 12px; color: var(--muted); line-height: 1.9; }
@@ -478,10 +478,10 @@
 
         /* ═══ PRODUCT SHOWCASE — CENTER SPRAY ═══ */
         .showcase-sec {
-          background: linear-gradient(160deg, #e8f5ec 0%, #f4fbf6 40%, #edf7f1 100%);
+          background: linear-gradient(160deg, #fef6ec 0%, #fdf9f4 40%, #fef3e8 100%);
           padding: clamp(52px,8vw,96px) 0;
-          border-top: 1px solid rgba(20,92,46,.1);
-          border-bottom: 1px solid rgba(20,92,46,.1);
+          border-top: 1px solid rgba(222,113,32,.1);
+          border-bottom: 1px solid rgba(222,113,32,.1);
           overflow: hidden;
           position: relative;
         }
@@ -493,7 +493,7 @@
           transform: translate(-50%,-50%);
           width: min(600px, 90vw);
           height: min(600px, 90vw);
-          background: radial-gradient(circle, rgba(20,92,46,.07) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(222,113,32,.07) 0%, transparent 70%);
           pointer-events: none;
         }
 
@@ -509,14 +509,14 @@
           font-weight: 700;
           letter-spacing: .22em;
           text-transform: uppercase;
-          color: var(--green);
+          color: var(--orange);
           margin-bottom: 10px;
         }
         .showcase-eyebrow::before,
         .showcase-eyebrow::after {
           content: '';
           width: 28px; height: 1.5px;
-          background: var(--green);
+          background: var(--orange);
           opacity: .4;
           border-radius: 2px;
         }
@@ -527,7 +527,7 @@
           line-height: 1.35;
           margin-bottom: 6px;
         }
-        .showcase-title span { color: var(--green); }
+        .showcase-title span { color: var(--orange); }
         .showcase-sub {
           font-size: clamp(13px,1.1vw,15px);
           color: var(--body-c);
@@ -583,16 +583,16 @@
           width: 44px; height: 44px;
           border-radius: 12px;
           background: var(--white);
-          border: 1.5px solid rgba(20,92,46,.15);
+          border: 1.5px solid rgba(222,113,32,.15);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: 0 3px 12px rgba(20,92,46,.09);
+          box-shadow: 0 3px 12px rgba(222,113,32,.09);
         }
         .sc-icon svg {
           width: 22px; height: 22px;
-          stroke: var(--green);
+          stroke: var(--orange);
           fill: none;
           stroke-width: 1.8;
           stroke-linecap: round;
@@ -601,7 +601,7 @@
         .sc-feat-label {
           font-size: clamp(14px,1.2vw,17px);
           font-weight: 800;
-          color: var(--green);
+          color: var(--orange);
           line-height: 1.3;
         }
         .sc-feat-desc {
@@ -625,7 +625,7 @@
           height: auto;
           object-fit: contain;
           display: block;
-          filter: drop-shadow(0 24px 40px rgba(20,92,46,.18)) drop-shadow(0 8px 16px rgba(0,0,0,.08));
+          filter: drop-shadow(0 24px 40px rgba(222,113,32,.18)) drop-shadow(0 8px 16px rgba(0,0,0,.08));
           position: relative;
           z-index: 2;
           animation: bottlefloat 4s ease-in-out infinite;
@@ -640,7 +640,7 @@
           width: clamp(180px,22vw,290px);
           height: clamp(180px,22vw,290px);
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(20,92,46,.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(222,113,32,.12) 0%, transparent 70%);
           z-index: 1;
         }
 
@@ -653,7 +653,7 @@
           flex-wrap: wrap;
           margin-top: clamp(32px,5vw,52px);
           padding-top: clamp(20px,3vw,30px);
-          border-top: 1px dashed rgba(20,92,46,.2);
+          border-top: 1px dashed rgba(222,113,32,.2);
         }
         .sc-trust-item {
           display: flex;
@@ -661,13 +661,13 @@
           gap: 8px;
           font-size: clamp(12px,1vw,14px);
           font-weight: 700;
-          color: var(--green);
+          color: var(--orange);
           background: var(--white);
-          border: 1.5px solid rgba(20,92,46,.15);
+          border: 1.5px solid rgba(222,113,32,.15);
           border-radius: 30px;
           padding: 7px 16px;
           white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(20,92,46,.07);
+          box-shadow: 0 2px 8px rgba(222,113,32,.07);
         }
         .sc-trust-item span { font-size: 15px; }
 
@@ -677,34 +677,129 @@
         .ptab-nav::-webkit-scrollbar { display: none; }
         .ptab-btn { flex-shrink: 0; padding: 16px clamp(16px,2.5vw,32px); font-family: var(--font-ne); font-size: clamp(13px,1.1vw,15px); font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap; }
         .ptab-btn:hover { color: var(--ink); }
-        .ptab-btn.active { color: var(--green); font-weight: 700; border-bottom-color: var(--green); }
+        .ptab-btn.active { color: var(--orange); font-weight: 700; border-bottom-color: var(--orange); }
         .ptab-panels { padding: clamp(24px,4vw,40px) 0; }
         .ptab-panel { display: none; animation: tabfade .25s ease; }
         .ptab-panel.active { display: block; }
         @keyframes tabfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
         /* bullets */
-        .ptab-bullets { display: flex; flex-direction: column; gap: 13px; }
-        .ptab-bullet { display: flex; align-items: flex-start; gap: 12px; font-size: clamp(14px,1.15vw,16px); color: var(--body-c); line-height: 1.75; }
-        .ptab-bullet::before { content: ''; width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: var(--green); margin-top: 9px; flex-shrink: 0; }
+        .ben-feat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+        @media (max-width: 700px) { .ben-feat-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 420px) { .ben-feat-grid { grid-template-columns: 1fr; } }
+
+        .ben-feat-card {
+          background: var(--bg);
+          border: 1.5px solid var(--line);
+          border-radius: 14px;
+          padding: 20px 18px 18px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          transition: border-color .2s, box-shadow .2s, transform .18s;
+          position: relative;
+          overflow: hidden;
+        }
+        .ben-feat-card::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: var(--orange);
+          opacity: 0;
+          transition: opacity .2s;
+          border-radius: 14px 14px 0 0;
+        }
+        .ben-feat-card:hover {
+          border-color: rgba(222,113,32,.35);
+          box-shadow: 0 6px 22px rgba(222,113,32,.1);
+          transform: translateY(-2px);
+        }
+        .ben-feat-card:hover::after { opacity: 1; }
+
+        .bfc-icon {
+          width: 44px; height: 44px;
+          border-radius: 11px;
+          background: var(--orange-lt);
+          border: 1.5px solid rgba(222,113,32,.18);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 20px;
+          flex-shrink: 0;
+        }
+        .bfc-title {
+          font-size: clamp(13px,1.1vw,15px);
+          font-weight: 800;
+          color: var(--black);
+          line-height: 1.35;
+        }
+        .bfc-desc {
+          font-size: clamp(12px,1vw,13px);
+          color: var(--body-c);
+          line-height: 1.75;
+          flex: 1;
+        }
+        .bfc-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          background: var(--orange-lt);
+          color: var(--orange-dk);
+          font-size: 11px;
+          font-weight: 700;
+          padding: 3px 10px;
+          border-radius: 20px;
+          align-self: flex-start;
+          white-space: nowrap;
+          margin-top: auto;
+        }
+        .ben-feat-footer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(12px,3vw,28px);
+          flex-wrap: wrap;
+          padding: 18px 0 2px;
+          border-top: 1px dashed var(--line);
+          margin-top: 4px;
+        }
+        .bff-item {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          font-size: clamp(12px,1vw,13px);
+          font-weight: 700;
+          color: var(--body-c);
+          white-space: nowrap;
+        }
+        .bff-dot {
+          width: 7px; height: 7px;
+          border-radius: 50%;
+          background: var(--orange);
+          flex-shrink: 0;
+        }
         /* ingredients */
         .ingr-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
         @media (max-width:680px) { .ingr-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width:380px) { .ingr-grid { grid-template-columns: 1fr; } }
-        .ingr-card { background: var(--green-lt); border: 1.5px solid rgba(20,92,46,.13); border-radius: 12px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; transition: border-color .18s, box-shadow .18s; }
-        .ingr-card:hover { border-color: var(--green); box-shadow: 0 4px 14px rgba(20,92,46,.1); }
+        .ingr-card { background: var(--orange-lt); border: 1.5px solid rgba(222,113,32,.13); border-radius: 12px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; transition: border-color .18s, box-shadow .18s; }
+        .ingr-card:hover { border-color: var(--orange); box-shadow: 0 4px 14px rgba(222,113,32,.1); }
         .ingr-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
-        .ingr-name { font-size: clamp(13px,1.05vw,14px); font-weight: 700; color: var(--green); margin-bottom: 3px; line-height: 1.35; }
+        .ingr-name { font-size: clamp(13px,1.05vw,14px); font-weight: 700; color: var(--orange); margin-bottom: 3px; line-height: 1.35; }
         .ingr-desc { font-size: clamp(11px,.95vw,12px); color: var(--body-c); line-height: 1.65; }
         /* how to use */
         .htu-steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
         .htu-step { display: flex; align-items: stretch; background: var(--white); border-bottom: 1px solid var(--line); transition: background .15s; }
         .htu-step:last-child { border-bottom: none; }
-        .htu-step:hover { background: var(--green-lt); }
-        .htu-num { background: var(--green); color: #fff; font-family: var(--font-d); font-size: 22px; min-width: 52px; width: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .htu-step:hover { background: var(--orange-lt); }
+        .htu-num { background: var(--orange); color: #fff; font-family: var(--font-d); font-size: 22px; min-width: 52px; width: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .htu-body { padding: clamp(14px,2vw,20px) clamp(14px,2.5vw,22px); }
         .htu-title { font-size: clamp(13px,1.1vw,15px); font-weight: 700; color: var(--black); margin-bottom: 4px; line-height: 1.4; }
         .htu-desc  { font-size: clamp(12px,1vw,14px); color: var(--body-c); line-height: 1.8; }
-        .htu-note  { margin-top: 18px; background: var(--green-lt); border: 1px solid rgba(20,92,46,.15); border-radius: var(--r); padding: 14px 18px; font-size: clamp(13px,1.05vw,14px); color: var(--body-c); line-height: 1.8; display: flex; gap: 10px; align-items: flex-start; }
+        .htu-note  { margin-top: 18px; background: var(--orange-lt); border: 1px solid rgba(222,113,32,.15); border-radius: var(--r); padding: 14px 18px; font-size: clamp(13px,1.05vw,14px); color: var(--body-c); line-height: 1.8; display: flex; gap: 10px; align-items: flex-start; }
         .htu-note-ico { font-size: 18px; flex-shrink: 0; }
 
         /* REVEAL */
@@ -818,13 +913,61 @@
 
             <!-- KEY BENEFITS -->
             <div class="ptab-panel active" id="ptab-benefits">
-                <div class="ptab-bullets">
-                    <div class="ptab-bullet">पाइल्स, फिसर र फिस्टुलाको बाह्य उपचारको लागि <strong>नेपालको पहिलो हर्बल Spray</strong> — छिटो, सुरक्षित र प्रभावकारी।</div>
-                    <div class="ptab-bullet"><strong>हात नलगाउनेकै फर्मुला</strong> — सिधै Spray गर्नुस्, पोल्दैन र चिपचिप गर्दैन। ३० सेकेन्डभित्रै शितल राहत।</div>
-                    <div class="ptab-bullet">NABL Lab Tested र GMP Certified — <strong>वैज्ञानिक रूपमा प्रमाणित</strong>, संवेदनशील छालामा पनि शत-प्रतिशत सुरक्षित।</div>
-                    <div class="ptab-bullet">नेपालका <strong>१,०००+ भन्दा बढी परिवारले</strong> विश्वास गरेको — रगत आउने, जलन, गाठो र खुजली सबैमा काम गर्छ।</div>
-                    <div class="ptab-bullet">न अस्पताल जानुपर्ने, न अपरेसनको डर — <strong>घरैमा गोपनीय रूपमा उपचार</strong>, दैनिक दिनचर्यामा कुनै बाधा छैन।</div>
+
+                <div class="ben-feat-grid">
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">⚡</div>
+                        <div class="bfc-title">तुरुन्त दुखाइबाट राहत</div>
+                        <p class="bfc-desc">पहिलो Spray मै शितल र आरामदायी महसुस। बस्न, उठ्न र हिँड्न फेरि सहज।</p>
+                        <span class="bfc-badge">३० सेकेन्डमै</span>
+                    </div>
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">🩸</div>
+                        <div class="bfc-title">रगत आउन बन्द हुन्छ</div>
+                        <p class="bfc-desc">लोध्र र नागकेसरले Bleeding Piles मा छिटो काम गरी रगत रोक्छ।</p>
+                        <span class="bfc-badge">७–१४ दिनमा</span>
+                    </div>
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">🌿</div>
+                        <div class="bfc-title">१००% प्राकृतिक, सुरक्षित</div>
+                        <p class="bfc-desc">कुनै हानिकारक केमिकल वा स्टेरोइड छैन। NABL Lab Tested — संवेदनशील छालामा पनि सुरक्षित।</p>
+                        <span class="bfc-badge">Zero Side Effects</span>
+                    </div>
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">💨</div>
+                        <div class="bfc-title">हात नलगाउनेकै Spray</div>
+                        <p class="bfc-desc">सिधै Spray गर्नुस् — चिपचिप छैन, झन्झट छैन, लाज मान्नु पर्दैन।</p>
+                        <span class="bfc-badge">Touch-Free Formula</span>
+                    </div>
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">🫧</div>
+                        <div class="bfc-title">गाठो र सुन्निएको भाग कम</div>
+                        <p class="bfc-desc">२०+ जडीबुटीको मिश्रणले गाठो बिस्तारै सुक्छ र सुन्निएको भाग सामान्य हुन्छ।</p>
+                        <span class="bfc-badge">नियमित प्रयोगमा</span>
+                    </div>
+
+                    <div class="ben-feat-card">
+                        <div class="bfc-icon">🏠</div>
+                        <div class="bfc-title">घरमै गोपनीय उपचार</div>
+                        <p class="bfc-desc">न अस्पताल धाउने झन्झट, न अपरेसनको डर। गोप्य Packaging मा Nepal भरि Free Delivery।</p>
+                        <span class="bfc-badge">Cash on Delivery</span>
+                    </div>
+
                 </div>
+
+                <div class="ben-feat-footer">
+                    <div class="bff-item"><span class="bff-dot"></span>GMP Certified</div>
+                    <div class="bff-item"><span class="bff-dot"></span>NABL Lab Tested</div>
+                    <div class="bff-item"><span class="bff-dot"></span>१,०००+ खुसी ग्राहक</div>
+                    <div class="bff-item"><span class="bff-dot"></span>Zero Side Effects</div>
+                    <div class="bff-item"><span class="bff-dot"></span>Free Delivery Nepal भरि</div>
+                </div>
+
             </div>
 
             <!-- KEY INGREDIENTS -->
@@ -860,29 +1003,33 @@
     <div class="strip"><div class="wide-wrap">
 
         <div class="benefits-strip-head">
-            <div class="eyebrow">पाइल्स, फिसर र फिस्टुलामा अत्यन्त प्रभावकारी</div>
+            <div class="eyebrow">पाइल्स, फिसर र फिस्टुलामा काम गर्छ</div>
             <div class="benefits-strip-title">
-                <strong>दुखाइबाट मुक्ति</strong> — <span>पहिलो स्प्रेबाटै!</span>
+                <strong>पीडाबाट राहत</strong> — <span>पहिलो Spray देखि नै!</span>
             </div>
         </div>
 
         <div class="ben-strip-grid">
 
+            <!-- Card 1 -->
             <div class="ben-card">
                 <div class="ben-icon-wrap">
+                    <!-- Lightning bolt / instant relief icon -->
                     <svg viewBox="0 0 24 24">
                         <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
                     </svg>
                 </div>
                 <div class="ben-card-body">
-                    <div class="ben-card-title">दुखाइ र जलनबाट तुरुन्तै राहत</div>
-                    <div class="ben-card-desc">पहिलो स्प्रेमै शीतलताको महसुस। उठबस गर्न र हिँड्न फेरि सहज बनाउँछ।</div>
+                    <div class="ben-card-title">तुरुन्त दुखाइ र जलनबाट राहत</div>
+                    <div class="ben-card-desc">पहिलो Spray मै ठण्डो र सुखद अनुभव। बस्न र हिँड्न फेरि सहज हुन्छ।</div>
                     <div class="ben-card-time">३० सेकेन्डमै</div>
                 </div>
             </div>
 
+            <!-- Card 2 -->
             <div class="ben-card">
                 <div class="ben-icon-wrap">
+                    <!-- Healing / bandage icon -->
                     <svg viewBox="0 0 24 24">
                         <rect x="2" y="8" width="20" height="8" rx="4"/>
                         <path d="M8 8V16M16 8V16M12 5V19"/>
@@ -891,28 +1038,32 @@
                     </svg>
                 </div>
                 <div class="ben-card-body">
-                    <div class="ben-card-title">घाउ सुकाउँछ र रगत बग्न रोक्छ</div>
-                    <div class="ben-card-desc">आयुर्वेदिक जडीबुटीले घाउलाई भित्रैबाट सुकाउँछ र रगत आउने समस्या बिस्तारै कम गर्छ।</div>
+                    <div class="ben-card-title">घाउ निको पार्छ, रगत बन्द गर्छ</div>
+                    <div class="ben-card-desc">आयुर्वेदिक जडीबुटीले घाउ सुकाउँछ र रगत आउन बिस्तारै बन्द गर्छ।</div>
                     <div class="ben-card-time">७–१४ दिनमा</div>
                 </div>
             </div>
 
+            <!-- Card 3 -->
             <div class="ben-card">
                 <div class="ben-icon-wrap">
+                    <!-- Leaf / natural icon -->
                     <svg viewBox="0 0 24 24">
                         <path d="M12 2C6 2 3 7 3 12C3 16 5.5 19.5 9 21L12 22L15 21C18.5 19.5 21 16 21 12C21 7 18 2 12 2Z"/>
                         <path d="M12 22V12M12 12L7 8M12 12L17 8"/>
                     </svg>
                 </div>
                 <div class="ben-card-body">
-                    <div class="ben-card-title">सुन्निएको र मासु पलाएको निको पार्छ</div>
-                    <div class="ben-card-desc">मलद्वारमा पलाएको मासु र गिर्खालाई बिना अपरेशन भित्रैबाट सुकाउन मद्दत गर्छ।</div>
-                    <div class="ben-card-time">भित्री र बाहिरी दुवैमा उपयोगी</div>
+                    <div class="ben-card-title">बाहिरी भागको उपचार गर्छ</div>
+                    <div class="ben-card-desc">सुन्निएको मासु र गाठोलाई भित्रैबाट निको पार्छ — बिना अपरेशन।</div>
+                    <div class="ben-card-time">बाहिरी र भित्री दुवै</div>
                 </div>
             </div>
 
+            <!-- Card 4 -->
             <div class="ben-card">
                 <div class="ben-icon-wrap">
+                    <!-- Itching / relief icon -->
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"/>
                         <path d="M9 12C9 10.3 10.3 9 12 9C13.7 9 15 10.3 15 12"/>
@@ -920,8 +1071,8 @@
                     </svg>
                 </div>
                 <div class="ben-card-body">
-                    <div class="ben-card-title">चिलाउने र पोल्ने समस्याबाट छुटकारा</div>
-                    <div class="ben-card-desc">मलद्वार चिलाउने र असह्य रूपमा पोल्ने समस्याबाट पहिलो प्रयोगमै राहत महसुस गर्नुहोस्।</div>
+                    <div class="ben-card-title">चिलाउने र जलन बन्द गर्छ</div>
+                    <div class="ben-card-desc">मलद्वारको खुजली र असह्य जलन — पहिलो प्रयोगमै राहत महसुस गर्नुहोस्।</div>
                     <div class="ben-card-time">३० सेकेन्डमै</div>
                 </div>
             </div>
@@ -935,6 +1086,7 @@
 
     </div></div>
 </section>
+
 
 <!-- ══════════  PRODUCT SHOWCASE — CENTER BOTTLE  ══════════ -->
 <section class="showcase-sec rv">
