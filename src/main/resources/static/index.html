@@ -22,6 +22,7 @@
           --orange-dk:  #c3601b;
           --orange-lt:  #fef3e8;
           --green:      #145c2e;
+          --green-md:   #1a7a3c;
           --green-lt:   #eaf4ee;
           --red:        #b53030;
           --red-lt:     #fdf2f2;
@@ -100,18 +101,19 @@
         .pw  { font-size: clamp(18px,1.2vw,22px); text-decoration: line-through; color: red;font-weight:bold; }
         .pc2 { font-size: clamp(15px,1.3vw,19px); font-weight: 600; color: var(--body-c); align-self: flex-end; padding-bottom: 5px; }
         .pn2 { font-family: var(--font-d); font-size: clamp(48px,7vw,74px); color: var(--black); line-height: 1; }
-        .ps  { background: var(--orange); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 8px; }
+
+        /* ✅ SAVE BADGE — GREEN */
+        .ps  { background: var(--green); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 8px; }
+
         .trust-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 26px; }
         .tbadge { display: flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--line); border-radius: 7px; padding: 6px 12px; font-size: clamp(11px,.9vw,13px); font-weight: 600; color: var(--body-c); white-space: nowrap; line-height: 1; }
 
-        /* HERO IMAGE — fully transparent background */
         .hero-img-panel {
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: clamp(20px,3vw,40px) clamp(12px,2vw,28px);
-          /* no background — product floats on page background */
         }
         .hero-img-panel img,
         .hero-img-panel video {
@@ -139,6 +141,134 @@
           .cta-group.hero-cta { display: none; }
         }
 
+        /* ═══════════════════════════════════════
+           BENEFITS STRIP — NEW SECTION
+        ═══════════════════════════════════════ */
+        .benefits-strip {
+          background: var(--white);
+          border-top: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+          padding: clamp(36px,5vw,64px) 0;
+        }
+        .benefits-strip-head {
+          text-align: center;
+          margin-bottom: clamp(28px,4vw,48px);
+        }
+        .benefits-strip-head .eyebrow {
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+        .benefits-strip-head .eyebrow::before { display: none; }
+        .benefits-strip-title {
+          font-size: clamp(18px,2.4vw,28px);
+          font-weight: 800;
+          color: var(--black);
+          line-height: 1.4;
+        }
+        .benefits-strip-title span { color: var(--green); }
+
+        .ben-strip-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+        @media (max-width:860px)  { .ben-strip-grid { grid-template-columns: repeat(2,1fr); gap: 14px; } }
+        @media (max-width:480px)  { .ben-strip-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+        .ben-card {
+          background: var(--bg);
+          border: 1.5px solid var(--line);
+          border-radius: 16px;
+          padding: clamp(18px,2.5vw,28px) clamp(14px,2vw,22px);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          position: relative;
+          overflow: hidden;
+          transition: border-color .2s, box-shadow .2s, transform .2s;
+        }
+        .ben-card:hover {
+          border-color: var(--green);
+          box-shadow: 0 8px 28px rgba(20,92,46,.1);
+          transform: translateY(-3px);
+        }
+        .ben-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, var(--green), var(--green-md));
+          opacity: 0;
+          transition: opacity .2s;
+        }
+        .ben-card:hover::before { opacity: 1; }
+
+        .ben-icon-wrap {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: var(--green-lt);
+          border: 1.5px solid rgba(20,92,46,.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .ben-icon-wrap svg {
+          width: 26px;
+          height: 26px;
+          stroke: var(--green);
+          fill: none;
+          stroke-width: 1.8;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .ben-card-body { flex: 1; }
+        .ben-card-title {
+          font-size: clamp(13px,1.1vw,15px);
+          font-weight: 800;
+          color: var(--black);
+          line-height: 1.35;
+          margin-bottom: 6px;
+        }
+        .ben-card-desc {
+          font-size: clamp(12px,1vw,13px);
+          color: var(--body-c);
+          line-height: 1.7;
+        }
+        .ben-card-time {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          background: var(--green-lt);
+          color: var(--green);
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: .04em;
+          padding: 3px 10px;
+          border-radius: 20px;
+          margin-top: 4px;
+          white-space: nowrap;
+        }
+        .ben-card-time::before {
+          content: '✓';
+          font-size: 10px;
+        }
+
+        /* Headline sub-note */
+        .ben-strip-note {
+          text-align: center;
+          margin-top: clamp(20px,3vw,32px);
+          font-size: 13px;
+          color: var(--muted);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        .ben-strip-note strong { color: var(--green); }
+
         /* ═══ SYMPTOM STRIP ═══ */
         .symptom-strip { background: var(--black); padding: clamp(40px,6vw,72px) 0; }
         .symptom-strip .eyebrow { color: rgba(255,255,255,.45); }
@@ -160,7 +290,6 @@
         }
         .symptom-card:hover { transform: scale(1.02); }
 
-        /* Real symptom image fills the card */
         .symptom-card .sc-img {
           position: absolute;
           inset: 0;
@@ -173,7 +302,6 @@
         }
         .symptom-card:hover .sc-img { filter: brightness(.82) saturate(1); transform: scale(1.04); }
 
-        /* Gradient always on top of image */
         .symptom-card::after {
           content: '';
           position: absolute; inset: 0;
@@ -245,32 +373,14 @@
         .demo-video-wrap .vid-fallback img { width: 55%; object-fit: contain; opacity: .9; }
         .demo-label { margin-top: 12px; text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
 
-        /* ═══ BEFORE / AFTER ═══ */
-        .ba-section { padding: clamp(48px,7vw,80px) 0; border-top: 1px solid var(--line); background: var(--black); }
-        .ba-section .eyebrow { color: rgba(255,255,255,.45); }
-        .ba-section .eyebrow::before { background: rgba(255,255,255,.25); }
-        .ba-title { font-size: clamp(24px,3.6vw,44px); font-weight: 800; color: var(--white); margin-bottom: 32px; line-height: 1.3; }
-        .ba-title span { color: var(--orange); }
-        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width:500px) { .ba-grid { grid-template-columns: 1fr; } }
-        .ba-col { border-radius: 18px; overflow: hidden; position: relative; }
-        .ba-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
-        .ba-img-placeholder { width: 100%; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-size: 56px; }
-        .ba-before-bg { background: linear-gradient(160deg,#1a0505,#2a0a0a); }
-        .ba-after-bg  { background: linear-gradient(160deg,#021a09,#05280f); }
-        .ba-tag { position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 6px; z-index: 2; }
-        .ba-tag.before { background: var(--red);   color: #fff; }
-        .ba-tag.after  { background: var(--green); color: #fff; }
-        .ba-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, transparent 100%); padding: 40px 18px 20px; z-index: 2; }
-        .ba-cap-title { font-size: clamp(14px,1.4vw,17px); font-weight: 700; color: #fff; margin-bottom: 6px; }
-        .ba-cap-list  { display: flex; flex-direction: column; gap: 4px; }
-        .ba-cap-item  { font-size: clamp(12px,1vw,13px); color: rgba(255,255,255,.7); display: flex; align-items: center; gap: 7px; }
-
         /* ═══ OFFER ═══ */
         .offer-wrap { border: 2px solid var(--black); border-radius: 16px; overflow: hidden; margin-top: 22px; }
         .offer-head { background: var(--black); padding: 16px clamp(18px,3vw,28px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
         .oh-title { font-size: clamp(13px,1.1vw,15px); font-weight: 700; color: #fff; line-height: 1.3; }
-        .oh-pill  { background: var(--orange); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+
+        /* ✅ OFFER PILL — GREEN */
+        .oh-pill  { background: var(--green); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+
         .offer-body { background: var(--white); padding: clamp(20px,3vw,32px) clamp(18px,3vw,28px); }
         .anchor-box { background: var(--red-lt); border: 1px solid rgba(181,48,48,.12); border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: clamp(13px,1.05vw,15px); color: var(--body-c); line-height: 1.8; }
         .anchor-box b { color: var(--red); }
@@ -287,16 +397,6 @@
         .tr-today { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
         .tr-price { font-family: var(--font-d); font-size: 34px; color: var(--orange); line-height: 1; }
         @media (min-width:860px) { .vstack { display: grid; grid-template-columns: 1fr 1fr; } }
-
-        /* ═══ TARGETING ═══ */
-        .target-list { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 20px; }
-        .tg-row { background: var(--white); display: flex; align-items: flex-start; gap: 12px; padding: clamp(13px,1.8vw,18px) clamp(16px,2.5vw,24px); border-bottom: 1px solid var(--line); font-size: clamp(13px,1.05vw,15px); color: var(--body-c); line-height: 1.8; }
-        .tg-row:last-child { border-bottom: none; }
-        .tg-row.yes { border-left: 3px solid var(--green); }
-        .tg-row.no  { border-left: 3px solid var(--red); background: #fefafa; }
-        .tg-ico { font-size: 15px; flex-shrink: 0; margin-top: 3px; width: 20px; }
-        .retarget-box { margin-top: 18px; background: var(--orange-lt); border: 1px solid rgba(222,113,32,.18); border-radius: var(--r); padding: clamp(16px,2.5vw,22px) clamp(16px,2.5vw,24px); font-size: clamp(13px,1.05vw,15px); color: var(--body-c); line-height: 1.9; }
-        .retarget-box b { color: var(--orange-dk); }
 
         /* ═══ PROOF ═══ */
         .proof-top { display: grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,48px); align-items: flex-start; margin-bottom: 32px; }
@@ -343,19 +443,6 @@
         .obj-body  { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
         .obj-inner { padding: 16px clamp(16px,2.5vw,24px) 20px; border-top: 1px solid var(--line); font-size: clamp(13px,1.05vw,15px); color: var(--body-c); line-height: 1.9; }
 
-        /* ═══ STAKES ═══ */
-        .stakes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-        @media (max-width:420px) { .stakes-grid { grid-template-columns: 1fr; } }
-        .sk-col  { border-radius: var(--r); overflow: hidden; }
-        .sk-bad  { background: var(--red-lt);   border: 1px solid rgba(181,48,48,.15); }
-        .sk-good { background: var(--green-lt); border: 1px solid rgba(20,92,46,.15); }
-        .sk-head { padding: 12px 16px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-        .sk-bad  .sk-head { color: var(--red); }
-        .sk-good .sk-head { color: var(--green); }
-        .sk-body { padding: 10px 16px 18px; display: flex; flex-direction: column; gap: 10px; }
-        .sk-item { display: flex; align-items: flex-start; gap: 8px; font-size: clamp(13px,1.05vw,14px); color: var(--body-c); line-height: 1.65; }
-        .sk-ico  { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-
         /* ═══ CLOSE ═══ */
         #close-sec { padding: clamp(52px,8vw,80px) 0; text-align: center; border-top: 1px solid var(--line); }
         .cd-row { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 30px; }
@@ -374,7 +461,9 @@
         .cp-was  { font-size: 22px; text-decoration: line-through; color: red; font-weight:bold;}
         .cp-curr { font-size: 20px; font-weight: 600; color: var(--body-c); align-self: flex-end; padding-bottom: 7px; }
         .cp-now  { font-family: var(--font-d); font-size: clamp(50px,8vw,70px); color: var(--black); line-height: 1; }
-        .cp-save { background: var(--orange); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 10px; }
+
+        /* ✅ CLOSE SAVE BADGE — GREEN */
+        .cp-save { background: var(--green); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 5px; align-self: flex-start; margin-top: 10px; }
 
         /* FOOTER */
         footer { border-top: 1px solid var(--line); padding: clamp(24px,4vw,40px) var(--px); text-align: center; font-size: 12px; color: var(--muted); line-height: 1.9; }
@@ -459,21 +548,6 @@
                 </div>
             </div>
 
-            <!--
-              HERO PRODUCT PANEL
-              ──────────────────
-              Background is fully transparent (no panel colour, no box).
-              The product image simply floats on the page background.
-
-              VIDEO VERSION: If you have the spray animation, replace the <img>
-              tag below with:
-                <video autoplay muted loop playsinline
-                       src="video/spray-animation.mp4"
-                       poster="Images/Herbalpilesspray-8-scaled.png">
-                </video>
-
-              "Live Demo" badge has been removed entirely.
-            -->
             <div class="hero-img-panel rv d2">
                 <div class="img-chip top-left">
                     <span class="img-chip-ico">🌿</span>
@@ -501,16 +575,97 @@
 </section>
 
 
+<!-- ══════════  BENEFITS STRIP — NEW  ══════════ -->
+<section class="benefits-strip rv">
+    <div class="strip"><div class="wide-wrap">
+
+        <div class="benefits-strip-head">
+            <div class="eyebrow">पाइल्स, फिसर र फिस्टुलामा काम गर्छ</div>
+            <div class="benefits-strip-title">
+                <strong>पीडाबाट राहत</strong> — <span>पहिलो Spray देखि नै!</span>
+            </div>
+        </div>
+
+        <div class="ben-strip-grid">
+
+            <!-- Card 1 -->
+            <div class="ben-card">
+                <div class="ben-icon-wrap">
+                    <!-- Lightning bolt / instant relief icon -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+                    </svg>
+                </div>
+                <div class="ben-card-body">
+                    <div class="ben-card-title">तुरुन्त दुखाइ र जलनबाट राहत</div>
+                    <div class="ben-card-desc">पहिलो Spray मै ठण्डो र सुखद अनुभव। बस्न र हिँड्न फेरि सहज हुन्छ।</div>
+                    <div class="ben-card-time">३० सेकेन्डमै</div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ben-card">
+                <div class="ben-icon-wrap">
+                    <!-- Healing / bandage icon -->
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="8" width="20" height="8" rx="4"/>
+                        <path d="M8 8V16M16 8V16M12 5V19"/>
+                        <circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/>
+                        <circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </div>
+                <div class="ben-card-body">
+                    <div class="ben-card-title">घाउ निको पार्छ, रगत बन्द गर्छ</div>
+                    <div class="ben-card-desc">आयुर्वेदिक जडीबुटीले घाउ सुकाउँछ र रगत आउन बिस्तारै बन्द गर्छ।</div>
+                    <div class="ben-card-time">७–१४ दिनमा</div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ben-card">
+                <div class="ben-icon-wrap">
+                    <!-- Leaf / natural icon -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6 2 3 7 3 12C3 16 5.5 19.5 9 21L12 22L15 21C18.5 19.5 21 16 21 12C21 7 18 2 12 2Z"/>
+                        <path d="M12 22V12M12 12L7 8M12 12L17 8"/>
+                    </svg>
+                </div>
+                <div class="ben-card-body">
+                    <div class="ben-card-title">बाहिरी भागको उपचार गर्छ</div>
+                    <div class="ben-card-desc">सुन्निएको मासु र गाठोलाई भित्रैबाट निको पार्छ — बिना अपरेशन।</div>
+                    <div class="ben-card-time">बाहिरी र भित्री दुवै</div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="ben-card">
+                <div class="ben-icon-wrap">
+                    <!-- Itching / relief icon -->
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M9 12C9 10.3 10.3 9 12 9C13.7 9 15 10.3 15 12"/>
+                        <path d="M12 15V17M8 10L6.5 8.5M16 10L17.5 8.5"/>
+                    </svg>
+                </div>
+                <div class="ben-card-body">
+                    <div class="ben-card-title">चिलाउने र जलन बन्द गर्छ</div>
+                    <div class="ben-card-desc">मलद्वारको खुजली र असह्य जलन — पहिलो प्रयोगमै राहत महसुस गर्नुहोस्।</div>
+                    <div class="ben-card-time">३० सेकेन्डमै</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ben-strip-note">
+            🔬 <span>NABL Lab Tested &nbsp;·&nbsp; GMP Certified &nbsp;·&nbsp;</span>
+            <strong>१,०००+ नेपालीको भरोसा</strong>
+        </div>
+
+    </div></div>
+</section>
+
+
 <!-- ══════════  SYMPTOM STRIP  ══════════ -->
-<!--
-  Replace each sc-img src with a real photo.
-  Suggested images (all should be portrait-oriented, face/body showing discomfort):
-    Images/symptom-bleeding.jpg   →  person with visible concern / redness illustration
-    Images/symptom-pain.jpg       →  person holding lower back / grimacing while sitting
-    Images/symptom-swelling.jpg   →  close-up swelling or discomfort visual
-    Images/symptom-itch.jpg       →  person looking uncomfortable / itching
-  The dark gradient overlay always keeps text legible even if image is slightly dark.
--->
 <section class="symptom-strip rv">
     <div class="strip"><div class="wide-wrap">
         <span class="eyebrow">के तपाईंलाई यस्तो छ?</span>
@@ -561,13 +716,6 @@
 
 
 <!-- ══════════  §2  PROBLEM  ══════════ -->
-<!--
-  Replace each pv-img-wrap img src with a real contextual photo.
-  Suggested:
-    Images/problem-physical.jpg  →  person wincing in pain while sitting
-    Images/problem-mental.jpg    →  person looking sad / worried / ashamed
-    Images/problem-hope.jpg      →  person smiling, walking freely, happy
--->
 <section class="sec rv">
     <div class="strip"><div class="content-wrap">
         <h2 class="h-lg" style="margin-bottom:22px;">
@@ -654,11 +802,6 @@
                     <div class="bg-item"><div class="bg-ico">🫧</div><div class="bg-title">गाठो सुक्दै जाने</div><div class="bg-desc">जडीबुटीले सुन्निएको भाग र गाठोलाई निको पार्छ</div></div>
                 </div>
             </div>
-            <!--
-              Place your spray animation video at: video/spray-animation.mp4
-              poster= shows as a thumbnail while the video loads.
-              The fallback div shows only when the video file is actually missing.
-            -->
             <div>
                 <div class="demo-video-wrap">
                     <video autoplay muted loop playsinline
@@ -676,16 +819,6 @@
         </div>
     </div></div>
 </section>
-
-
-<!-- ══════════  BEFORE / AFTER  ══════════ -->
-<!--
-  Replace src with real patient result images (square crop recommended).
-    Images/before-treatment.jpg
-    Images/after-treatment.jpg
-  The emoji fallback only shows if the image path is wrong.
--->
-
 
 
 <!-- ══════════  §5  OFFER  ══════════ -->
@@ -715,9 +848,6 @@
         </div>
     </div></div>
 </section>
-
-
-
 
 
 <!-- ══════════  §7  PROOF  ══════════ -->
@@ -782,9 +912,6 @@
         </div>
     </div></div>
 </section>
-
-<!-- ══════════  §9  STAKES  ══════════ -->
-
 
 
 <!-- ══════════  §10  CLOSE  ══════════ -->
