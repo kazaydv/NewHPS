@@ -476,6 +476,237 @@
         #mpad { height: 66px; display: none; }
         @media (max-width:768px) { #mpad { display:block; } }
 
+        /* ═══ PRODUCT SHOWCASE — CENTER SPRAY ═══ */
+        .showcase-sec {
+          background: linear-gradient(160deg, #e8f5ec 0%, #f4fbf6 40%, #edf7f1 100%);
+          padding: clamp(52px,8vw,96px) 0;
+          border-top: 1px solid rgba(20,92,46,.1);
+          border-bottom: 1px solid rgba(20,92,46,.1);
+          overflow: hidden;
+          position: relative;
+        }
+        /* subtle radial glow behind bottle */
+        .showcase-sec::before {
+          content: '';
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%,-50%);
+          width: min(600px, 90vw);
+          height: min(600px, 90vw);
+          background: radial-gradient(circle, rgba(20,92,46,.07) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .showcase-head {
+          text-align: center;
+          margin-bottom: clamp(32px,5vw,56px);
+        }
+        .showcase-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: .22em;
+          text-transform: uppercase;
+          color: var(--green);
+          margin-bottom: 10px;
+        }
+        .showcase-eyebrow::before,
+        .showcase-eyebrow::after {
+          content: '';
+          width: 28px; height: 1.5px;
+          background: var(--green);
+          opacity: .4;
+          border-radius: 2px;
+        }
+        .showcase-title {
+          font-size: clamp(20px,2.8vw,34px);
+          font-weight: 800;
+          color: var(--black);
+          line-height: 1.35;
+          margin-bottom: 6px;
+        }
+        .showcase-title span { color: var(--green); }
+        .showcase-sub {
+          font-size: clamp(13px,1.1vw,15px);
+          color: var(--body-c);
+          max-width: 480px;
+          margin-inline: auto;
+          line-height: 1.7;
+        }
+
+        /* Three-column layout: left features | bottle | right features */
+        .showcase-layout {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          gap: clamp(16px,4vw,52px);
+          align-items: center;
+        }
+        @media (max-width:760px) {
+          .showcase-layout {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+          }
+          .showcase-bottle-col {
+            grid-column: 1 / -1;
+            order: -1;
+          }
+        }
+        @media (max-width:400px) {
+          .showcase-layout { grid-template-columns: 1fr; }
+          .showcase-bottle-col { grid-column: 1; }
+        }
+
+        /* Feature items */
+        .sc-feat-col { display: flex; flex-direction: column; gap: clamp(20px,3vw,34px); }
+        .sc-feat-col.right { align-items: flex-start; }
+        .sc-feat-col.left  { align-items: flex-end;   }
+
+        .sc-feat {
+          max-width: 240px;
+          position: relative;
+        }
+        .sc-feat-col.left  .sc-feat { text-align: right; }
+        .sc-feat-col.right .sc-feat { text-align: left; }
+
+        .sc-feat-icon-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 6px;
+        }
+        .sc-feat-col.left  .sc-feat-icon-row { flex-direction: row-reverse; justify-content: flex-start; }
+        .sc-feat-col.right .sc-feat-icon-row { flex-direction: row; }
+
+        .sc-icon {
+          width: 44px; height: 44px;
+          border-radius: 12px;
+          background: var(--white);
+          border: 1.5px solid rgba(20,92,46,.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 3px 12px rgba(20,92,46,.09);
+        }
+        .sc-icon svg {
+          width: 22px; height: 22px;
+          stroke: var(--green);
+          fill: none;
+          stroke-width: 1.8;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .sc-feat-label {
+          font-size: clamp(14px,1.2vw,17px);
+          font-weight: 800;
+          color: var(--green);
+          line-height: 1.3;
+        }
+        .sc-feat-desc {
+          font-size: clamp(12px,1vw,14px);
+          color: var(--body-c);
+          line-height: 1.7;
+        }
+
+        /* connector line from icon to bottle (decorative) */
+        .sc-feat { }
+
+        /* Bottle column */
+        .showcase-bottle-col {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+        }
+        .showcase-bottle-img {
+          width: clamp(140px, 18vw, 240px);
+          height: auto;
+          object-fit: contain;
+          display: block;
+          filter: drop-shadow(0 24px 40px rgba(20,92,46,.18)) drop-shadow(0 8px 16px rgba(0,0,0,.08));
+          position: relative;
+          z-index: 2;
+          animation: bottlefloat 4s ease-in-out infinite;
+        }
+        @keyframes bottlefloat {
+          0%,100% { transform: translateY(0); }
+          50%      { transform: translateY(-10px); }
+        }
+        /* glow ring behind bottle */
+        .bottle-glow {
+          position: absolute;
+          width: clamp(180px,22vw,290px);
+          height: clamp(180px,22vw,290px);
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(20,92,46,.12) 0%, transparent 70%);
+          z-index: 1;
+        }
+
+        /* trust bar below grid */
+        .showcase-trust {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(12px,3vw,32px);
+          flex-wrap: wrap;
+          margin-top: clamp(32px,5vw,52px);
+          padding-top: clamp(20px,3vw,30px);
+          border-top: 1px dashed rgba(20,92,46,.2);
+        }
+        .sc-trust-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: clamp(12px,1vw,14px);
+          font-weight: 700;
+          color: var(--green);
+          background: var(--white);
+          border: 1.5px solid rgba(20,92,46,.15);
+          border-radius: 30px;
+          padding: 7px 16px;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(20,92,46,.07);
+        }
+        .sc-trust-item span { font-size: 15px; }
+
+        /* ═══ PRODUCT TABS ═══ */
+        .ptab-sec { background: var(--white); border-bottom: 1px solid var(--line); }
+        .ptab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--line); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .ptab-nav::-webkit-scrollbar { display: none; }
+        .ptab-btn { flex-shrink: 0; padding: 16px clamp(16px,2.5vw,32px); font-family: var(--font-ne); font-size: clamp(13px,1.1vw,15px); font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap; }
+        .ptab-btn:hover { color: var(--ink); }
+        .ptab-btn.active { color: var(--green); font-weight: 700; border-bottom-color: var(--green); }
+        .ptab-panels { padding: clamp(24px,4vw,40px) 0; }
+        .ptab-panel { display: none; animation: tabfade .25s ease; }
+        .ptab-panel.active { display: block; }
+        @keyframes tabfade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+        /* bullets */
+        .ptab-bullets { display: flex; flex-direction: column; gap: 13px; }
+        .ptab-bullet { display: flex; align-items: flex-start; gap: 12px; font-size: clamp(14px,1.15vw,16px); color: var(--body-c); line-height: 1.75; }
+        .ptab-bullet::before { content: ''; width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: var(--green); margin-top: 9px; flex-shrink: 0; }
+        /* ingredients */
+        .ingr-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        @media (max-width:680px) { .ingr-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width:380px) { .ingr-grid { grid-template-columns: 1fr; } }
+        .ingr-card { background: var(--green-lt); border: 1.5px solid rgba(20,92,46,.13); border-radius: 12px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; transition: border-color .18s, box-shadow .18s; }
+        .ingr-card:hover { border-color: var(--green); box-shadow: 0 4px 14px rgba(20,92,46,.1); }
+        .ingr-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+        .ingr-name { font-size: clamp(13px,1.05vw,14px); font-weight: 700; color: var(--green); margin-bottom: 3px; line-height: 1.35; }
+        .ingr-desc { font-size: clamp(11px,.95vw,12px); color: var(--body-c); line-height: 1.65; }
+        /* how to use */
+        .htu-steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+        .htu-step { display: flex; align-items: stretch; background: var(--white); border-bottom: 1px solid var(--line); transition: background .15s; }
+        .htu-step:last-child { border-bottom: none; }
+        .htu-step:hover { background: var(--green-lt); }
+        .htu-num { background: var(--green); color: #fff; font-family: var(--font-d); font-size: 22px; min-width: 52px; width: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .htu-body { padding: clamp(14px,2vw,20px) clamp(14px,2.5vw,22px); }
+        .htu-title { font-size: clamp(13px,1.1vw,15px); font-weight: 700; color: var(--black); margin-bottom: 4px; line-height: 1.4; }
+        .htu-desc  { font-size: clamp(12px,1vw,14px); color: var(--body-c); line-height: 1.8; }
+        .htu-note  { margin-top: 18px; background: var(--green-lt); border: 1px solid rgba(20,92,46,.15); border-radius: var(--r); padding: 14px 18px; font-size: clamp(13px,1.05vw,14px); color: var(--body-c); line-height: 1.8; display: flex; gap: 10px; align-items: flex-start; }
+        .htu-note-ico { font-size: 18px; flex-shrink: 0; }
+
         /* REVEAL */
         .rv  { opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
         .rv.in { opacity:1; transform:translateY(0); }
@@ -575,6 +806,56 @@
 </section>
 
 
+<!-- ══════════  PRODUCT TABS  ══════════ -->
+<div class="ptab-sec rv">
+    <div class="strip"><div class="wide-wrap">
+        <nav class="ptab-nav" role="tablist">
+            <button class="ptab-btn active" role="tab" onclick="ptabSwitch(this,'ptab-benefits')">मुख्य फाइदाहरू</button>
+            <button class="ptab-btn"        role="tab" onclick="ptabSwitch(this,'ptab-ingr')">मुख्य जडीबुटीहरू</button>
+            <button class="ptab-btn"        role="tab" onclick="ptabSwitch(this,'ptab-htu')">प्रयोग विधि</button>
+        </nav>
+        <div class="ptab-panels">
+
+            <!-- KEY BENEFITS -->
+            <div class="ptab-panel active" id="ptab-benefits">
+                <div class="ptab-bullets">
+                    <div class="ptab-bullet">पाइल्स, फिसर र फिस्टुलाको बाह्य उपचारको लागि <strong>नेपालको पहिलो हर्बल Spray</strong> — छिटो, सुरक्षित र प्रभावकारी।</div>
+                    <div class="ptab-bullet"><strong>हात नलगाउनेकै फर्मुला</strong> — सिधै Spray गर्नुस्, पोल्दैन र चिपचिप गर्दैन। ३० सेकेन्डभित्रै शितल राहत।</div>
+                    <div class="ptab-bullet">NABL Lab Tested र GMP Certified — <strong>वैज्ञानिक रूपमा प्रमाणित</strong>, संवेदनशील छालामा पनि शत-प्रतिशत सुरक्षित।</div>
+                    <div class="ptab-bullet">नेपालका <strong>१,०००+ भन्दा बढी परिवारले</strong> विश्वास गरेको — रगत आउने, जलन, गाठो र खुजली सबैमा काम गर्छ।</div>
+                    <div class="ptab-bullet">न अस्पताल जानुपर्ने, न अपरेसनको डर — <strong>घरैमा गोपनीय रूपमा उपचार</strong>, दैनिक दिनचर्यामा कुनै बाधा छैन।</div>
+                </div>
+            </div>
+
+            <!-- KEY INGREDIENTS -->
+            <div class="ptab-panel" id="ptab-ingr">
+                <div class="ingr-grid">
+                    <div class="ingr-card"><span class="ingr-emoji">🌿</span><div><div class="ingr-name">हरिताकी (Haritaki)</div><div class="ingr-desc">घाउ सुकाउने र सूजन कम गर्ने — आयुर्वेदको "फलराज"।</div></div></div>
+                    <div class="ingr-card"><span class="ingr-emoji">🌱</span><div><div class="ingr-name">हरिद्रा (Haridra)</div><div class="ingr-desc">हल्दीको शक्ति — एन्टीसेप्टिक, सूजन र जलन विरोधी।</div></div></div>
+                    <div class="ingr-card"><span class="ingr-emoji">🍃</span><div><div class="ingr-name">निर्गुण्डी (Nirgundi)</div><div class="ingr-desc">दुखाइ र सुन्निएको भाग कम गर्ने प्राकृतिक औषधि।</div></div></div>
+                    <div class="ingr-card"><span class="ingr-emoji">🌺</span><div><div class="ingr-name">लोध्र (Lodhra)</div><div class="ingr-desc">रगत बन्द गर्ने र मासुको सुरक्षात्मक तह बनाउने।</div></div></div>
+                    <div class="ingr-card"><span class="ingr-emoji">🌾</span><div><div class="ingr-name">नागकेसर (Nagkesar)</div><div class="ingr-desc">Bleeding Piles मा विशेष प्रभावकारी — रगत रोक्छ।</div></div></div>
+                    <div class="ingr-card"><span class="ingr-emoji">🌼</span><div><div class="ingr-name">तुलसी + अरू १५+ जडीबुटी</div><div class="ingr-desc">एन्टीब्याक्टेरियल, चिलाउने र जलन विरोधी मिश्रण।</div></div></div>
+                </div>
+            </div>
+
+            <!-- HOW TO USE -->
+            <div class="ptab-panel" id="ptab-htu">
+                <div class="htu-steps">
+                    <div class="htu-step"><div class="htu-num">१</div><div class="htu-body"><div class="htu-title">🧼 राम्ररी सफा गर्नुहोस्</div><div class="htu-desc">मनतातो पानी र हल्का साबुनले प्रभावित ठाउँ सफा गर्नुहोस्। नरम कपडाले थपथपाएर सुकाउनुहोस् — रगड्नु हुँदैन।</div></div></div>
+                    <div class="htu-step"><div class="htu-num">२</div><div class="htu-body"><div class="htu-title">💨 ५–७ सेमी टाढाबाट Spray गर्नुहोस्</div><div class="htu-desc">बोतललाई प्रभावित ठाउँतिर फर्काएर <strong>१–२ पटक</strong> स्प्रे गर्नुहोस्। हातले छुनु पर्दैन।</div></div></div>
+                    <div class="htu-step"><div class="htu-num">३</div><div class="htu-body"><div class="htu-title">⏱ १ मिनेट सुक्न दिनुहोस्</div><div class="htu-desc">Spray गरेपछि लुगा नलगाउनुस् — १ मिनेट प्राकृतिक रूपमा सुक्न दिनुहोस्। त्यसपछि सामान्य दिनचर्यामा लाग्नुहोस्।</div></div></div>
+                    <div class="htu-step"><div class="htu-num">४</div><div class="htu-body"><div class="htu-title">🔄 दिनमा २ पटक दोहोर्याउनुहोस्</div><div class="htu-desc"><strong>बिहान शौचपछि</strong> र <strong>राति सुत्नुअघि</strong> — नियमित गर्दा ३–५ दिनमै फरक महसुस हुन्छ।</div></div></div>
+                </div>
+                <div class="htu-note"><span class="htu-note-ico">💡</span><span>राम्रो नतिजाको लागि कम्तीमा <strong>३–४ हप्ता</strong> नियमित प्रयोग गर्नुहोस्। पिरो र अत्यधिक चिल्लो खाना कम गर्नुहोस् र प्रशस्त पानी पिउनुहोस्।</span></div>
+            </div>
+
+        </div>
+    </div></div>
+</div>
+
+
+<!-- ══════════  BENEFITS STRIP — NEW  ══════════ -->
 <section class="benefits-strip rv">
     <div class="strip"><div class="wide-wrap">
 
@@ -650,6 +931,114 @@
         <div class="ben-strip-note">
             🔬 <span>NABL Lab Tested &nbsp;·&nbsp; GMP Certified &nbsp;·&nbsp;</span>
             <strong>१,०००+ नेपालीको भरोसा</strong>
+        </div>
+
+    </div></div>
+</section>
+
+<!-- ══════════  PRODUCT SHOWCASE — CENTER BOTTLE  ══════════ -->
+<section class="showcase-sec rv">
+    <div class="strip"><div class="wide-wrap">
+
+        <div class="showcase-head">
+            <div class="showcase-eyebrow">नेपालको नम्बर १ हर्बल Spray</div>
+            <div class="showcase-title">
+                २०+ जडीबुटीको शक्ति — <span>एउटै Spray मा</span>
+            </div>
+            <p class="showcase-sub">प्राकृतिक आयुर्वेदिक सूत्रले पाइल्स, फिसर र फिस्टुलालाई जरोदेखि निको पार्छ।</p>
+        </div>
+
+        <div class="showcase-layout">
+
+            <!-- LEFT features -->
+            <div class="sc-feat-col left">
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.25C18.25 22.15 22 17.25 22 12V6L12 2Z"/></svg>
+                        </div>
+                        <div class="sc-feat-label">१००% प्राकृतिक सूत्र</div>
+                    </div>
+                    <p class="sc-feat-desc">कुनै हानिकारक केमिकल छैन — संवेदनशील छालामा पनि पूर्ण सुरक्षित।</p>
+                </div>
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6 2 3 7 3 12c0 4 2.5 7.5 6 9l3 1 3-1c3.5-1.5 6-5 6-9 0-5-3-10-9-10Z"/><path d="M12 22v-10M12 12l-5-4M12 12l5-4"/></svg>
+                        </div>
+                        <div class="sc-feat-label">छिटो घाउ निको पार्छ</div>
+                    </div>
+                    <p class="sc-feat-desc">जडीबुटीको शक्तिले क्षतिग्रस्त मासु र घाउलाई छिटो निको पार्छ।</p>
+                </div>
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <div class="sc-feat-label">जीवनस्तर सुधार</div>
+                    </div>
+                    <p class="sc-feat-desc">नियमित प्रयोगले रोजको दिनचर्या सामान्य र पीडारहित बन्छ।</p>
+                </div>
+
+            </div>
+
+            <!-- CENTER — bottle -->
+            <div class="showcase-bottle-col">
+                <div class="bottle-glow"></div>
+                <img
+                        src="Images/Herbalpilesspray-8-scaled.png"
+                        alt="Herbal Piles Spray बोतल"
+                        class="showcase-bottle-img"
+                        loading="lazy"
+                />
+            </div>
+
+            <!-- RIGHT features -->
+            <div class="sc-feat-col right">
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/></svg>
+                        </div>
+                        <div class="sc-feat-label">तुरुन्त दुखाइ कम</div>
+                    </div>
+                    <p class="sc-feat-desc">पहिलो Spray मै ठण्डो र सुखद अनुभव — ३० सेकेन्डमै राहत।</p>
+                </div>
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="4" y1="4" x2="20" y2="20"/></svg>
+                        </div>
+                        <div class="sc-feat-label">चिलाउने बन्द हुन्छ</div>
+                    </div>
+                    <p class="sc-feat-desc">मलद्वारको खुजली र जलन कम गर्छ — लाज र असुविधाबाट मुक्ति।</p>
+                </div>
+
+                <div class="sc-feat">
+                    <div class="sc-feat-icon-row">
+                        <div class="sc-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <div class="sc-feat-label">हजारौं खुसी ग्राहक</div>
+                    </div>
+                    <p class="sc-feat-desc">१,०००+ नेपाली परिवारले विश्वास गरेको सिद्ध उत्पादन।</p>
+                </div>
+
+            </div>
+        </div><!-- /.showcase-layout -->
+
+        <!-- Trust badges -->
+        <div class="showcase-trust">
+            <div class="sc-trust-item"><span>🔬</span> NABL Lab Tested</div>
+            <div class="sc-trust-item"><span>✅</span> GMP Certified</div>
+            <div class="sc-trust-item"><span>🌿</span> Zero Side Effects</div>
+            <div class="sc-trust-item"><span>🚚</span> Free Delivery Nepal भरि</div>
+            <div class="sc-trust-item"><span>💵</span> Cash on Delivery</div>
         </div>
 
     </div></div>
@@ -954,6 +1343,17 @@
 
     /* Testimonial carousel */
     !function(){var scroll=document.getElementById('revScroll');var dotsWrap=document.getElementById('revDots');var prevBtn=document.getElementById('revPrev');var nextBtn=document.getElementById('revNext');if(!scroll||!dotsWrap||!prevBtn||!nextBtn)return;var cards=Array.from(scroll.querySelectorAll('.tcard'));var total=cards.length,cur=0,paused=false;for(var i=0;i<total;i++){var d=document.createElement('div');d.className='rev-dot'+(i===0?' on':'');(function(idx){d.onclick=function(){goTo(idx);};})(i);dotsWrap.appendChild(d);}function getDots(){return Array.from(dotsWrap.querySelectorAll('.rev-dot'));}function goTo(idx,instant){cur=(idx+total)%total;var card=cards[cur];var left=card.offsetLeft-scroll.offsetLeft;if(instant){scroll.scrollLeft=left;}else{scroll.scrollTo({left:left,behavior:'smooth'});}getDots().forEach(function(dot,i){dot.classList.toggle('on',i===cur);});}var st;scroll.addEventListener('scroll',function(){clearTimeout(st);st=setTimeout(function(){var mid=scroll.scrollLeft+scroll.clientWidth/2;var closest=0,minDist=Infinity;cards.forEach(function(c,i){var dist=Math.abs((c.offsetLeft-scroll.offsetLeft)+c.offsetWidth/2-mid);if(dist<minDist){minDist=dist;closest=i;}});cur=closest;getDots().forEach(function(dot,i){dot.classList.toggle('on',i===cur);});},80);},{passive:true});prevBtn.onclick=function(){paused=true;goTo(cur-1);};nextBtn.onclick=function(){paused=true;goTo(cur+1);};scroll.addEventListener('mouseenter',function(){paused=true;});scroll.addEventListener('mouseleave',function(){paused=false;});scroll.addEventListener('touchstart',function(){paused=true;},{passive:true});scroll.addEventListener('touchend',function(){setTimeout(function(){paused=false;},3000);},{passive:true});setInterval(function(){if(!paused)goTo(cur+1);},4500);goTo(0,true);}();
+
+    /* Product tabs */
+    function ptabSwitch(btn, panelId) {
+        var nav = btn.closest('.ptab-nav');
+        nav.querySelectorAll('.ptab-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var panels = btn.closest('.ptab-sec').querySelectorAll('.ptab-panel');
+        panels.forEach(function(p){ p.classList.remove('active'); });
+        var target = document.getElementById(panelId);
+        if (target) target.classList.add('active');
+    }
 
     /* FAQ accordion */
     function tog(btn){var item=btn.parentElement;var body=item.querySelector('.obj-body');var inner=item.querySelector('.obj-inner');var open=item.classList.contains('open');document.querySelectorAll('.obj-item.open').forEach(function(el){el.classList.remove('open');el.querySelector('.obj-body').style.maxHeight='0';});if(!open){item.classList.add('open');body.style.maxHeight=(inner.scrollHeight+24)+'px';}}
