@@ -108,7 +108,6 @@
             color: var(--green-main);
         }
 
-        /* Size label pill shown inside package cards */
         .size-label {
             display: inline-block;
             font-size: 11px;
@@ -259,7 +258,6 @@
             letter-spacing: .04em;
         }
 
-        /* Price fade animation on toggle */
         .price-animate {
             animation: priceFlip 0.25s ease;
         }
@@ -374,7 +372,6 @@
             color: var(--text-main);
         }
 
-        /* size badge in modal */
         .modal-size-badge {
             display: inline-block;
             background: #dcfce7;
@@ -562,14 +559,6 @@
                 <p><b>प्याकेज / Package:</b> <span id="confirmPackage"></span></p>
                 <p><b>जम्मा / Total:</b> Rs <span id="confirmPrice"></span></p>
 
-                <div id="otpInputArea" style="display:none; margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
-                    <p style="color:var(--green-dark); font-weight:bold;">मोबाइलमा आएको कोड हाल्नुहोस् / Enter OTP:</p>
-                    <div class="input-group">
-                        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6"
-                               style="text-align:center; letter-spacing:4px; font-weight:bold; border-color:var(--green-main);">
-                    </div>
-                </div>
-
                 <div class="modal-actions">
                     <button id="editOrderBtn" type="button" class="btn-secondary">परिवर्तन गर्नुहोस् / Edit</button>
                     <button id="confirmOrderBtn" type="button" class="btn">पुष्टि गर्नुहोस् / Confirm</button>
@@ -595,6 +584,7 @@
     };
 
     let currentSize = "30";
+    let formDataToSubmit = null;
 
     const fmt = (n) => new Intl.NumberFormat('ne-NP').format(n);
 
@@ -615,13 +605,12 @@
             saveEl.textContent = `बचत Rs ${fmt(saved)}`;
             lblEl.textContent  = size + 'ml';
 
-            // Set data-price on the card for form submission
             document.getElementById('x' + idx).setAttribute('data-price', String(data.now[i]));
 
             if (animate) {
                 [oldEl, newEl, saveEl].forEach(el => {
                     el.classList.remove('price-animate');
-                    void el.offsetWidth; // reflow
+                    void el.offsetWidth;
                     el.classList.add('price-animate');
                 });
             }
@@ -656,23 +645,18 @@
     });
 
     // ===== MODAL =====
-    const form    = document.getElementById('sprayForm');
-    const modal   = document.getElementById('confirmationModal');
-    const overlay = document.getElementById('loadingOverlay');
+    const form       = document.getElementById('sprayForm');
+    const modal      = document.getElementById('confirmationModal');
+    const overlay    = document.getElementById('loadingOverlay');
     const confirmBtn = document.getElementById('confirmOrderBtn');
     const editBtn    = document.getElementById('editOrderBtn');
-    const otpInputArea = document.getElementById('otpInputArea');
 
     function openModal()  { modal.style.display = 'flex'; document.body.classList.add('modal-lock'); }
-    function closeModal() {
-        modal.style.display = 'none';
-        otpInputArea.style.display = 'none';
-        confirmBtn.textContent = "पुष्टि गर्नुहोस् / Confirm";
-        document.body.classList.remove('modal-lock');
-    }
+    function closeModal() { modal.style.display = 'none'; document.body.classList.remove('modal-lock'); }
+
     editBtn.addEventListener('click', closeModal);
 
-    form.addEventListener('submit', async function (e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
 
@@ -683,75 +667,42 @@
         const packageName = selected.id.toUpperCase() + ' – ' + currentSize + 'ml';
         const bottles     = selected.getAttribute('data-bottles');
 
-        const fdPreview = new FormData(form);
-        fdPreview.set('package', packageName);
-        fdPreview.set('size', currentSize + 'ml');
-        fdPreview.set('bottles', bottles);
-        fdPreview.set('total', price);
+        formDataToSubmit = new FormData(form);
+        formDataToSubmit.set('package', packageName);
+        formDataToSubmit.set('size', currentSize + 'ml');
+        formDataToSubmit.set('bottles', bottles);
+        formDataToSubmit.set('total', price);
 
-        document.getElementById('confirmName').textContent    = fdPreview.get('name')     || '';
-        document.getElementById('confirmPhone').textContent   = fdPreview.get('phone')    || '';
-        document.getElementById('confirmAddress').textContent = fdPreview.get('address')  || '';
-        document.getElementById('confirmProvince').textContent= fdPreview.get('province') || '';
-        document.getElementById('confirmSize').innerHTML      = `<span class="modal-size-badge">${currentSize}ml</span>`;
-        document.getElementById('confirmPackage').textContent = packageName;
-        document.getElementById('confirmPrice').textContent   = fmt(Number(price));
+        document.getElementById('confirmName').textContent     = formDataToSubmit.get('name')     || '';
+        document.getElementById('confirmPhone').textContent    = formDataToSubmit.get('phone')    || '';
+        document.getElementById('confirmAddress').textContent  = formDataToSubmit.get('address')  || '';
+        document.getElementById('confirmProvince').textContent = formDataToSubmit.get('province') || '';
+        document.getElementById('confirmSize').innerHTML       = `<span class="modal-size-badge">${currentSize}ml</span>`;
+        document.getElementById('confirmPackage').textContent  = packageName;
+        document.getElementById('confirmPrice').textContent    = fmt(Number(price));
 
         openModal();
+    });
 
-        confirmBtn.onclick = async function () {
-            const phone    = document.getElementById('phone').value;
-            const otpValue = document.getElementById('otpCode').value;
+    confirmBtn.addEventListener('click', async function () {
+        if (!formDataToSubmit) return;
 
-            if (otpInputArea.style.display === 'none') {
-                overlay.style.display = 'flex';
-                overlay.textContent = "OTP पठाउँदै... / Sending OTP...";
-                try {
-                    const res  = await fetch(`/send-otp?phone=${phone}`, { method: 'POST' });
-                    const text = await res.text();
-                    overlay.style.display = 'none';
-                    if (text === "OTP Sent") {
-                        otpInputArea.style.display = 'block';
-                        confirmBtn.textContent = "OTP रुजु गर्नुहोस् / Verify & Order";
-                        alert("तपाईँको मोबाइलमा ६ अंकको कोड पठाइएको छ।");
-                    } else {
-                        alert("SMS Error: " + text);
-                    }
-                } catch (err) {
-                    overlay.style.display = 'none';
-                    alert("Connection error while sending OTP");
-                }
-                return;
-            }
+        overlay.style.display = 'flex';
+        overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
 
-            if (!otpValue || otpValue.length < 6) { alert("कृपया ६ अंकको कोड हाल्नुहोस्।"); return; }
-
-            overlay.style.display = 'flex';
-            overlay.textContent = "भेरिफाइ गर्दै... / Verifying...";
-
-            try {
-                const vRes   = await fetch(`/verify-otp?phone=${phone}&otp=${otpValue}`, { method: 'POST' });
-                const status = await vRes.text();
-
-                if (status === "verified") {
-                    overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
-                    const response = await fetch('/Order', { method: 'POST', body: fdPreview });
-                    const result   = await response.text();
-                    if (result === 'success') {
-                        window.location.href = 'thankyou.html';
-                    } else {
-                        alert('Error: ' + result);
-                        overlay.style.display = 'none';
-                    }
-                } else {
-                    alert("गलत OTP! / Invalid OTP");
-                    overlay.style.display = 'none';
-                }
-            } catch (error) {
-                alert('त्रुटि भयो: ' + error.message);
+        try {
+            const response = await fetch('/Order', { method: 'POST', body: formDataToSubmit });
+            const result   = await response.text();
+            if (result === 'success') {
+                window.location.href = 'thankyou.html';
+            } else {
+                alert('Error: ' + result);
                 overlay.style.display = 'none';
             }
-        };
+        } catch (error) {
+            alert('त्रुटि भयो: ' + error.message);
+            overlay.style.display = 'none';
+        }
     });
 
     // ===== INIT =====
