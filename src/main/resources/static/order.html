@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="/Images/favicon.png">
     <style>
         :root {
-            --container-max:760px;
+            --container-max: 760px;
             --green-main: #16a34a;
             --green-dark: #0f7a36;
             --orange-main: #f97316;
@@ -17,7 +17,6 @@
             --text-muted: #6b7280;
         }
 
-        /* --- Global stabilizers --- */
         html, body {
             margin: 0;
             padding: 0;
@@ -32,7 +31,6 @@
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        /* ✅ FULL-WIDTH, NO CUTTING */
         #custom-form-container {
             position: relative;
             margin: 0;
@@ -41,23 +39,12 @@
             padding: 48px 16px 52px;
             border-radius: 0;
             box-shadow: none;
-            box-sizing: border-box;
-
             background:
-                    linear-gradient(180deg, rgba(240,253,244,0.9), rgba(239,246,255,0.95)),
-                    url("http://localhost/EasyPS/wp-content/uploads/2025/11/Untitled-design-7.png")
-                    center/cover no-repeat;
+                linear-gradient(180deg, rgba(240,253,244,0.9), rgba(239,246,255,0.95)),
+                url("http://localhost/EasyPS/wp-content/uploads/2025/11/Untitled-design-7.png")
+                center/cover no-repeat;
         }
 
-        #custom-form-container::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: transparent;
-            z-index: -1;
-        }
-
-        /* The actual white card that holds the form */
         .form-card {
             background: #ffffffec;
             padding: 40px 32px 34px;
@@ -69,19 +56,73 @@
             box-shadow: 0 20px 50px rgba(15,23,42,0.12);
         }
 
-        h2 {
-            margin: 0 0 10px;
+        .form-card h2 {
+            margin: 0 0 6px;
             font-size: 26px;
             color: var(--green-dark);
             font-weight: 800;
         }
 
         .form-subtitle {
-            margin: 0 0 18px;
+            margin: 0 0 20px;
             font-size: 14px;
             color: var(--text-muted);
         }
 
+        /* ===== SIZE TOGGLE ===== */
+        .size-toggle-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 26px;
+            background: #f1f5f9;
+            border-radius: 999px;
+            padding: 4px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        .size-toggle-btn {
+            padding: 9px 28px;
+            border-radius: 999px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .size-toggle-btn.active {
+            background: #ffffff;
+            color: var(--green-dark);
+            box-shadow: 0 2px 8px rgba(15,23,42,0.12);
+        }
+
+        .size-toggle-btn:hover:not(.active) {
+            color: var(--green-main);
+        }
+
+        /* Size label pill shown inside package cards */
+        .size-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            background: #dcfce7;
+            color: var(--green-dark);
+            border-radius: 999px;
+            padding: 2px 9px;
+            margin-left: 6px;
+            vertical-align: middle;
+            letter-spacing: 0.03em;
+        }
+
+        /* ===== INPUTS ===== */
         .input-group {
             margin: 16px 0;
             position: relative;
@@ -121,12 +162,12 @@
             border-radius: 999px;
         }
 
-        /* Package options */
+        /* ===== PACKAGE CARDS ===== */
         .package-options {
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-top: 24px;
+            margin-top: 4px;
             align-items: stretch;
         }
 
@@ -158,7 +199,7 @@
             box-shadow: 0 14px 30px rgba(22,163,74,0.22);
         }
 
-        .package-option h2 {
+        .package-option h3 {
             font-size: 18px;
             margin: 0;
             font-weight: 700;
@@ -166,46 +207,47 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
-        /* Price block with before/now */
         .price-row {
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin-top:8px;
-            flex-wrap:wrap;
-            font-weight:600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            font-weight: 600;
         }
 
         .price-old {
-            color:black;
+            color: black;
             text-decoration: line-through;
-            font-size:14px;
+            font-size: 14px;
         }
 
         .price-new {
             color: var(--green-dark);
-            font-weight:800;
-            font-size:20px;
+            font-weight: 800;
+            font-size: 20px;
+            transition: opacity 0.2s ease;
         }
 
         .save-pill {
-            background:#fee2e2;
-            border:1px solid #fecaca;
-            color:#b91c1c;
-            font-size:12px;
-            font-weight:700;
-            padding:3px 8px;
-            border-radius:999px;
-            white-space:nowrap;
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 999px;
+            white-space: nowrap;
         }
 
         .package-option .badge {
             position: absolute;
             top: 14px;
             right: 14px;
-            background: linear-gradient(135deg,#f97316,#facc15);
+            background: linear-gradient(135deg, #f97316, #facc15);
             padding: 4px 10px;
             font-size: 11px;
             font-weight: 800;
@@ -217,7 +259,16 @@
             letter-spacing: .04em;
         }
 
-        /* Primary button (match hero CTA) */
+        /* Price fade animation on toggle */
+        .price-animate {
+            animation: priceFlip 0.25s ease;
+        }
+        @keyframes priceFlip {
+            0%   { opacity: 0; transform: translateY(4px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== BUTTON ===== */
         .btn {
             width: 100%;
             padding: 14px 24px;
@@ -240,12 +291,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                    110deg,
-                    rgba(255,255,255,0) 0%,
-                    rgba(255,255,255,0.45) 45%,
-                    rgba(255,255,255,0) 60%
-            );
+            background: linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 45%, rgba(255,255,255,0) 60%);
             transform: translateX(-120%);
             pointer-events: none;
             animation: epsFormCtaShine 4s ease-in-out infinite;
@@ -268,7 +314,6 @@
             box-shadow: 0 16px 34px rgba(234,88,12,0.42);
         }
 
-        /* Secondary button (outline) */
         .btn-secondary {
             width: 100%;
             padding: 12px 18px;
@@ -288,14 +333,12 @@
             .btn-secondary:hover {
                 transform: translateY(-1px);
                 border-color: var(--green-main);
-                background:#f9fafb;
+                background: #f9fafb;
             }
         }
-        .btn-secondary:active {
-            transform: translateY(0);
-        }
+        .btn-secondary:active { transform: translateY(0); }
 
-        /* Confirmation modal */
+        /* ===== MODAL ===== */
         .confirmation-modal {
             display: none;
             position: fixed;
@@ -331,6 +374,18 @@
             color: var(--text-main);
         }
 
+        /* size badge in modal */
+        .modal-size-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: var(--green-dark);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 999px;
+            margin-left: 4px;
+        }
+
         .modal-actions {
             display: flex;
             gap: 12px;
@@ -353,11 +408,9 @@
             touch-action: none;
         }
 
-        /* ========= Mobile adjustments (<= 600px) ========= */
+        /* ===== MOBILE ===== */
         @media (max-width: 600px) {
-            #custom-form-container {
-                padding: 28px 10px 36px;
-            }
+            #custom-form-container { padding: 28px 10px 36px; }
 
             .form-card {
                 width: 94%;
@@ -367,49 +420,24 @@
                 border-radius: 14px;
             }
 
-            h2 {
-                font-size: 22px;
+            .form-card h2 { font-size: 22px; }
+            .form-subtitle { font-size: 13px; }
+
+            .size-toggle-btn {
+                padding: 8px 22px;
+                font-size: 14px;
             }
 
-            .form-subtitle {
-                font-size: 13px;
-            }
+            .input-group { text-align: left; }
+            .input-group label { left: 14px; transform: none; }
+            .input-group input { text-align: left; }
 
-            /* ✅ keep inputs & labels nicely aligned on the left */
-            .input-group {
-                text-align: left;
-            }
+            .package-options { align-items: stretch; }
+            .package-option { max-width: 100%; text-align: left; }
+            .package-option .badge { right: 10px; }
 
-            .input-group label {
-                left: 14px;
-                transform: none;
-            }
-
-            .input-group input {
-                text-align: left;
-            }
-
-            .package-options {
-                align-items: stretch;
-            }
-
-            .package-option {
-                max-width: 100%;
-                text-align: left;
-            }
-
-            .package-option .badge {
-                right: 10px;
-            }
-
-            .modal-content {
-                text-align: center;
-            }
-
-            .modal-content p {
-                text-align: left;
-                margin: 6px 0;
-            }
+            .modal-content { text-align: center; }
+            .modal-content p { text-align: left; margin: 6px 0; }
         }
     </style>
 </head>
@@ -417,10 +445,19 @@
 
 <div id="custom-form-container">
     <div class="form-card">
+
         <h2>प्याकेज छान्नुहोस् / Choose Package</h2>
-        <p class="form-subtitle">Free Delivery + Cash on Delivery (COD) </p>
+        <p class="form-subtitle">Free Delivery + Cash on Delivery (COD)</p>
+
+        <!-- ===== SIZE TOGGLE ===== -->
+        <div class="size-toggle-wrap" role="group" aria-label="Bottle size">
+            <button class="size-toggle-btn active" data-size="30" type="button">30ml</button>
+            <button class="size-toggle-btn" data-size="60" type="button">60ml</button>
+        </div>
 
         <form id="sprayForm">
+
+            <!-- Contact fields -->
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder=" " required />
                 <label for="name">नाम / Name</label>
@@ -435,11 +472,10 @@
                         required
                         inputmode="numeric"
                         pattern="^(?:\+?977)?9[6-8]\d{8}$"
-                        title="कृपया ठिक नेपाली मोबाइल नम्बर हाल्नुहोस् (98XXXXXXXX, 97798XXXXXXXX, +97798XXXXXXXX)"
+                        title="कृपया ठिक नेपाली मोबाइल नम्बर हाल्नुहोस्"
                 />
                 <label for="phone">मोबाइल नम्बर / Mobile Number</label>
             </div>
-
 
             <div class="input-group">
                 <input type="text" id="address" name="address" placeholder=" " required />
@@ -468,59 +504,74 @@
                 </datalist>
             </div>
 
+            <!-- Package cards -->
             <div class="package-options">
+
                 <div class="package-option" id="x1" data-bottles="1" role="button" tabindex="0" aria-pressed="false">
-                    <h2>X1 बोतल / 1 Bottle</h2>
+                    <h3>
+                        X1 बोतल / 1 Bottle
+                        <span class="size-label" id="sizeLabel1">30ml</span>
+                    </h3>
                     <div class="price-row">
-                        <span class="price-old" aria-label="पुरानो मूल्य">Rs 2,100</span>
-                        <span class="price-new" aria-label="नयाँ मूल्य">Rs 1,600</span>
-                        <span class="save-pill" aria-label="तपाईंको बचत">save Rs 500</span>
+                        <span class="price-old" id="oldPrice1"></span>
+                        <span class="price-new" id="newPrice1"></span>
+                        <span class="save-pill" id="savePill1"></span>
                     </div>
                 </div>
 
                 <div class="package-option selected" id="x2" data-bottles="2" role="button" tabindex="0" aria-pressed="true">
-                    <h2>X2 बोतल / 2 Bottles</h2>
+                    <h3>
+                        X2 बोतल / 2 Bottles
+                        <span class="size-label" id="sizeLabel2">30ml</span>
+                    </h3>
                     <div class="price-row">
-                        <span class="price-old">Rs 4,200</span>
-                        <span class="price-new">Rs 2,600</span>
-                        <span class="save-pill">save Rs 1,600</span>
+                        <span class="price-old" id="oldPrice2"></span>
+                        <span class="price-new" id="newPrice2"></span>
+                        <span class="save-pill" id="savePill2"></span>
                     </div>
                     <div class="badge">Best Choice</div>
                 </div>
 
                 <div class="package-option" id="x3" data-bottles="3" role="button" tabindex="0" aria-pressed="false">
-                    <h2>X3 बोतल / 3 Bottles</h2>
+                    <h3>
+                        X3 बोतल / 3 Bottles
+                        <span class="size-label" id="sizeLabel3">30ml</span>
+                    </h3>
                     <div class="price-row">
-                        <span class="price-old">Rs 6,300</span>
-                        <span class="price-new">Rs 3,500</span>
-                        <span class="save-pill">save Rs 2,800</span>
+                        <span class="price-old" id="oldPrice3"></span>
+                        <span class="price-new" id="newPrice3"></span>
+                        <span class="save-pill" id="savePill3"></span>
                     </div>
                 </div>
+
             </div>
 
             <button class="btn" type="submit">अर्डर गर्नुहोस् / Submit Order</button>
         </form>
 
+        <!-- ===== CONFIRMATION MODAL ===== -->
         <div class="confirmation-modal" id="confirmationModal" aria-modal="true" role="dialog">
             <div class="modal-content">
                 <h3>अर्डर पुष्टि गर्नुहोस् / Confirm Your Order</h3>
 
                 <p><b>नाम / Name:</b> <span id="confirmName"></span></p>
-                <p><b>मोबाइल नम्बर / Mobile:</b> <span id="confirmPhone"></span></p>
+                <p><b>मोबाइल / Mobile:</b> <span id="confirmPhone"></span></p>
                 <p><b>ठेगाना / Address:</b> <span id="confirmAddress"></span></p>
                 <p><b>प्रदेश / Province:</b> <span id="confirmProvince"></span></p>
+                <p><b>साइज / Size:</b> <span id="confirmSize"></span></p>
                 <p><b>प्याकेज / Package:</b> <span id="confirmPackage"></span></p>
                 <p><b>जम्मा / Total:</b> Rs <span id="confirmPrice"></span></p>
 
-                <div id="otpInputArea" style="display:none; margin-top:15px; border-top: 1px dashed #ccc; padding-top:10px;">
+                <div id="otpInputArea" style="display:none; margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
                     <p style="color:var(--green-dark); font-weight:bold;">मोबाइलमा आएको कोड हाल्नुहोस् / Enter OTP:</p>
                     <div class="input-group">
-                        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align:center; letter-spacing:4px; font-weight:bold; border-color:var(--green-main);">
+                        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6"
+                               style="text-align:center; letter-spacing:4px; font-weight:bold; border-color:var(--green-main);">
                     </div>
                 </div>
 
                 <div class="modal-actions">
-                    <button id="editOrderBtn" type="button" class="btn-secondary">अर्डर परिवर्तन गर्नुहोस् / Edit Order</button>
+                    <button id="editOrderBtn" type="button" class="btn-secondary">परिवर्तन गर्नुहोस् / Edit</button>
                     <button id="confirmOrderBtn" type="button" class="btn">पुष्टि गर्नुहोस् / Confirm</button>
                 </div>
             </div>
@@ -531,37 +582,63 @@
 </div>
 
 <script>
-    const form = document.getElementById('sprayForm');
-    const modal = document.getElementById('confirmationModal');
-    const overlay = document.getElementById('loadingOverlay');
-    const confirmBtn = document.getElementById('confirmOrderBtn');
-    const editBtn = document.getElementById('editOrderBtn');
-    const otpInputArea = document.getElementById('otpInputArea');
+    // ===== PRICING DATA =====
+    const PRICING = {
+        "30": {
+            old:  [2100, 4200, 6300],
+            now:  [1600, 2600, 3500]
+        },
+        "60": {
+            old:  [2500, 5000, 7500],
+            now:  [1900, 3200, 4500]
+        }
+    };
 
-    const OLD_UNIT_PRICE = 2100;
-    const BUNDLE_PRICES = { 1: 1600, 2: 2600, 3: 3500 };
+    let currentSize = "30";
 
-    function initPrices() {
-        document.querySelectorAll('#custom-form-container .package-option').forEach(opt => {
-            const bottles = Number(opt.getAttribute('data-bottles')) || 1;
-            const oldTotal = OLD_UNIT_PRICE * bottles;
-            const newTotal = (BUNDLE_PRICES[bottles] !== undefined)
-                ? BUNDLE_PRICES[bottles]
-                : BUNDLE_PRICES[1] * bottles;
+    const fmt = (n) => new Intl.NumberFormat('ne-NP').format(n);
 
-            opt.setAttribute('data-price', String(newTotal));
+    // ===== UPDATE PRICES =====
+    function updatePrices(size, animate) {
+        const data = PRICING[size];
+        for (let i = 0; i < 3; i++) {
+            const idx = i + 1;
+            const oldEl  = document.getElementById('oldPrice'  + idx);
+            const newEl  = document.getElementById('newPrice'  + idx);
+            const saveEl = document.getElementById('savePill'  + idx);
+            const lblEl  = document.getElementById('sizeLabel' + idx);
 
-            const oldEl = opt.querySelector('.price-old');
-            const newEl = opt.querySelector('.price-new');
-            const saveEl = opt.querySelector('.save-pill');
+            const saved = data.old[i] - data.now[i];
 
-            const fmt = (n) => new Intl.NumberFormat('ne-NP').format(n);
-            if (oldEl) oldEl.textContent = `Rs ${fmt(oldTotal)}`;
-            if (newEl) newEl.textContent = `Rs ${fmt(newTotal)}`;
-            if (saveEl) saveEl.textContent = `बचत Rs ${fmt(oldTotal - newTotal)}`;
-        });
+            oldEl.textContent  = `Rs ${fmt(data.old[i])}`;
+            newEl.textContent  = `Rs ${fmt(data.now[i])}`;
+            saveEl.textContent = `बचत Rs ${fmt(saved)}`;
+            lblEl.textContent  = size + 'ml';
+
+            // Set data-price on the card for form submission
+            document.getElementById('x' + idx).setAttribute('data-price', String(data.now[i]));
+
+            if (animate) {
+                [oldEl, newEl, saveEl].forEach(el => {
+                    el.classList.remove('price-animate');
+                    void el.offsetWidth; // reflow
+                    el.classList.add('price-animate');
+                });
+            }
+        }
     }
 
+    // ===== SIZE TOGGLE =====
+    document.querySelectorAll('.size-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.size-toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentSize = btn.getAttribute('data-size');
+            updatePrices(currentSize, true);
+        });
+    });
+
+    // ===== PACKAGE SELECTION =====
     function selectPackage(el) {
         document.querySelectorAll('#custom-form-container .package-option').forEach(opt => {
             opt.classList.remove('selected');
@@ -578,64 +655,61 @@
         });
     });
 
-    function openModal() {
-        modal.style.display = 'flex';
-        document.body.classList.add('modal-lock');
-    }
+    // ===== MODAL =====
+    const form    = document.getElementById('sprayForm');
+    const modal   = document.getElementById('confirmationModal');
+    const overlay = document.getElementById('loadingOverlay');
+    const confirmBtn = document.getElementById('confirmOrderBtn');
+    const editBtn    = document.getElementById('editOrderBtn');
+    const otpInputArea = document.getElementById('otpInputArea');
+
+    function openModal()  { modal.style.display = 'flex'; document.body.classList.add('modal-lock'); }
     function closeModal() {
         modal.style.display = 'none';
-        otpInputArea.style.display = 'none'; // Reset OTP area
-        confirmBtn.textContent = "पुष्टि गर्नुहोस् / Confirm"; // Reset button text
+        otpInputArea.style.display = 'none';
+        confirmBtn.textContent = "पुष्टि गर्नुहोस् / Confirm";
         document.body.classList.remove('modal-lock');
     }
     editBtn.addEventListener('click', closeModal);
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
-
         if (!form.checkValidity()) { form.reportValidity(); return; }
 
         const selected = document.querySelector('#custom-form-container .package-option.selected');
-        if (!selected) {
-            alert('कृपया पहिले प्याकेज छान्नुहोस्।');
-            return;
-        }
+        if (!selected) { alert('कृपया पहिले प्याकेज छान्नुहोस्।'); return; }
 
-        const price = selected.getAttribute('data-price');
-        const packageName = selected.id.toUpperCase();
+        const price       = selected.getAttribute('data-price');
+        const packageName = selected.id.toUpperCase() + ' – ' + currentSize + 'ml';
+        const bottles     = selected.getAttribute('data-bottles');
 
         const fdPreview = new FormData(form);
         fdPreview.set('package', packageName);
+        fdPreview.set('size', currentSize + 'ml');
+        fdPreview.set('bottles', bottles);
         fdPreview.set('total', price);
 
-        document.getElementById('confirmName').textContent = fdPreview.get('name') || '';
-        document.getElementById('confirmPhone').textContent = fdPreview.get('phone') || '';
-        document.getElementById('confirmAddress').textContent = fdPreview.get('address') || '';
-        document.getElementById('confirmProvince').textContent = fdPreview.get('province') || '';
+        document.getElementById('confirmName').textContent    = fdPreview.get('name')     || '';
+        document.getElementById('confirmPhone').textContent   = fdPreview.get('phone')    || '';
+        document.getElementById('confirmAddress').textContent = fdPreview.get('address')  || '';
+        document.getElementById('confirmProvince').textContent= fdPreview.get('province') || '';
+        document.getElementById('confirmSize').innerHTML      = `<span class="modal-size-badge">${currentSize}ml</span>`;
         document.getElementById('confirmPackage').textContent = packageName;
-        document.getElementById('confirmPrice').textContent =
-            new Intl.NumberFormat('ne-NP').format(Number(price));
+        document.getElementById('confirmPrice').textContent   = fmt(Number(price));
 
         openModal();
 
-        // OTP INTEGRATION LOGIC STARTS HERE
-        // ... (keep your existing variables at the top)
-
         confirmBtn.onclick = async function () {
-            const phone = document.getElementById('phone').value;
+            const phone    = document.getElementById('phone').value;
             const otpValue = document.getElementById('otpCode').value;
 
-            // STEP 1: If OTP area is not visible, send OTP first
             if (otpInputArea.style.display === 'none') {
                 overlay.style.display = 'flex';
                 overlay.textContent = "OTP पठाउँदै... / Sending OTP...";
-
                 try {
-                    // FIXED: Removed http://localhost:8080
-                    const res = await fetch(`/send-otp?phone=${phone}`, { method: 'POST' });
+                    const res  = await fetch(`/send-otp?phone=${phone}`, { method: 'POST' });
                     const text = await res.text();
                     overlay.style.display = 'none';
-
                     if (text === "OTP Sent") {
                         otpInputArea.style.display = 'block';
                         confirmBtn.textContent = "OTP रुजु गर्नुहोस् / Verify & Order";
@@ -650,34 +724,20 @@
                 return;
             }
 
-            // STEP 2: Verify and then submit order
-            if (!otpValue || otpValue.length < 6) {
-                alert("कृपया ६ अंकको कोड हाल्नुहोस्।");
-                return;
-            }
+            if (!otpValue || otpValue.length < 6) { alert("कृपया ६ अंकको कोड हाल्नुहोस्।"); return; }
 
             overlay.style.display = 'flex';
             overlay.textContent = "भेरिफाइ गर्दै... / Verifying...";
 
             try {
-                // This one was already relative - good job!
-                const vRes = await fetch(`/verify-otp?phone=${phone}&otp=${otpValue}`, {
-                    method: 'POST'
-                });
+                const vRes   = await fetch(`/verify-otp?phone=${phone}&otp=${otpValue}`, { method: 'POST' });
                 const status = await vRes.text();
 
                 if (status === "verified") {
                     overlay.textContent = "अर्डर सुरक्षित गर्दै... / Saving Order...";
-
-                    // FIXED: Removed http://localhost:8080
-                    const response = await fetch('/Order', {
-                        method: 'POST',
-                        body: fdPreview
-                    });
-
-                    const result = await response.text();
+                    const response = await fetch('/Order', { method: 'POST', body: fdPreview });
+                    const result   = await response.text();
                     if (result === 'success') {
-                        // Ensure this URL is correct (usually no slash at the end for .html)
                         window.location.href = 'thankyou.html';
                     } else {
                         alert('Error: ' + result);
@@ -694,11 +754,13 @@
         };
     });
 
-    initPrices();
+    // ===== INIT =====
+    updatePrices("30", false);
 </script>
 
 </body>
 </html>
+
 <!-- Meta Pixel Code -->
 <script>
     !function(f,b,e,v,n,t,s)
