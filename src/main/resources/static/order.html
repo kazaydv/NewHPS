@@ -318,16 +318,90 @@
         .modal-actions { display: flex; gap: 12px; margin-top: 14px; flex-direction: column; }
         @media (min-width: 520px) { .modal-actions { flex-direction: row; } }
 
+        /* ===== LOADING OVERLAY ===== */
         .loading-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(255,255,255,.7);
+            background: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            flex-direction: column;
             z-index: 99999;
             touch-action: none;
+            gap: 28px;
+        }
+
+        .loading-overlay.active { display: flex; }
+
+        .loader-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            padding: 40px 36px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(15,23,42,0.12);
+            min-width: 280px;
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .spinner-ring {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 6px solid #dcfce7;
+            border-top-color: var(--green-main);
+            border-right-color: var(--green-dark);
+            animation: spinRing 0.9s linear infinite;
+            flex-shrink: 0;
+        }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+
+        .check-circle {
+            display: none;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--green-main);
+            align-items: center;
+            justify-content: center;
+            animation: popIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+            flex-shrink: 0;
+        }
+        .check-circle svg { width: 36px; height: 36px; stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        @keyframes popIn {
+            from { transform: scale(0.4); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .loader-label {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--green-dark);
+            line-height: 1.45;
+        }
+        .loader-sublabel {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: -10px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--green-main), #4ade80);
+            border-radius: 999px;
+            transition: width 0.35s ease;
         }
 
         @media (max-width: 600px) {
@@ -458,14 +532,28 @@
             </div>
         </div>
 
-        <div class="loading-overlay" id="loadingOverlay">अर्डर सुरक्षित गर्दै... / Saving Order...</div>
+
+    </div>
+</div>
+
+<!-- Animated Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-box">
+        <div class="spinner-ring" id="spinnerRing"></div>
+        <div class="check-circle" id="checkCircle">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="loader-label" id="loaderLabel">अर्डर प्रशोधन हुँदैछ…<br/>Processing your order…</div>
+        <div class="loader-sublabel" id="loaderSub">कृपया पर्खनुहोस् / Please wait</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
     </div>
 </div>
 
 <script>
     const form       = document.getElementById('sprayForm');
     const modal      = document.getElementById('confirmationModal');
-    const overlay    = document.getElementById('loadingOverlay');
     const confirmBtn = document.getElementById('confirmOrderBtn');
     const editBtn    = document.getElementById('editOrderBtn');
 
@@ -525,26 +613,58 @@
         openModal();
     });
 
-    // Confirm → submit order directly
-    confirmBtn.addEventListener('click', async function () {
+    // Confirm → animated loader for ~3s then redirect
+    confirmBtn.addEventListener('click', function () {
         if (!pendingFormData) return;
 
-        overlay.style.display = 'flex';
         closeModal();
 
-        try {
-            const response = await fetch('/Order', { method: 'POST', body: pendingFormData });
-            const result   = await response.text();
-            if (result === 'success') {
-                window.location.href = 'thankyou.html';
-            } else {
-                alert('Error: ' + result);
-                overlay.style.display = 'none';
-            }
-        } catch (error) {
-            alert('त्रुटि भयो: ' + error.message);
-            overlay.style.display = 'none';
-        }
+        // Fire order in background immediately
+        fetch('/Order', {
+            method: 'POST',
+            body: pendingFormData,
+            keepalive: true
+        }).catch(() => {});
+
+        // Show loader
+        const overlay     = document.getElementById('loadingOverlay');
+        const spinner     = document.getElementById('spinnerRing');
+        const checkCircle = document.getElementById('checkCircle');
+        const label       = document.getElementById('loaderLabel');
+        const sub         = document.getElementById('loaderSub');
+        const fill        = document.getElementById('progressFill');
+
+        overlay.style.display = 'flex';
+
+        // Animate progress bar over 3 seconds in steps
+        const steps = [
+            { pct: 30,  delay: 0    },
+            { pct: 55,  delay: 600  },
+            { pct: 75,  delay: 1300 },
+            { pct: 90,  delay: 2000 },
+            { pct: 100, delay: 2700 },
+        ];
+
+        steps.forEach(({ pct, delay }) => {
+            setTimeout(() => { fill.style.width = pct + '%'; }, delay);
+        });
+
+        // Update label midway
+        setTimeout(() => {
+            label.innerHTML = 'अर्डर सुरक्षित गर्दै…<br/>Saving your order…';
+        }, 1400);
+
+        // At 3s: show checkmark, then redirect after brief pause
+        setTimeout(() => {
+            spinner.style.display    = 'none';
+            checkCircle.style.display = 'flex';
+            label.innerHTML = 'अर्डर सफल भयो! 🎉<br/>Order Placed Successfully!';
+            sub.textContent = 'धन्यवाद! / Thank you!';
+        }, 3000);
+
+        setTimeout(() => {
+            window.location.href = 'thankyou.html';
+        }, 3600);
     });
 </script>
 
