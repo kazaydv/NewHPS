@@ -27,10 +27,13 @@ public class GoogleSheetsService {
 
     public void addOrderToSheet(Order order) throws IOException, GeneralSecurityException {
         // 1. Load Credentials
-        InputStream in = GoogleSheetsService.class.getResourceAsStream("/credentials.json");
-        if (in == null) {
-            throw new IOException("File not found: credentials.json in resources folder");
+        String json = System.getenv("GOOGLE_CREDENTIALS");
+
+        if (json == null) {
+            throw new IOException("GOOGLE_CREDENTIALS environment variable not set");
         }
+
+        InputStream in = new java.io.ByteArrayInputStream(json.getBytes());
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(in)
                 .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS));
