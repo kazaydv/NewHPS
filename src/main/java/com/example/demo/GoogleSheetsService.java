@@ -35,7 +35,7 @@ public class GoogleSheetsService {
         GoogleCredentials credentials = GoogleCredentials.fromStream(in)
                 .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS));
 
-        // 2. Setup Sheets API Service
+
         Sheets service = new Sheets.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(),
                 GsonFactory.getDefaultInstance(),
