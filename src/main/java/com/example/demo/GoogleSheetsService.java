@@ -26,7 +26,7 @@ public class GoogleSheetsService {
     private static final String SPREADSHEET_ID = "1d5bL0IOwCJ9BBqIhs_LX2LZ7SVAYB8D3Af0swE0oSKg";
 
     public void addOrderToSheet(Order order) throws IOException, GeneralSecurityException {
-        // 1. Load Credentials
+
         String json = System.getenv("GOOGLE_CREDENTIALS");
 
         if (json == null) {
