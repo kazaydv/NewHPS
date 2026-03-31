@@ -317,7 +317,7 @@
 
 <script>
     // ─── CONFIG ──────────────────────────────────────────────────────────────
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbDDQVWkBPjcSnp04evjlwfGWJ-IrSrs5ahm9lWk2THay41fWvvOOmahEEvOZAGa7f/exec"; // ← paste your deployed URL here
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFBfs6KqigTS8M5TMdQ4oPRHDdnvekZkqtAIGLwAusAbKe2Pmea7BJmtSe25om_nsL9w/exec"; // ← paste deployed URL here
     // ─────────────────────────────────────────────────────────────────────────
 
     const form       = document.getElementById('sprayForm');
@@ -350,12 +350,37 @@
 
     editBtn.addEventListener('click', closeModal);
 
-    // ── Store pending form data ──────────────────────────────────────────────
+    // ── Show inline error below the form ─────────────────────────────────────
+    function showError(msg) {
+        let box = document.getElementById('submitErrorBox');
+        if (!box) {
+            box = document.createElement('div');
+            box.id = 'submitErrorBox';
+            box.style.cssText = [
+                'margin-top:16px', 'padding:14px 18px', 'border-radius:10px',
+                'background:#fef2f2', 'border:1.5px solid #fecaca',
+                'color:#b91c1c', 'font-size:14px', 'font-weight:600',
+                'text-align:center', 'line-height:1.5'
+            ].join(';');
+            form.after(box);
+        }
+        box.textContent = msg;
+        box.style.display = 'block';
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function clearError() {
+        const box = document.getElementById('submitErrorBox');
+        if (box) box.style.display = 'none';
+    }
+
+    // ── Store pending form data ───────────────────────────────────────────────
     let pendingFormData = null;
 
-    // ── Form submit → show confirmation modal ────────────────────────────────
+    // ── Form submit → show confirmation modal ─────────────────────────────────
     form.addEventListener('submit', function (e) {
         e.preventDefault();
+        clearError();
         if (!form.checkValidity()) { form.reportValidity(); return; }
 
         const selected = document.querySelector('#custom-form-container .package-option.selected');
@@ -365,16 +390,12 @@
         const bottles     = selected.getAttribute('data-bottles');
         const packageName = selected.id.toUpperCase() + ' – 60ml';
 
-        // Build FormData from the form fields
         pendingFormData = new FormData(form);
-
-        // Append extra computed fields
         pendingFormData.set('package', packageName);
         pendingFormData.set('size',    '60ml');
         pendingFormData.set('bottles', bottles);
         pendingFormData.set('total',   price);
 
-        // Populate confirmation modal
         document.getElementById('confirmName').textContent     = pendingFormData.get('name')     || '';
         document.getElementById('confirmPhone').textContent    = pendingFormData.get('phone')    || '';
         document.getElementById('confirmAddress').textContent  = pendingFormData.get('address')  || '';
@@ -385,23 +406,19 @@
         openModal();
     });
 
-    // ── Confirm → POST FormData to Apps Script → animated loader → redirect ──
-    confirmBtn.addEventListener('click', function () {
+    // ── Confirm → POST to Apps Script → wait for success → redirect ───────────
+    confirmBtn.addEventListener('click', async function () {
         if (!pendingFormData) return;
 
         closeModal();
 
-        // Fire FormData to Google Apps Script (no-cors: fire-and-forget)
-        fetch(APPS_SCRIPT_URL, {
-            method:    'POST',
-            body:      pendingFormData,
-            mode:      'no-cors',   // Apps Script doesn't send CORS headers for cross-origin POSTs
-            keepalive: true
-        }).catch(function (err) {
-            console.error('Sheet submit error:', err);
-        });
+        // Convert FormData → URLSearchParams (Apps Script reads e.parameter from this)
+        const params = new URLSearchParams();
+        for (const [key, val] of pendingFormData.entries()) {
+            params.append(key, val);
+        }
 
-        // ── Loading animation ────────────────────────────────────────────────
+        // Show loader
         const overlay     = document.getElementById('loadingOverlay');
         const spinner     = document.getElementById('spinnerRing');
         const checkCircle = document.getElementById('checkCircle');
@@ -411,32 +428,72 @@
 
         overlay.style.display = 'flex';
 
-        // Progress bar steps over ~3 seconds
-        const steps = [
-            { pct: 30,  delay: 0    },
-            { pct: 55,  delay: 600  },
-            { pct: 75,  delay: 1300 },
-            { pct: 90,  delay: 2000 },
-            { pct: 100, delay: 2700 },
+        // Animate progress bar while waiting
+        const fakeSteps = [
+            { pct: 25,  delay: 0    },
+            { pct: 50,  delay: 600  },
+            { pct: 70,  delay: 1300 },
+            { pct: 85,  delay: 2000 },
         ];
-        steps.forEach(({ pct, delay }) => {
+        fakeSteps.forEach(({ pct, delay }) => {
             setTimeout(() => { fill.style.width = pct + '%'; }, delay);
         });
 
         setTimeout(() => {
             label.innerHTML = 'अर्डर सुरक्षित गर्दै…<br/>Saving your order…';
-        }, 1400);
+        }, 1000);
 
+        // ── Actual fetch ──────────────────────────────────────────────────────
+        let success = false;
+        let errMsg  = 'अर्डर पठाउन सकिएन। कृपया फेरि प्रयास गर्नुहोस्।\nFailed to submit order. Please try again.';
+
+        try {
+            const res = await fetch(APPS_SCRIPT_URL, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body:    params.toString(),
+            });
+
+            if (!res.ok) {
+                errMsg = `Server error (${res.status}). Please try again.`;
+            } else {
+                const json = await res.json();
+                if (json.status === 'success') {
+                    success = true;
+                } else {
+                    errMsg = json.message || errMsg;
+                }
+            }
+        } catch (err) {
+            console.error('Fetch error:', err);
+            errMsg = 'नेटवर्क त्रुटि। कृपया इन्टरनेट जाँच गर्नुहोस्।\nNetwork error. Please check your connection.';
+        }
+
+        // ── On failure: hide loader, show error, let user retry ───────────────
+        if (!success) {
+            overlay.style.display = 'none';
+            // Reset loader state for potential retry
+            spinner.style.display     = 'block';
+            checkCircle.style.display = 'none';
+            fill.style.width          = '0%';
+            label.innerHTML = 'अर्डर प्रशोधन हुँदैछ…<br/>Processing your order…';
+            sub.textContent = 'कृपया पर्खनुहोस् / Please wait';
+            showError('❌ ' + errMsg);
+            return;
+        }
+
+        // ── On success: finish animation then redirect ─────────────────────────
+        fill.style.width = '100%';
         setTimeout(() => {
             spinner.style.display     = 'none';
             checkCircle.style.display = 'flex';
             label.innerHTML = 'अर्डर सफल भयो! 🎉<br/>Order Placed Successfully!';
             sub.textContent = 'धन्यवाद! / Thank you!';
-        }, 3000);
+        }, 400);
 
         setTimeout(() => {
             window.location.href = 'thankyou.html';
-        }, 3600);
+        }, 1200);
     });
 </script>
 
